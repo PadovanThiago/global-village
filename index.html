@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Villa curates analysis of the contemporary world through the lens of liberal democracy.">
+<title>Villa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap">
+<style>
+/* Layout: jornal impresso monocromático. Faixa de navegação fixa, colunas editoriais, faixas pretas para seções de pausa (números, assistir), uma única cor de sinal. */
+:root{
+  color-scheme:light;
+  --paper:#F7F6F2; --surface:#FFFFFF; --soft:#EFEDE7; --ink:#141414; --ink-2:#4F4C46; --rule:#D8D4CA;
+  --band:#EFEDE7; --band-2:#FFFFFF; --band-ink:#141414; --band-muted:#4F4C46; --band-rule:#CFCBC1;
+  --signal:#FF5A36; --signal-ink:#141414; --signal-text:#B8361A; --ok:#1F6B3A; --bad:#9A2A12; --focus:#1A56DB;
+  --f-display:"Anton", Impact, "Arial Narrow", sans-serif;
+  --f-serif:"Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-ui:"Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wrap:1240px;
+}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--paper)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+a{color:inherit}
+a:hover{color:var(--signal-text)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+h1,h2,h3{text-wrap:balance}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* logos */
+.logo{display:block;height:44px;width:auto}
+.logo-w{display:none}
+
+/* top strip + header */
+.strip{background:var(--soft);color:var(--ink);font-size:13px;border-bottom:1px solid var(--rule)}
+.strip .wrap{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding-block:6px}
+.langs{display:flex;gap:4px}
+.langs button{min-width:40px;min-height:32px;font:inherit;font-weight:700;font-size:12px;letter-spacing:.06em;cursor:pointer;border:1px solid var(--rule);background:transparent;color:var(--ink)}
+.langs button[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--paper);border-bottom:2px solid var(--ink)}
+header.site .wrap{display:flex;align-items:center;gap:20px;min-height:72px}
+header.site .brand{display:flex;align-items:center;text-decoration:none}
+nav.main{display:flex;gap:4px 20px;flex-wrap:wrap;font-weight:600;font-size:15px;margin-left:auto}
+nav.main a{text-decoration:none;padding:6px 0;border-bottom:3px solid transparent}
+nav.main a[aria-current="page"]{border-bottom-color:var(--signal)}
+.hdr-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.icon-btn:hover{background:var(--ink);color:var(--paper)}
+.menu-btn{display:none}
+@media (max-width:900px){
+  nav.main{display:none;position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:2px solid var(--ink);flex-direction:column;gap:0;padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px));margin:0}
+  nav.main.open{display:flex}
+  nav.main a{padding:12px 0;border-bottom:1px solid var(--rule);font-size:17px}
+  .menu-btn{display:inline-flex}
+  .hdr-actions{margin-left:auto}
+}
+
+/* type */
+.kicker{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.display{font-family:var(--f-display);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.005em;margin:0}
+.h-xl{font-size:clamp(48px,8vw,104px)}
+.h-l{font-size:clamp(34px,5vw,56px)}
+.h-m{font-size:clamp(26px,3.4vw,38px)}
+.serif{font-family:var(--f-serif)}
+.lede{font-family:var(--f-serif);font-size:clamp(18px,2vw,21px);line-height:1.5;max-width:44em;margin:0}
+.muted{color:var(--ink-2)}
+.tag{display:inline-flex;align-items:center;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--ink)}
+.tag.solid{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tag.signal{background:var(--signal);color:var(--signal-ink);border-color:var(--signal)}
+
+/* controls */
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;font:inherit;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--paper)}
+.btn.primary:hover{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.btn:hover{color:inherit}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pill{min-height:44px;padding:0 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;border:1.5px solid var(--ink);background:transparent;color:var(--ink)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.band .pill{border-color:var(--band-rule);color:var(--band-ink)}
+.band .pill[aria-pressed="true"]{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.field{display:flex;align-items:center;gap:8px;border:1.5px solid var(--ink);background:var(--surface);min-height:48px;padding:0 12px}
+.field input,.field select{border:0;outline:none;background:transparent;color:var(--ink);font:inherit;font-size:15px;width:100%;min-width:0}
+.filters{display:flex;flex-direction:column;gap:14px;padding-block:16px;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule)}
+.filter-row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.filter-row>.kicker{min-width:88px}
+.count{font-size:14px;color:var(--ink-2)}
+
+/* sections */
+section.block{padding-block:48px}
+.sec-head{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+.rule-top{border-top:6px solid var(--ink);padding-top:14px}
+.band{background:var(--band);color:var(--band-ink)}
+.band .muted{color:var(--band-muted)}
+.band a:hover{color:var(--signal-text)}
+.band{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.split{display:flex;flex-wrap:wrap;gap:40px}
+.split>.main-col{flex:999 1 560px;min-width:0}
+.split>.side-col{flex:1 1 300px;min-width:0}
+
+/* cards */
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr))}
+.card{background:var(--surface);border:1.5px solid var(--ink);padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card h3{margin:0;font-family:var(--f-serif);font-size:23px;line-height:1.22;font-weight:700}
+.card .meta{font-size:14px;color:var(--ink-2);margin:0}
+.card .meta a{font-weight:700;color:var(--ink);text-decoration:none}
+.card .meta a:hover{color:var(--signal-text)}
+.card p.sum{margin:0;font-size:15px;line-height:1.55}
+.card .top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.card .tags{display:inline-flex;gap:6px;flex-wrap:wrap}
+.card .go{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;min-height:44px}
+.paywall{margin:0;font-size:14px;line-height:1.5;padding:10px 12px;background:var(--soft);display:flex;gap:8px;align-items:flex-start}
+.empty{padding:28px;border:1.5px dashed var(--ink);font-size:16px;line-height:1.5}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;gap:40px;padding-block:40px 32px}
+.hero .lead{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.hero h1{font-family:var(--f-serif);font-weight:700;font-size:clamp(36px,5.4vw,64px);line-height:1.03;letter-spacing:-.01em;margin:0}
+.sumbox{background:var(--surface);border:1.5px solid var(--ink);padding:20px 22px;display:flex;flex-direction:column;gap:10px;max-width:780px}
+.sumbox p{margin:0;font-family:var(--f-serif);font-size:20px;line-height:1.5}
+.radar{flex:1 1 320px;min-width:0}
+.radar ol{list-style:none;margin:0;padding:0}
+.radar li a{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--rule);text-decoration:none}
+.radar .n{font-family:var(--f-display);font-size:28px;line-height:1;color:var(--signal);min-width:22px}
+.radar .t{font-family:var(--f-serif);font-size:19px;line-height:1.3;font-weight:600}
+
+/* stats */
+.stats{display:grid;gap:20px 32px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));padding-block:28px}
+.stat{display:flex;align-items:baseline;gap:12px}
+.stat b{font-family:var(--f-display);font-weight:400;font-size:52px;line-height:1;color:var(--signal);font-variant-numeric:tabular-nums}
+.stat span{font-size:15px;line-height:1.35;color:var(--band-muted)}
+
+/* people */
+.people{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
+.person{display:flex;gap:12px;align-items:center;padding:12px;border:1px solid var(--rule);background:var(--surface);text-decoration:none;min-height:68px}
+.person:hover{border-color:var(--ink);color:inherit}
+.avatar{width:44px;height:44px;flex:none;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-size:18px}
+.avatar.pub{background:var(--signal);color:var(--signal-ink);border-radius:0}
+.avatar.xl{width:132px;height:132px;font-size:52px}
+.person .nm{font-weight:700;font-size:15px;display:block}
+.person .ar{font-size:13px;color:var(--ink-2);display:block}
+.person .ct{margin-left:auto;font-size:12px;font-weight:700;white-space:nowrap}
+.person .ct.pending{color:var(--ink-2);font-weight:500}
+
+/* profile */
+.profile{display:flex;flex-wrap:wrap;gap:28px 40px;align-items:flex-start;padding-block:24px 32px;border-bottom:2px solid var(--ink)}
+.profile .info{flex:999 1 480px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:12px 24px;margin:0}
+.facts dt{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.facts dd{margin:2px 0 0;font-weight:600}
+.timeline{list-style:none;margin:0;padding:0}
+.timeline li{display:flex;flex-wrap:wrap;gap:8px 24px;padding:22px 0;border-top:1px solid var(--rule)}
+.timeline .when{flex:0 0 110px}
+.timeline .when b{display:block;font-family:var(--f-display);font-weight:400;font-size:24px;line-height:1}
+.timeline .body{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.timeline h3{margin:0;font-family:var(--f-serif);font-size:23px;line-height:1.25}
+.src{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--surface);border:1px solid var(--rule)}
+.status-ok{font-size:12px;font-weight:700;padding:5px 9px;background:var(--ink);color:var(--paper);white-space:nowrap}
+.status-pend{font-size:12px;font-weight:700;padding:4px 8px;border:1.5px dashed var(--ink);white-space:nowrap}
+.side-stack{display:flex;flex-direction:column;gap:28px}
+.side-stack h2{margin:0 0 10px;font-size:18px;font-weight:700}
+.crumbs{font-size:14px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:8px;padding-top:20px}
+
+/* watch */
+.posters{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+.poster{border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:12px;min-height:330px}
+.poster h3{margin:0;font-family:var(--f-display);font-weight:400;font-size:28px;line-height:1.05;text-transform:uppercase;overflow-wrap:anywhere}
+.poster .orig{font-size:13px;font-style:italic;color:var(--band-muted)}
+.poster .foot{border-top:1px solid var(--band-rule);padding-top:10px;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.avail{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.avail i{width:9px;height:9px;border-radius:50%;display:inline-block}
+.av-sub i,.av-free i{background:var(--ok)}
+.av-rent i{background:var(--signal)}
+.av-none i,.av-nf i{background:transparent;border:1.5px solid var(--band-muted)}
+.poster a.see{font-weight:700;min-height:44px;display:inline-flex;align-items:center;gap:6px}
+.soc{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
+.soc article{background:var(--surface);border:1px solid var(--rule);color:var(--ink);padding:18px;display:flex;flex-direction:column;gap:8px}
+.soc h3{margin:0;font-family:var(--f-serif);font-size:21px}
+
+/* orgs */
+.orgs{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+.org{display:flex;flex-direction:column;gap:6px;padding:16px;border:1.5px solid var(--ink);background:var(--surface);text-decoration:none}
+.org b{font-size:16px}
+.org span{font-size:14px;color:var(--ink-2);line-height:1.4}
+
+/* newsletter */
+.nl{background:var(--signal);color:var(--signal-ink)}
+.nl .wrap{display:flex;flex-wrap:wrap;gap:24px 48px;align-items:center;justify-content:space-between;padding-block:48px}
+.nl form{flex:1 1 380px;display:flex;flex-wrap:wrap;gap:10px}
+.nl input{flex:1 1 240px;min-height:52px;border:2px solid #141414;padding:0 16px;font:inherit;font-size:16px;background:#FFFFFF;color:#141414}
+.nl button{min-height:52px;padding:0 24px;background:#141414;color:#F5F4F0;border:0;font:inherit;font-weight:700;font-size:16px;cursor:pointer}
+.nl a{color:#141414}
+.ok-msg{font-weight:700}
+.checks{display:flex;flex-wrap:wrap;gap:10px}
+.check{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1.5px solid var(--ink);cursor:pointer;font-weight:600;font-size:14px}
+.check input{width:18px;height:18px;accent-color:var(--ink)}
+
+/* about */
+.steps{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{border-top:6px solid var(--ink);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.steps li::before{counter-increment:s;content:counter(s);font-family:var(--f-display);font-size:40px;line-height:1;color:var(--signal)}
+.prose{max-width:44em;display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.6}
+.prose p{margin:0}
+
+/* search overlay */
+.overlay{position:fixed;inset:0;z-index:80;background:color-mix(in srgb,var(--ink) 55%,transparent);display:flex;justify-content:center;align-items:flex-start;padding:calc(env(safe-area-inset-top,0px) + 56px) max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+.overlay .panel{background:var(--paper);border:2px solid var(--ink);width:min(760px,100%);max-height:80vh;display:flex;flex-direction:column}
+.overlay .panel .field{border:0;border-bottom:2px solid var(--ink)}
+.overlay .res{overflow:auto;padding:8px 16px 16px}
+.overlay .res h4{margin:14px 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+.overlay .res a{display:block;padding:10px 0;border-bottom:1px solid var(--rule);text-decoration:none}
+
+
+/* value proposition */
+.vp{border-bottom:1px solid var(--rule)}
+.vp-grid{display:flex;flex-wrap:wrap;gap:32px 56px;padding-block:44px 28px;align-items:flex-start}
+.vp-main{flex:999 1 520px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.vp-title{font-size:clamp(40px,6vw,78px)}
+#feed{scroll-margin-top:calc(env(safe-area-inset-top,0px) + 84px)}
+.vp-pillars{flex:1 1 340px;min-width:0;list-style:none;margin:0;padding:0;display:grid;gap:0}
+.vp-pillars li{display:flex;flex-direction:column;gap:4px;padding:14px 0;border-top:1px solid var(--rule)}
+.vp-pillars li:first-child{border-top:6px solid var(--ink)}
+.vp-pillars b{font-size:17px}
+.vp-pillars span{font-size:15px;color:var(--ink-2);line-height:1.5}
+.vp-stats{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));padding-block:0 32px}
+.vp-stats .stat{background:var(--surface);border:1px solid var(--rule);padding:14px 16px}
+.vp-stats .stat b{font-size:44px}
+.vp-stats .stat span{color:var(--ink-2)}
+.soft-band{background:var(--soft);border-top:1px solid var(--rule)}
+
+/* feed */
+.feed-grid{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start}
+.feed-col{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px;max-width:760px}
+.feed-side{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:20px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 92px)}
+@media (max-width:1000px){.feed-side{position:static}.feed-col{max-width:none}}
+.feed-head{display:flex;flex-direction:column;gap:6px}
+.feed-controls{display:flex;flex-direction:column;gap:12px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);overflow-x:auto}
+.tab{min-height:46px;padding:0 18px;font:inherit;font-weight:700;font-size:15px;background:transparent;border:0;border-bottom:3px solid transparent;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--signal)}
+.feed{display:flex;flex-direction:column;gap:16px}
+.day{margin:12px 0 0;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);display:flex;align-items:center;gap:12px}
+.day::after{content:"";flex:1;height:1px;background:var(--rule)}
+.post{background:var(--surface);border:1px solid var(--rule);display:flex;flex-direction:column}
+.post:hover{border-color:var(--ink)}
+.post-head{display:flex;gap:12px;align-items:center;padding:16px 18px 0}
+.pname{display:block;font-weight:700;font-size:15px;text-decoration:none;line-height:1.3}
+.pmeta{display:block;font-size:13px;color:var(--ink-2);line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ptime{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--ink-2);white-space:nowrap}
+.post-body{padding:14px 18px 6px;display:flex;flex-direction:column;gap:10px}
+.post-body h3{margin:0;font-family:var(--f-serif);font-size:24px;line-height:1.22;font-weight:700}
+.post-body h3 a{text-decoration:none}
+.post-body .sum{margin:0;font-size:16px;line-height:1.55}
+.media{display:flex;gap:12px;align-items:center;padding:12px;background:var(--soft);text-decoration:none;font-size:14px}
+.play{width:44px;height:44px;flex:none;border-radius:50%;background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:center}
+.post-actions{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;padding:6px 10px 10px;border-top:1px solid var(--soft);margin-top:8px}
+.act{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 10px;font:inherit;font-size:14px;font-weight:600;background:transparent;border:0;color:var(--ink-2);cursor:pointer;text-decoration:none}
+.act:hover{color:var(--ink);background:var(--soft)}
+.act.strong{color:var(--ink);font-weight:700}
+.act[aria-pressed="true"]{color:var(--ink)}
+.side-box{background:var(--surface);border:1px solid var(--rule);padding:16px;display:flex;flex-direction:column;gap:4px}
+.side-box h2{margin:0 0 8px;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.side-box .more{font-weight:700;font-size:14px;margin-top:8px}
+.frow{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--soft)}
+.frow .avatar{width:38px;height:38px;font-size:15px}
+.mini{min-height:36px;padding:0 12px;font:inherit;font-size:13px;font-weight:700;border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;white-space:nowrap}
+.mini[aria-pressed="true"],.act[data-follow][aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.bars{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.bars a{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) 28px;gap:10px;align-items:center;text-decoration:none;font-size:14px;min-height:32px}
+.bt{height:8px;background:var(--soft);display:block}
+.bt i{display:block;height:100%;background:var(--ink)}
+.bn{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.wrow{display:flex;flex-direction:column;gap:2px;padding:8px 0;border-top:1px solid var(--soft);text-decoration:none;font-size:14px}
+.nl-mini{background:var(--signal);border-color:var(--signal);color:var(--signal-ink)}
+.nl-mini input{min-height:46px;border:2px solid #141414;padding:0 12px;font:inherit;background:#FFFFFF;color:#141414}
+.nl-mini .btn.primary{background:#141414;color:#F7F6F2;border-color:#141414}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 20px);transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:12px 18px;font-weight:700;font-size:14px;z-index:90}
+footer.site{border-top:2px solid var(--ink);margin-top:24px}
+footer.site .cols{display:grid;gap:28px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));padding-block:40px}
+footer.site h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px}
+footer.site ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:15px}
+footer.site a{text-decoration:none}
+.proto{font-size:13px;line-height:1.5;color:var(--ink-2);padding:10px 12px;border:1px dashed var(--ink-2)}
+.notice{font-size:13px;color:var(--ink-2);display:flex;gap:8px;align-items:center}
+@media (prefers-reduced-motion: no-preference){ main{animation:fade .25s ease-out} @keyframes fade{from{opacity:.4}to{opacity:1}} }
+</style>
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span id="today"></span>
+  <div class="langs" role="group" aria-label="Language" id="langs"></div>
+</div></div>
+
+<header class="site"><div class="wrap" style="position:relative">
+  <a class="brand" href="#inicio" aria-label="Villa">
+    <img class="logo logo-b" src="villa-black.png" alt="Villa">
+    <img class="logo logo-w" src="villa-white.png" alt="Villa">
+  </a>
+  <nav class="main" id="nav" aria-label="Main"></nav>
+  <div class="hdr-actions">
+    <button class="icon-btn" id="searchBtn" type="button" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></button>
+    <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</div></header>
+
+<main id="app"></main>
+<footer class="site" id="footer"></footer>
+<div class="overlay" id="overlay" hidden></div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============ DATA ============ */
+const CC_REG = {"BR": "latam", "VE": "latam", "AR": "latam", "NI": "latam", "MX": "latam", "SV": "latam", "CU": "latam", "CL": "latam", "US": "na", "CA": "na", "IT": "eu", "NO": "eu", "GB": "eu", "SE": "eu", "GR": "eu", "BE": "eu", "RU": "eu", "FI": "eu", "DE": "eu", "FR": "eu", "HU": "eu", "NL": "eu", "UA": "eu", "EUR": "eu", "RU-EX": "eu", "IL": "mena", "IR": "mena", "LB": "mena", "IN": "asia", "AU": "asia", "TW": "asia", "NG": "afr", "ZA": "afr", "GH": "afr", "SN": "afr"};
+const regOf=cc=>CC_REG[cc]||"int";
+const REGIONS=["latam","na","eu","afr","mena","asia","int"];
+const AREAS = {
+ "Teoria democrática":{en:"Democratic theory",es:"Teoría democrática",fr:"Théorie démocratique",it:"Teoria democratica"},
+ "Cultura e sociedade":{en:"Culture and society",es:"Cultura y sociedad",fr:"Culture et société",it:"Cultura e società"},
+ "Filosofia":{en:"Philosophy",es:"Filosofía",fr:"Philosophie",it:"Filosofia"},
+ "Relações internacionais":{en:"International relations",es:"Relaciones internacionales",fr:"Relations internationales",it:"Relazioni internazionali"},
+ "Geopolítica":{en:"Geopolitics",es:"Geopolítica",fr:"Géopolitique",it:"Geopolitica"},
+ "Ciência política":{en:"Political science",es:"Ciencia política",fr:"Science politique",it:"Scienza politica"},
+ "Economia":{en:"Economics",es:"Economía",fr:"Économie",it:"Economia"},
+ "Economia e sociedade":{en:"Economics and society",es:"Economía y sociedad",fr:"Économie et société",it:"Economia e società"},
+ "Política":{en:"Politics",es:"Política",fr:"Politique",it:"Politica"},
+ "Política e geopolítica":{en:"Politics and geopolitics",es:"Política y geopolítica",fr:"Politique et géopolitique",it:"Politica e geopolitica"},
+ "Política internacional":{en:"International politics",es:"Política internacional",fr:"Politique internationale",it:"Politica internazionale"},
+ "Política e tecnologia":{en:"Politics and technology",es:"Política y tecnología",fr:"Politique et technologie",it:"Politica e tecnologia"},
+ "Política e cultura":{en:"Politics and culture",es:"Política y cultura",fr:"Politique et culture",it:"Politica e cultura"},
+ "História e autoritarismo":{en:"History and authoritarianism",es:"Historia y autoritarismo",fr:"Histoire et autoritarisme",it:"Storia e autoritarismo"},
+ "Autoritarismo e geopolítica":{en:"Authoritarianism and geopolitics",es:"Autoritarismo y geopolítica",fr:"Autoritarisme et géopolitique",it:"Autoritarismo e geopolitica"},
+ "Populismo e tecnologia":{en:"Populism and technology",es:"Populismo y tecnología",fr:"Populisme et technologie",it:"Populismo e tecnologia"},
+ "Poder e geopolítica":{en:"Power and geopolitics",es:"Poder y geopolítica",fr:"Pouvoir et géopolitique",it:"Potere e geopolitica"},
+ "História das ideias":{en:"History of ideas",es:"Historia de las ideas",fr:"Histoire des idées",it:"Storia delle idee"},
+ "Democracia e tecnologia":{en:"Democracy and technology",es:"Democracia y tecnología",fr:"Démocratie et technologie",it:"Democrazia e tecnologia"},
+ "Instituições e desenvolvimento":{en:"Institutions and development",es:"Instituciones y desarrollo",fr:"Institutions et développement",it:"Istituzioni e sviluppo"},
+ "Economia política":{en:"Political economy",es:"Economía política",fr:"Économie politique",it:"Economia politica"},
+ "Desenvolvimento":{en:"Development economics",es:"Economía del desarrollo",fr:"Économie du développement",it:"Economia dello sviluppo"},
+ "Economia global":{en:"Global economy",es:"Economía global",fr:"Économie mondiale",it:"Economia globale"},
+ "Rússia e Europa do Leste":{en:"Russia and Eastern Europe",es:"Rusia y Europa del Este",fr:"Russie et Europe de l’Est",it:"Russia ed Europa dell’Est"},
+ "Democracia e crescimento":{en:"Democracy and growth",es:"Democracia y crecimiento",fr:"Démocratie et croissance",it:"Democrazia e crescita"},
+ "Rússia e autoritarismo":{en:"Russia and authoritarianism",es:"Rusia y autoritarismo",fr:"Russie et autoritarisme",it:"Russia e autoritarismo"},
+ "Política indiana":{en:"Indian politics",es:"Política india",fr:"Politique indienne",it:"Politica indiana"},
+ "Tecnologia e liberdades":{en:"Technology and civil liberties",es:"Tecnología y libertades",fr:"Technologie et libertés",it:"Tecnologia e libertà"},
+ "Tecnologia e economia":{en:"Technology and business",es:"Tecnología y economía",fr:"Technologie et économie",it:"Tecnologia ed economia"},
+ "Europa":{en:"European politics",es:"Política europea",fr:"Politique européenne",it:"Politica europea"},
+ "América Latina":{en:"Latin America",es:"América Latina",fr:"Amérique latine",it:"America Latina"},
+ "Irã e direitos das mulheres":{en:"Iran and women’s rights",es:"Irán y derechos de las mujeres",fr:"Iran et droits des femmes",it:"Iran e diritti delle donne"},
+ "Rússia, Ucrânia e segurança europeia":{en:"Russia, Ukraine and European security",es:"Rusia, Ucrania y seguridad europea",fr:"Russie, Ukraine et sécurité européenne",it:"Russia, Ucraina e sicurezza europea"},
+ "Medição da democracia":{en:"Measuring democracy",es:"Medición de la democracia",fr:"Mesure de la démocratie",it:"Misurazione della democrazia"},
+ "Política americana":{en:"US politics",es:"Política estadounidense",fr:"Politique américaine",it:"Politica statunitense"},
+ "Populismo e liberalismo":{en:"Populism and liberalism",es:"Populismo y liberalismo",fr:"Populisme et libéralisme",it:"Populismo e liberalismo"},
+ "Inovação democrática":{en:"Democratic innovation",es:"Innovación democrática",fr:"Innovation démocratique",it:"Innovazione democratica"},
+ "Literatura e política":{en:"Literature and politics",es:"Literatura y política",fr:"Littérature et politique",it:"Letteratura e politica"},
+ "Estado de direito na América Latina":{en:"Rule of law in Latin America",es:"Estado de derecho en América Latina",fr:"État de droit en Amérique latine",it:"Stato di diritto in America Latina"},
+ "Democracia na África":{en:"Democracy in Africa",es:"Democracia en África",fr:"Démocratie en Afrique",it:"Democrazia in Africa"},
+ "Estado de direito":{en:"Rule of law",es:"Estado de derecho",fr:"État de droit",it:"Stato di diritto"},
+ "Política externa":{en:"Foreign policy",es:"Política exterior",fr:"Politique étrangère",it:"Politica estera"},
+ "Geopolítica europeia":{en:"European geopolitics",es:"Geopolítica europea",fr:"Géopolitique européenne",it:"Geopolitica europea"},
+ "Europa e segurança":{en:"Europe and security",es:"Europa y seguridad",fr:"Europe et sécurité",it:"Europa e sicurezza"},
+ "Populismo e desinformação":{en:"Populism and disinformation",es:"Populismo y desinformación",fr:"Populisme et désinformation",it:"Populismo e disinformazione"},
+ "Autoritarismo":{en:"Authoritarianism",es:"Autoritarismo",fr:"Autoritarisme",it:"Autoritarismo"},
+ "Propaganda e desinformação":{en:"Propaganda and disinformation",es:"Propaganda y desinformación",fr:"Propagande et désinformation",it:"Propaganda e disinformazione"},
+ "História e democracia":{en:"History and democracy",es:"Historia y democracia",fr:"Histoire et démocratie",it:"Storia e democrazia"}
+};
+
+const PEOPLE = [
+ // id, name, cat, area (pt key into AREAS), country code, affiliation, language, topics, channels
+ ["augusto-de-franco","Augusto de Franco","think","Teoria democrática","BR","Revista ID · Dagobah","pt",["dem", "tec"],{newsletter:"https://www.revistaid.com.br/",site:"https://dagobah.com.br/",rss:"https://dagobah.com.br/feed/"}],
+ ["antonio-riserio","Antônio Risério","think","Cultura e sociedade","BR","","pt",["dem"],{}],
+ ["luiz-felipe-ponde","Luiz Felipe Pondé","think","Filosofia","BR","","pt",["dem"],{}],
+ ["paulo-roberto-de-almeida","Paulo Roberto de Almeida","think","Relações internacionais","BR","","pt",["geo"],{}],
+ ["oliver-stuenkel","Oliver Stuenkel","think","Geopolítica","BR","FGV","pt",["geo", "dem"],{site:"https://oliverstuenkel.com/"}],
+ ["guilherme-casaroes","Guilherme Casarões","think","Relações internacionais","BR","FGV","pt",["geo"],{}],
+ ["fernando-schuler","Fernando Schüler","think","Ciência política","BR","Insper","pt",["dem"],{}],
+ ["elena-landau","Elena Landau","econ","Economia","BR","","pt",["eco"],{}],
+ ["marcos-lisboa","Marcos Lisboa","econ","Economia","BR","","pt",["eco"],{}],
+ ["alexandre-schwartsman","Alexandre Schwartsman","econ","Economia","BR","","pt",["eco"],{}],
+ ["joel-pinheiro-da-fonseca","Joel Pinheiro da Fonseca","econ","Economia e sociedade","BR","","pt",["eco", "dem"],{}],
+ ["heni-ozi-cukier","Heni Ozi Cukier","journo","Geopolítica","BR","","pt",["geo"],{}],
+ ["merval-pereira","Merval Pereira","journo","Política","BR","","pt",["dem"],{}],
+ ["william-waack","William Waack","journo","Política e geopolítica","BR","","pt",["dem", "geo"],{}],
+ ["demetrio-magnoli","Demétrio Magnoli","journo","Geopolítica","BR","","pt",["geo"],{}],
+ ["renata-lo-prete","Renata Lo Prete","journo","Política","BR","","pt",["dem"],{}],
+ ["caio-blinder","Caio Blinder","journo","Política internacional","BR","","pt",["geo"],{}],
+ ["eduardo-affonso","Eduardo Affonso","journo","Política e cultura","BR","","pt",["dem"],{}],
+ ["rodrigo-da-silva","Rodrigo da Silva","journo","Política","BR","","pt",["dem"],{}],
+ ["mario-vitor-rodrigues","Mario Vitor Rodrigues","journo","Política","BR","","pt",["dem"],{}],
+ ["lygia-maria","Lygia Maria","journo","Política","BR","","pt",["dem"],{}],
+ ["eduardo-leite","Eduardo Leite","pol","Política","BR","","pt",["dem"],{}],
+ ["raquel-lyra","Raquel Lyra","pol","Política","BR","","pt",["dem"],{}],
+ ["joao-amoedo","João Amoêdo","pol","Política","BR","","pt",["dem"],{}],
+ ["roberto-freire","Roberto Freire","pol","Política","BR","","pt",["dem"],{}],
+ ["eduardo-jorge","Eduardo Jorge","pol","Política","BR","","pt",["dem"],{}],
+ ["gilberto-natalini","Gilberto Natalini","pol","Política","BR","","pt",["dem"],{}],
+ ["soninha-francine","Soninha Francine","pol","Política","BR","","pt",["dem"],{}],
+ ["gabriel-azevedo","Gabriel Azevedo","pol","Política","BR","","pt",["dem"],{}],
+ ["francis-fukuyama","Francis Fukuyama","think","Teoria democrática","US","","en",["dem"],{}],
+ ["timothy-snyder","Timothy Snyder","think","História e autoritarismo","US","Thinking about… (Substack)","en",["dem", "geo"],{newsletter:"https://snyder.substack.com"}],
+ ["yascha-mounk","Yascha Mounk","think","Teoria democrática","US","Persuasion","en",["dem"],{newsletter:"https://writing.yaschamounk.com/",site:"https://www.persuasion.community"}],
+ ["anne-applebaum","Anne Applebaum","journo","Autoritarismo e geopolítica","US","The Atlantic","en",["dem", "geo"],{site:"https://www.anneapplebaum.com"}],
+ ["giuliano-da-empoli","Giuliano da Empoli","think","Populismo e tecnologia","IT","","it",["dem", "tec"],{}],
+ ["moises-naim","Moisés Naím","think","Poder e geopolítica","VE","","es",["geo", "dem"],{site:"https://www.moisesnaim.com"}],
+ ["fania-oz-salzberger","Fania Oz-Salzberger","think","História das ideias","IL","University of Haifa","en",["dem"],{}],
+ ["carl-henrik-knutsen","Carl Henrik Knutsen","think","Ciência política","NO","University of Oslo","en",["dem"],{}],
+ ["mike-brock","Mike Brock","think","Democracia e tecnologia","US","","en",["tec", "dem"],{}],
+ ["daron-acemoglu","Daron Acemoglu","econ","Instituições e desenvolvimento","US","MIT","en",["eco", "tec"],{site:"https://www.project-syndicate.org/columnist/daron-acemoglu"}],
+ ["ricardo-hausmann","Ricardo Hausmann","econ","Desenvolvimento","VE","Harvard Kennedy School","en",["eco", "geo"],{site:"https://www.project-syndicate.org/columnist/ricardo-hausmann"}],
+ ["martin-wolf","Martin Wolf","econ","Economia global","GB","Financial Times","en",["eco"],{}],
+ ["anders-aslund","Anders Åslund","econ","Rússia e Europa do Leste","SE","","en",["eco", "geo"],{}],
+ ["elias-papaioannou","Elias Papaioannou","econ","Instituições e desenvolvimento","GR","London Business School","en",["eco"],{}],
+ ["mehmet-ulubasoglu","Mehmet Ulubaşoğlu","econ","Democracia e crescimento","AU","Deakin University","en",["eco", "dem"],{}],
+ ["ian-bremmer","Ian Bremmer","journo","Geopolítica","US","Eurasia Group · GZERO","en",["geo"],{site:"https://www.gzeromedia.com",video:"https://www.gzeromedia.com/video/"}],
+ ["vlad-vexler","Vlad Vexler","journo","Rússia e autoritarismo","GB","","en",["geo"],{}],
+ ["shekhar-gupta","Shekhar Gupta","journo","Política indiana","IN","ThePrint","en",["geo"],{}],
+ ["mike-masnick","Mike Masnick","journo","Tecnologia e liberdades","US","Techdirt","en",["tec"],{}],
+ ["scott-galloway","Scott Galloway","journo","Tecnologia e economia","US","NYU Stern","en",["tec", "eco"],{}],
+ ["guy-verhofstadt","Guy Verhofstadt","pol","Europa","BE","","en",["geo", "dem"],{}],
+ ["garry-kasparov","Garry Kasparov","pol","Rússia e autoritarismo","RU","Renew Democracy Initiative","en",["geo"],{}],
+ ["leopoldo-lopez","Leopoldo López","pol","América Latina","VE","World Liberty Congress","es",["dem", "geo"],{}],
+ ["masih-alinejad","Masih Alinejad","pol","Irã e direitos das mulheres","IR","","en",["tec", "dem"],{}],
+ ["joni-askola","Joni Askola","journo","Rússia, Ucrânia e segurança europeia","FI","Kyiv Post","en",["geo"],{x:"https://x.com/joni_askola"}],
+ ["yana-gorokhovskaia","Yana Gorokhovskaia","think","Medição da democracia","US","Freedom House","en",["dem"],{x:"https://x.com/gorokhovskaia"}],
+ ["tim-miller","Tim Miller","journo","Política americana","US","The Bulwark","en",["dem"],{newsletter:"https://www.thebulwark.com",rss:"https://www.thebulwark.com/feed"}],
+ ["jonathan-v-last","Jonathan V. Last","journo","Política americana","US","The Bulwark","en",["dem"],{newsletter:"https://www.thebulwark.com",rss:"https://www.thebulwark.com/feed"}],
+ ["bill-kristol","Bill Kristol","journo","Política americana","US","The Bulwark","en",["dem", "geo"],{newsletter:"https://www.thebulwark.com",rss:"https://www.thebulwark.com/feed"}],
+ ["joe-walsh","Joe Walsh","pol","Política americana","US","The Social Contract","en",["dem"],{newsletter:"https://socialcontractwithjoewalsh.substack.com/",site:"https://hopenotfearproject.org",rss:"https://socialcontractwithjoewalsh.substack.com/feed"}],
+ ["shikha-dalmia","Shikha Dalmia","journo","Populismo e liberalismo","US","The UnPopulist · ISMA","en",["dem", "eco"],{newsletter:"https://www.theunpopulist.net/",rss:"https://www.theunpopulist.net/feed"}],
+ ["claudia-chwalisz","Claudia Chwalisz","think","Inovação democrática","INT","DemocracyNext","en",["dem", "tec"],{site:"https://www.demnext.org",newsletter:"https://demnext.substack.com/",rss:"https://demnext.substack.com/feed"}],
+ ["pedro-doria","Pedro Doria","journo","Política e tecnologia","BR","Meio","pt",["tec", "dem"],{site:"https://www.canalmeio.com.br"}],
+ ["sergio-ramirez","Sergio Ramírez","think","Literatura e política","NI","","es",["dem"],{site:"https://www.sergioramirez.com"}],
+ ["noah-smith","Noah Smith","econ","Economia","US","Noahpinion","en",["eco", "tec"],{newsletter:"https://www.noahpinion.blog"}],
+ ["sergei-guriev","Sergei Guriev","econ","Economia política","RU","London Business School","en",["eco", "dem"],{site:"https://www.london.edu/faculty-and-research/faculty-profiles/s/sergei-guriev"}],
+ ["tamara-taraciuk-broner","Tamara Taraciuk Broner","think","Estado de direito na América Latina","US","Inter-American Dialogue","es",["dem"],{site:"https://www.thedialogue.org/experts/tamara-taraciuk-broner/"}],
+ ["nic-cheeseman","Nic Cheeseman","think","Democracia na África","GB","University of Birmingham","en",["dem"],{site:"https://democracyinafrica.org"}],
+ ["wole-soyinka","Wole Soyinka","think","Literatura e política","NG","","en",["dem"],{}],
+ ["thuli-madonsela","Thuli Madonsela","think","Estado de direito","ZA","Stellenbosch University","en",["dem"],{}],
+ ["robert-kagan","Robert Kagan","think","Política externa","US","Brookings","en",["geo", "dem"],{site:"https://www.brookings.edu/people/robert-kagan/"}],
+ ["mark-leonard","Mark Leonard","think","Geopolítica europeia","GB","ECFR","en",["geo"],{site:"https://ecfr.eu/profile/mark_leonard/"}],
+ ["constanze-stelzenmuller","Constanze Stelzenmüller","think","Europa e segurança","DE","Brookings","en",["geo"],{site:"https://www.brookings.edu/people/constanze-stelzenmuller/"}],
+ ["dominique-moisi","Dominique Moïsi","think","Geopolítica","FR","Institut Montaigne","fr",["geo"],{site:"https://www.institutmontaigne.org/experts/dominique-moisi"}],
+ ["peter-kreko","Péter Krekó","think","Populismo e desinformação","HU","Political Capital","en",["dem", "tec"],{site:"https://www.politicalcapital.hu"}],
+ ["erica-frantz","Erica Frantz","think","Autoritarismo","US","Michigan State University","en",["dem"],{site:"https://polisci.msu.edu/people/directory/frantz-erica.html"}],
+ ["peter-pomerantsev","Peter Pomerantsev","journo","Propaganda e desinformação","GB","SNF Agora · Johns Hopkins","en",["tec", "geo"],{site:"https://snfagora.jhu.edu/person/peter-pomerantsev/"}],
+ ["enrique-krauze","Enrique Krauze","think","História e democracia","MX","Letras Libres","es",["dem"],{site:"https://letraslibres.com"}]
+].map(r=>({id:r[0],name:r[1],cat:r[2],area:r[3],cc:r[4],region:regOf(r[4]),org:r[5],lang:r[6],themes:r[7],ch:r[8]}));
+
+const ITEMS = [
+ {id:"id-conviver",who:[],pub:"revista-id",by:"Diogo Dutra",theme:"dem",fmt:"text",src:"Revista ID",date:"2026-10-24",lang:"PT",title:"Aprendemos a vencer. Desaprendemos a conviver",sum_en:"Diogo Dutra starts from conflict to think about justice, trust and democracy.",sum:"Diogo Dutra parte do conflito para pensar justiça, confiança e democracia.",url:"https://www.revistaid.com.br/p/aprendemos-a-vencer-desaprendemos"},
+ {id:"dagobah-oposicao",who:["augusto-de-franco"],pub:"dagobah",theme:"dem",fmt:"text",src:"Dagobah",date:"2026-10-22",lang:"PT",title:"Faço oposição ao governo Lula e farei oposição a um governo Flávio",sum_en:"Augusto de Franco explains why, as a liberal democrat, he opposes populists in power, both Lula’s government and a possible government led by Flávio Bolsonaro.",sum:"Augusto de Franco explica por que, como democrata liberal, faz oposição aos populismos quando estão no governo, seja o de Lula, seja um eventual governo Flávio.",url:"https://dagobah.com.br/faco-oposicao-ao-governo-lula-e-farei-oposicao-a-um-governo-flavio/"},
+ {id:"id-majoritarismo",who:[],pub:"revista-id",by:"Rafael Ferreira",theme:"dem",fmt:"text",src:"Revista ID",date:"2026-10-22",lang:"PT",title:"Na contramão do majoritarismo",sum_en:"Rafael Ferreira writes for Revista ID about majoritarianism in politics.",sum:"Artigo de Rafael Ferreira para a Revista ID que discute o majoritarismo na política.",url:"https://www.revistaid.com.br/p/na-contramao-do-majoritarismo"},
+ {id:"id-sem-dono",who:[],pub:"revista-id",by:"Marcelo Maceo",theme:"dem",fmt:"text",src:"Revista ID",date:"2026-10-21",lang:"PT",title:"Democracia é o mundo sem dono",sum_en:"Marcelo Maceo describes democracy as an order that never becomes anyone’s property.",sum:"Marcelo Maceo descreve a democracia como uma ordem que não se transforma em propriedade.",url:"https://www.revistaid.com.br/p/democracia-e-o-mundo-sem-dono"},
+ {id:"id-embate",who:["augusto-de-franco"],pub:"revista-id",theme:"dem",fmt:"text",src:"Revista ID",date:"2026-10-21",lang:"PT",title:"O significado político do embate Lula x Flávio",sum_en:"Augusto de Franco sums up what is at stake in the contest between Lula and Flávio Bolsonaro.",sum:"Augusto de Franco faz uma síntese do que está em jogo na disputa entre Lula e Flávio.",url:"https://www.revistaid.com.br/p/o-significado-politico-do-embate"},
+ {id:"dagobah-gurri",who:[],pub:"dagobah",by:"Martin Gurri (tradução)",theme:"dem",fmt:"text",src:"Dagobah",date:"2026-10-14",lang:"PT",title:"A busca por uma democracia pós-iluminismo",sum_en:"Translation of an essay by Martin Gurri, first published in Persuasion, which starts from the claim that liberal democracy is in terminal decline.",sum:"Tradução de um ensaio de Martin Gurri publicado na Persuasion, que parte da tese de que a democracia liberal vive um declínio terminal.",url:"https://dagobah.com.br/a-busca-por-uma-democracia-pos-iluminismo/"},
+ {id:"dagobah-voto",who:["augusto-de-franco"],pub:"dagobah",theme:"dem",fmt:"text",src:"Dagobah",date:"2026-10-02",lang:"PT",title:"Minha declaração de voto",sum_en:"Augusto de Franco says he will not choose between a left-wing populist and a right-wing populist.",sum:"Augusto de Franco declara que não vai escolher entre um populista de esquerda e um populista de direita.",url:"https://dagobah.com.br/minha-declaracao-de-voto/"},
+ {id:"dagobah-tang",who:[],pub:"dagobah",by:"Audrey Tang (tradução)",theme:"tec",fmt:"text",src:"Dagobah",date:"2026-07-31",lang:"PT",title:"Inteligência Artificial e Democracia",sum_en:"Translation of a piece by Audrey Tang, first published in The Humanist Review of AI, on artificial intelligence, humanism and democracy.",sum:"Tradução de um texto de Audrey Tang, publicado originalmente na The Humanist Review of AI, sobre inteligência artificial, humanismo e democracia.",url:"https://dagobah.com.br/inteligencia-artificial-e-democracia-2/"},
+ {id:"snyder-cowardice",who:["timothy-snyder"],theme:"geo",fmt:"text",src:"Thinking about… (Substack)",date:"2026-09-21",lang:"EN",title:"On Cowardice (Kharkiv Meditations 1/10)",sum_en:"Snyder opens Kharkiv Meditations, a planned series of ten pieces, with a first text on cowardice.",sum:"Snyder abre a série Kharkiv Meditations, que terá dez textos, e dedica este primeiro ao tema da covardia.",url:"https://snyder.substack.com/p/cowardice"},
+ {id:"applebaum-venezuela",who:["anne-applebaum"],theme:"geo",fmt:"text",src:"The Atlantic",date:"2026-10-22",lang:"EN",title:"What the U.S. Is Really Doing in Venezuela",sum_en:"Applebaum reports for The Atlantic’s December issue on what the United States is doing in Venezuela.",sum:"Reportagem de Applebaum para a edição de dezembro da The Atlantic sobre a atuação dos Estados Unidos na Venezuela.",url:"https://www.theatlantic.com/magazine/2026/12/trump-oil-venezuela-exploitation/689033/"},
+ {id:"bremmer-france",who:["ian-bremmer"],theme:"dem",fmt:"text",src:"GZERO Media",date:"2026-10-21",lang:"EN",title:"France’s Fifth Republic is in turmoil… is Europe next?",sum_en:"Bremmer assesses the political crisis of France’s Fifth Republic and asks whether it could spread across Europe.",sum:"Bremmer avalia a crise política da Quinta República francesa e pergunta se ela pode se espalhar pela Europa.",url:"https://www.gzeromedia.com/by-ian-bremmer/frances-fifth-republic-is-in-turmoil-is-europe-next"},
+ {id:"applebaum-autocracy",who:["anne-applebaum"],theme:"dem",fmt:"podcast",src:"The Atlantic",date:"2026-10-20",lang:"EN",title:"A New Season of Autocracy in America",sum_en:"Applebaum announces a new season of the Autocracy in America podcast, with interviews with political, tech and cultural leaders, and argues that the midterm elections could mark the beginning of the end of Trump’s second term and open room for democratic recovery.",sum:"Applebaum anuncia a nova temporada do podcast Autocracy in America, com entrevistas a lideranças políticas, tecnológicas e culturais, e defende que as eleições de meio de mandato podem marcar o começo do fim do segundo mandato de Trump e abrir espaço para a recuperação democrática.",url:"https://www.anneapplebaum.com/2026/10/20/a-new-season-of-autocracy-in-america/",featured:true},
+ {id:"stuenkel-latam",who:["oliver-stuenkel"],theme:"dem",fmt:"text",src:"O Estado de S. Paulo",date:"2026-10-19",lang:"PT",title:"Onda conservadora na América Latina é menos coesa do que parece",paywall:true,url:"https://www.estadao.com.br/internacional/oliver-stuenkel/onda-conservadora-na-america-latina-e-menos-coesa-do-que-parece/"},
+ {id:"bremmer-ai-weapon",who:["ian-bremmer"],theme:"tec",fmt:"video",src:"GZERO Live",date:"2026-10-15",lang:"EN",title:"AI is becoming a superweapon",sum_en:"At the GZERO Summit in London, Bremmer lays out the risks of frontier AI models and argues for independent governance with global reach.",sum:"No GZERO Summit de Londres, Bremmer aponta os riscos dos modelos de IA de fronteira e defende uma governança independente e de alcance global.",url:"https://www.gzeromedia.com/video/gzero-live/ai-is-becoming-a-superweapon"},
+ {id:"bremmer-2028",who:["ian-bremmer"],theme:"geo",fmt:"video",src:"GZERO Live",date:"2026-10-15",lang:"EN",title:"Why 2028 matters for Europe",sum_en:"Bremmer looks at how the embrace of ethnonationalism by Trump and his possible successors could reshape the transatlantic relationship from 2028.",sum:"Bremmer analisa como a adesão de Trump e de possíveis sucessores ao etnonacionalismo pode redesenhar a relação transatlântica a partir de 2028.",url:"https://www.gzeromedia.com/video/gzero-live/why-2028-matters-for-europe"},
+ {id:"bremmer-superpowers",who:["ian-bremmer"],theme:"geo",fmt:"video",src:"GZERO World",date:"2026-10-13",lang:"EN",title:"Superpowers Collide",sum_en:"Bremmer and Elizabeth Economy of the Hoover Institution discuss whether Trump and Xi Jinping can keep relations between the United States and China stable despite mutual distrust.",sum:"Bremmer e Elizabeth Economy, da Hoover Institution, discutem se Trump e Xi Jinping conseguem manter a estabilidade entre Estados Unidos e China apesar da desconfiança mútua.",url:"https://www.kpbs.org/news/2026/10/13/gzero-world-with-ian-bremmer-superpowers-collide"},
+ {id:"applebaum-ukraine",who:["anne-applebaum"],theme:"geo",fmt:"text",src:"The Atlantic",date:"2026-10-12",lang:"EN",title:"Trump’s Message to Ukraine Is Now Crystal Clear",sum_en:"Applebaum’s column on the Trump administration’s position on Ukraine.",sum:"Coluna de Applebaum sobre a posição do governo Trump em relação à Ucrânia.",url:"https://www.anneapplebaum.com/2026/10/12/trumps-message-to-ukraine-is-now-crystal-clear/"},
+ {id:"bremmer-diesel",who:["ian-bremmer"],theme:"geo",fmt:"video",src:"GZERO Quick Take",date:"2026-10-12",lang:"EN",title:"Trump’s Russian diesel deal and what it means for Ukraine",sum_en:"Bremmer explains why Trump is pressing Ukraine over its strikes on Russian refineries and what the deal to buy Russian diesel means for the war.",sum:"Bremmer explica por que Trump pressiona a Ucrânia por causa dos ataques a refinarias russas e o que o acordo para comprar diesel russo significa para a guerra.",url:"https://www.gzeromedia.com/video/quick-take/trump-s-russian-diesel-deal-and-what-it-means-for-ukraine"},
+ {id:"bremmer-oct7",who:["ian-bremmer"],theme:"geo",fmt:"video",src:"GZERO World",date:"2026-10-09",lang:"EN",title:"How October 7 changed the Middle East, three years on",sum_en:"With Aaron David Miller, Bremmer discusses how the Middle East has changed since the 7 October attacks and what comes next for Israel and the region.",sum:"Com Aaron David Miller, Bremmer discute como o Oriente Médio mudou desde os ataques de 7 de outubro e o que vem a seguir para Israel e a região.",url:"https://www.gzeromedia.com/video/gzero-world-with-ian-bremmer/how-october-7-changed-the-middle-east-three-years-on-2678066333"},
+ {id:"snyder-train",who:["timothy-snyder"],theme:"geo",fmt:"text",src:"Thinking about… (Substack)",date:"2026-09-20",lang:"EN",title:"A Meditation on Train Stations",sum_en:"Second and final part of the series On Total War and Individual Responsibility.",sum:"Segunda e última parte da série On Total War and Individual Responsibility, sobre guerra total e responsabilidade individual.",url:"https://snyder.substack.com/p/a-meditation-on-train-stations"},
+ {id:"snyder-gas",who:["timothy-snyder"],theme:"geo",fmt:"text",src:"Thinking about… (Substack)",date:"2026-09-19",lang:"EN",title:"A Meditation on Gas Stations",sum_en:"First part of the series On Total War and Individual Responsibility.",sum:"Primeira parte da série On Total War and Individual Responsibility.",url:"https://snyder.substack.com/p/a-meditation-on-gas-stations"},
+ {id:"snyder-oligarchy",who:["timothy-snyder"],theme:"dem",fmt:"text",src:"Thinking about… (Substack)",date:"2026-09-16",lang:"EN",title:"Oligarchy, Neo Fascism, and Liberation",sum_en:"The tenth lecture in the series Snyder publishes on Substack, on oligarchy, neofascism and liberation.",sum:"Décima aula da série de palestras que Snyder publica no Substack, dedicada às relações entre oligarquia, neofascismo e libertação.",url:"https://snyder.substack.com/p/oligarchy-neo-fascism-and-liberation"},
+ {id:"applebaum-corruption",who:["anne-applebaum"],theme:"dem",fmt:"text",src:"The Atlantic",date:"2026-09-14",lang:"EN",title:"MAGA Is Making the World Safe for Corruption",sum_en:"Applebaum’s column on how the MAGA movement is affecting the international fight against corruption.",sum:"Coluna de Applebaum sobre os efeitos do movimento MAGA no combate internacional à corrupção.",url:"https://www.anneapplebaum.com/2026/09/14/maga-is-making-the-world-safe-for-corruption/"},
+ {id:"snyder-terror",who:["timothy-snyder"],theme:"geo",fmt:"text",src:"Thinking about… (Substack)",date:"2026-09-10",lang:"EN",title:"Helping the Terrorists to Win",sum_en:"Written as the attacks of 11 September 2001 reached their twenty-fifth anniversary.",sum:"Texto publicado quando os atentados de 11 de setembro de 2001 completaram um quarto de século.",url:"https://snyder.substack.com/p/helping-the-terrorists-to-win"},
+ {id:"snyder-dissident",who:["timothy-snyder"],theme:"dem",fmt:"text",src:"Thinking about… (Substack)",date:"2026-09-09",lang:"EN",title:"East European Dissident Thought",sum_en:"The ninth lecture in the series, on the thought of Eastern European dissidents.",sum:"Nona aula da série de palestras, dedicada ao pensamento dos dissidentes do Leste Europeu.",url:"https://snyder.substack.com/p/east-european-dissident-thought"},
+ {id:"stuenkel-alemanha",who:["oliver-stuenkel"],theme:"dem",fmt:"text",src:"O Estado de S. Paulo",date:"2026-09-06",lang:"PT",title:"Extrema direita na Alemanha: isolar, proibir ou deixar governar?",paywall:true,url:"https://oliverstuenkel.com/2026/09/06/extrema-direita-na-alemanha-isolar-proibir-ou-deixar-governar-estadao/"},
+ {id:"applebaum-censored",who:["anne-applebaum"],theme:"tec",fmt:"text",src:"The Atlantic",date:"2026-09-02",lang:"EN",title:"The MAGA Right Is Only Pretending to Be Censored",sum_en:"Applebaum’s column on the censorship rhetoric adopted by the MAGA right.",sum:"Coluna de Applebaum sobre o discurso de censura adotado pela direita MAGA.",url:"https://www.anneapplebaum.com/2026/09/02/the-maga-right-is-only-pretending-to-be-censored/"},
+ {id:"hausmann-canada",who:["ricardo-hausmann"],theme:"eco",fmt:"text",src:"Project Syndicate",date:"2026-09-01",lang:"EN",title:"Building Canada’s Post-American Economy",sum_en:"Hausmann and Eric Protzer explain how Canada can reduce its economic dependence on the United States, a neighbour it now sees as unreliable.",sum:"Hausmann e Eric Protzer explicam como o Canadá pode reduzir sua dependência econômica dos Estados Unidos, vizinho que passou a ser visto como pouco confiável.",url:"https://www.project-syndicate.org/commentary/how-canada-can-reduce-its-exposure-to-trumpian-extortion-by-ricardo-hausmann-and-eric-protzer-2026-09"},
+ {id:"stuenkel-china",who:["oliver-stuenkel"],theme:"geo",fmt:"text",src:"O Estado de S. Paulo",date:"2026-08-10",lang:"PT",title:"Como a China ultrapassou os EUA na opinião pública mundial",paywall:true,url:"https://oliverstuenkel.com/2026/08/10/como-a-china-ultrapassou-os-eua-na-opiniao-publica-mundial-estadao/"},
+ {id:"applebaum-safari",who:["anne-applebaum"],theme:"geo",fmt:"text",src:"The Atlantic",date:"2026-08-05",lang:"EN",title:"Putin’s Human Safari Is the Dystopian Future of War",sum_en:"Applebaum’s column on Russia’s tactics in Ukraine and what they suggest about future wars.",sum:"Coluna de Applebaum sobre as táticas de guerra russas na Ucrânia e o que elas antecipam sobre os conflitos futuros.",url:"https://www.anneapplebaum.com/2026/08/05/putins-human-safari-is-the-dystopian-future-of-war/"},
+ {id:"hausmann-rubio",who:["ricardo-hausmann"],theme:"dem",fmt:"text",src:"Project Syndicate",date:"2026-07-24",lang:"EN",title:"Will the Real Marco Rubio Please Stand Up?",sum_en:"Hausmann points to the widening gap between what American officials say and the reality of Venezuela after Maduro.",sum:"Hausmann aponta a distância crescente entre o discurso das autoridades americanas e a realidade da Venezuela depois de Maduro.",url:"https://www.project-syndicate.org/commentary/marco-rubio-is-failing-venezuelan-democracy-by-ricardo-hausmann-2026-07"},
+ {id:"hausmann-venezuela",who:["ricardo-hausmann"],theme:"eco",fmt:"text",src:"Project Syndicate",date:"2026-06-02",lang:"EN",title:"The Rape of Venezuela",sum_en:"Hausmann shows why economic conditions for ordinary Venezuelans keep getting worse despite higher oil revenues.",sum:"Hausmann mostra por que as condições econômicas dos venezuelanos comuns continuam piorando, apesar do aumento das receitas com petróleo.",url:"https://www.project-syndicate.org/commentary/how-venezuela-became-a-business-opportunity-for-trump-and-maduro-allies-by-ricardo-hausmann-2026-06"},
+ {id:"hausmann-ai",who:["ricardo-hausmann"],theme:"eco",fmt:"text",src:"Project Syndicate",date:"2026-04-08",lang:"EN",title:"The Real Question About the AI Future",sum_en:"Hausmann and Andrés Velasco ask what kind of world economy would justify the market value of a handful of American AI companies.",sum:"Hausmann e Andrés Velasco perguntam que tipo de economia mundial justificaria o valor de mercado de um punhado de empresas americanas de IA.",url:"https://www.project-syndicate.org/commentary/what-world-economy-would-justify-ai-firms-market-valuation-by-ricardo-hausmann-and-andres-velasco-2026-04"},
+ {id:"acemoglu-sandel",who:["daron-acemoglu"],theme:"tec",fmt:"text",src:"Project Syndicate",date:"2026-03",lang:"EN",title:"Reclaiming Democracy From the Market",sum_en:"Acemoglu and the philosopher Michael J. Sandel discuss how to protect democracy from the spread of market logic in the age of artificial intelligence.",sum:"Acemoglu e o filósofo Michael J. Sandel discutem como proteger a democracia do avanço da lógica de mercado na era da inteligência artificial.",url:"https://www.project-syndicate.org/onpoint/saving-democracy-in-the-age-of-ai-by-daron-acemoglu-and-michael-j-sandel-2026-03"},
+ {id:"acemoglu-rules",who:["daron-acemoglu"],theme:"geo",fmt:"text",src:"Project Syndicate",date:"2026-01",lang:"EN",title:"What Now for the “Rules-Based Order”?",sum_en:"Acemoglu argues that the rules-based international order needs to be rebuilt on new foundations.",sum:"Acemoglu defende que a ordem internacional baseada em regras precisa ser reconstruída em novas bases.",url:"https://www.project-syndicate.org/commentary/trump-venezuela-rules-based-order-must-be-built-anew-by-daron-acemoglu-2026-01"}
+];
+
+const ORGS = [
+ // name, type, country code, url, description (en), description (pt), topics, page id, full name, rss
+ ["V-Dem Institute","index","SE","https://v-dem.net","Measures many dimensions of democracy in more than 170 countries.","Mede várias dimensões da democracia em mais de 170 países.",["dem"]],
+ ["Freedom House","index","US","https://freedomhouse.org","Publishes the annual Freedom in the World and Freedom on the Net reports.","Publica os relatórios anuais Freedom in the World e Freedom on the Net.",["dem", "tec"]],
+ ["EIU Democracy Index","index","GB","https://www.eiu.com","The Economist Intelligence Unit’s annual classification of political regimes.","Classificação anual de regimes políticos da Economist Intelligence Unit.",["dem", "eco"]],
+ ["International IDEA","index","SE","https://www.idea.int","Intergovernmental institute that tracks the global state of democracy and elections.","Instituto intergovernamental que acompanha o estado da democracia e das eleições no mundo.",["dem"]],
+ ["Bertelsmann Transformation Index (BTI)","index","DE","https://bti-project.org","Assesses political and economic transformation in 137 developing and transition countries.","Avalia a transformação política e econômica de 137 países em desenvolvimento e em transição.",["dem", "eco"]],
+ ["Our World in Data","index","GB","https://ourworldindata.org","Open data and research on the world’s largest problems, including democracy and human rights.","Dados abertos e pesquisa sobre os grandes problemas do mundo, incluindo democracia e direitos humanos.",["dem", "eco"]],
+ ["Latinobarómetro","index","CL","https://www.latinobarometro.org","Annual public opinion survey on democracy in 18 Latin American countries.","Pesquisa anual de opinião sobre democracia em 18 países da América Latina.",["dem"]],
+ ["LAPOP Lab (AmericasBarometer)","index","US","https://www.vanderbilt.edu/lapop","Vanderbilt University lab behind the AmericasBarometer survey of democratic attitudes across the Americas.","Laboratório da Universidade Vanderbilt responsável pelo AmericasBarometer, pesquisa sobre atitudes democráticas nas Américas.",["dem"]],
+ ["Bright Line Watch","index","US","https://brightlinewatch.org","Regular survey by political scientists on the health of American democracy.","Monitoramento periódico, feito por cientistas políticos, da saúde da democracia americana.",["dem"]],
+ ["Afrobarometer","index","GH","https://www.afrobarometer.org","Pan-African survey network on democracy, governance and society.","Rede pan-africana de pesquisas sobre democracia, governança e sociedade.",["dem"]],
+ ["Mo Ibrahim Foundation","index","GB","https://mo.ibrahim.foundation","Publishes the Ibrahim Index of African Governance.","Publica o Índice Ibrahim de Governança Africana.",["dem", "eco"]],
+ ["Asian Barometer","index","TW","https://www.asianbarometer.org","Comparative survey of political values and democracy across Asia.","Pesquisa comparada sobre valores políticos e democracia na Ásia.",["dem"]],
+ ["Lokniti-CSDS","index","IN","https://www.lokniti.org","Research programme on Indian elections and public opinion at the Centre for the Study of Developing Societies.","Programa de pesquisa sobre eleições e opinião pública na Índia, ligado ao Centre for the Study of Developing Societies.",["dem"]],
+ ["Arab Barometer","index","INT","https://www.arabbarometer.org","Public opinion surveys on politics and society across the Arab world.","Pesquisas de opinião sobre política e sociedade no mundo árabe.",["dem", "geo"]],
+ ["Carnegie Endowment for International Peace","tank","US","https://carnegieendowment.org","Global think tank on international affairs and democracy.","Think tank global de relações internacionais e democracia.",["geo", "dem"]],
+ ["Carnegie Europe","tank","BE","https://carnegieendowment.org/europe","Carnegie’s Brussels centre on European foreign and security policy.","Centro da Carnegie em Bruxelas dedicado à política externa e de segurança europeia.",["geo"]],
+ ["Brookings Institution","tank","US","https://www.brookings.edu","Washington think tank on governance, economics and foreign policy.","Think tank de Washington sobre governança, economia e política externa.",["dem", "eco", "geo"]],
+ ["Cato Institute","tank","US","https://www.cato.org","Libertarian think tank focused on individual liberty and limited government.","Think tank libertário dedicado à liberdade individual e ao governo limitado.",["eco", "dem"]],
+ ["Inter-American Dialogue","tank","US","https://www.thedialogue.org","Washington policy centre on democracy and governance in the Americas.","Centro de Washington sobre democracia e governança nas Américas.",["dem", "geo"]],
+ ["CADAL","tank","AR","https://www.cadal.org","Buenos Aires centre that promotes democracy and human rights in Latin America.","Centro de Buenos Aires que promove a democracia e os direitos humanos na América Latina.",["dem"]],
+ ["Instituto Sivis","tank","BR","https://www.sivis.org.br","Institute that researches democratic culture and civic participation in Brazil.","Instituto que pesquisa cultura democrática e participação cívica no Brasil.",["dem"]],
+ ["Livres","tank","BR","https://www.eusoulivres.org","Liberal movement that drafts public policy proposals in Brazil.","Movimento liberal que formula propostas de políticas públicas no Brasil.",["dem", "eco"]],
+ ["ISMA · The UnPopulist","tank","US","https://www.ismaglobal.org/","Institute for the Study of Modern Authoritarianism, publisher of The UnPopulist.","Instituto para o Estudo do Autoritarismo Moderno, que publica The UnPopulist.",["dem"]],
+ ["European Council on Foreign Relations (ECFR)","tank","EUR","https://ecfr.eu","Pan-European think tank on foreign and security policy.","Think tank pan-europeu de política externa e segurança.",["geo"]],
+ ["Institut Montaigne","tank","FR","https://www.institutmontaigne.org","Paris think tank on public policy, Europe and geopolitics.","Think tank de Paris sobre políticas públicas, Europa e geopolítica.",["geo", "eco"]],
+ ["Political Capital","tank","HU","https://www.politicalcapital.hu","Budapest institute that researches populism, extremism and disinformation.","Instituto de Budapeste que pesquisa populismo, extremismo e desinformação.",["dem", "tec"]],
+ ["ISPI","tank","IT","https://www.ispionline.it","Milan institute for international political studies.","Instituto de Milão de estudos de política internacional.",["geo"]],
+ ["Re:Russia","tank","RU-EX","https://re-russia.net","Exiled Russian experts who analyse politics, the economy and society in Russia.","Especialistas russos no exílio que analisam política, economia e sociedade na Rússia.",["geo", "eco"]],
+ ["CDD-Ghana","tank","GH","https://cddgh.org","Ghana Center for Democratic Development, which researches and advocates for good governance in Africa.","Centro de Gana para o Desenvolvimento Democrático, que pesquisa e defende a boa governança na África.",["dem"]],
+ ["Africa Center for Strategic Studies","tank","US","https://africacenter.org","US Defense Department academic institution focused on security and governance in Africa.","Instituição acadêmica do Departamento de Defesa dos EUA voltada a segurança e governança na África.",["geo", "dem"]],
+ ["Institute for Security Studies (ISS Africa)","tank","ZA","https://issafrica.org","African research institute on human security and governance.","Instituto africano de pesquisa sobre segurança humana e governança.",["geo", "dem"]],
+ ["WATHI","tank","SN","https://www.wathi.org","Citizen think tank for West Africa, based in Dakar.","Think tank cidadão da África Ocidental, sediado em Dacar.",["dem"]],
+ ["Arab Reform Initiative","tank","INT","https://www.arab-reform.net","Network of Arab researchers working on democratic change in the region.","Rede de pesquisadores árabes que trabalha pela mudança democrática na região.",["dem", "geo"]],
+ ["Oslo Freedom Forum","net","NO","https://oslofreedomforum.com","Annual gathering of human rights defenders, organised by the Human Rights Foundation.","Encontro anual de defensores dos direitos humanos, organizado pela Human Rights Foundation.",["dem", "tec"]],
+ ["Human Rights Foundation","net","US","https://hrf.org","Defends human rights and civil liberties in closed societies.","Defende direitos humanos e liberdades civis em sociedades fechadas.",["dem"]],
+ ["Reporters Without Borders (RSF)","net","FR","https://rsf.org","Defends press freedom and publishes the World Press Freedom Index.","Defende a liberdade de imprensa e publica o Ranking Mundial da Liberdade de Imprensa.",["dem", "tec"]],
+ ["Committee to Protect Journalists (CPJ)","net","US","https://cpj.org","Documents attacks on journalists and defends press freedom worldwide.","Documenta ataques a jornalistas e defende a liberdade de imprensa no mundo.",["dem"]],
+ ["Article 19","net","GB","https://www.article19.org","Defends freedom of expression and the right to information.","Defende a liberdade de expressão e o direito à informação.",["tec", "dem"]],
+ ["Transparency International","net","DE","https://www.transparency.org","Global anti-corruption movement and publisher of the Corruption Perceptions Index.","Movimento global contra a corrupção, que publica o Índice de Percepção da Corrupção.",["dem", "eco"]],
+ ["Transparência Internacional Brasil","net","BR","https://transparenciainternacional.org.br","Brazilian chapter of the global anti-corruption movement.","Capítulo brasileiro do movimento global contra a corrupção.",["dem"]],
+ ["Abraji","net","BR","https://www.abraji.org.br","Brazilian Association of Investigative Journalism, which defends press freedom.","Associação Brasileira de Jornalismo Investigativo, que defende a liberdade de imprensa.",["dem"]],
+ ["Protect Democracy","net","US","https://protectdemocracy.org","Cross-partisan group working against authoritarian threats in the United States.","Organização suprapartidária que atua contra ameaças autoritárias nos Estados Unidos.",["dem"]],
+ ["Democracy Reporting International","net","DE","https://democracy-reporting.org","Berlin organisation that supports democratic governance and monitors disinformation.","Organização de Berlim que apoia a governança democrática e monitora a desinformação.",["dem", "tec"]],
+ ["Bellingcat","media","NL","https://www.bellingcat.com","Investigative journalism collective that works with open sources.","Coletivo de jornalismo investigativo que trabalha com fontes abertas.",["geo", "tec"]],
+ ["OCCRP","media","INT","https://www.occrp.org","Organized Crime and Corruption Reporting Project, a global network of investigative reporters.","Projeto de Reportagem sobre Crime Organizado e Corrupção, rede global de jornalistas investigativos.",["dem", "eco"]],
+ ["El Faro","media","SV","https://elfaro.net","Independent digital newspaper from El Salvador, known for its investigations.","Jornal digital independente de El Salvador, conhecido pelas investigações.",["dem"]],
+ ["Confidencial","media","NI","https://confidencial.digital","Independent Nicaraguan news outlet that works from exile.","Veículo independente da Nicarágua que trabalha no exílio.",["dem"]],
+ ["14ymedio","media","CU","https://www.14ymedio.com","Independent Cuban digital newspaper founded by Yoani Sánchez.","Jornal digital independente cubano fundado por Yoani Sánchez.",["dem"]],
+ ["Novaya Gazeta Europe","media","RU-EX","https://novayagazeta.eu","Exiled Russian newspaper published from Europe.","Jornal russo no exílio, publicado a partir da Europa.",["geo", "dem"]],
+ ["The Insider","media","RU-EX","https://theins.ru","Russian investigative outlet working from exile.","Veículo investigativo russo que trabalha no exílio.",["geo"]],
+ ["The Kyiv Independent","media","UA","https://kyivindependent.com","Ukrainian news outlet published in English.","Veículo ucraniano de notícias publicado em inglês.",["geo"]],
+ ["Daily Maverick","media","ZA","https://www.dailymaverick.co.za","South African investigative news outlet.","Veículo sul-africano de jornalismo investigativo.",["dem"]],
+ ["Daraj","media","LB","https://daraj.media","Independent Arabic-language digital outlet based in Beirut.","Veículo digital independente em árabe, sediado em Beirute.",["dem", "geo"]],
+ ["Persuasion","pub","US","https://www.persuasion.community","Publication founded by Yascha Mounk to defend free speech and liberal democracy.","Publicação fundada por Yascha Mounk em defesa da liberdade de expressão e da democracia liberal.",["dem"]],
+ ["Thinking about…","pub","US","https://snyder.substack.com","Timothy Snyder’s newsletter.","Newsletter de Timothy Snyder.",["dem", "geo"]],
+ ["The Bulwark","pub","US","https://www.thebulwark.com","Pro-democracy outlet founded by conservatives who broke with Trumpism.","Veículo pró-democracia fundado por conservadores que romperam com o trumpismo.",["dem"]],
+ ["The Dispatch","pub","US","https://thedispatch.com","Digital outlet for centre-right reporting and commentary.","Veículo digital de reportagem e opinião de centro-direita.",["dem", "geo"]],
+ ["Journal of Democracy","pub","US","https://www.journalofdemocracy.org","Academic quarterly on democracy, published with the National Endowment for Democracy.","Revista acadêmica trimestral sobre democracia, publicada com o National Endowment for Democracy.",["dem"]],
+ ["Americas Quarterly","pub","US","https://www.americasquarterly.org","Magazine on politics, business and culture in the Americas.","Revista sobre política, economia e cultura nas Américas.",["geo", "eco"]],
+ ["Letras Libres","pub","MX","https://letraslibres.com","Cultural and political magazine published in Mexico and Spain, founded by Enrique Krauze.","Revista de cultura e política publicada no México e na Espanha, fundada por Enrique Krauze.",["dem"]],
+ ["Nexos","pub","MX","https://www.nexos.com.mx","Mexican magazine on politics, society and culture.","Revista mexicana de política, sociedade e cultura.",["dem"]],
+ ["Meio","pub","BR","https://www.canalmeio.com.br","Newsletter and video outlet on politics and technology.","Newsletter e canal de vídeo sobre política e tecnologia.",["dem", "tec"]],
+ ["Le Grand Continent","pub","FR","https://legrandcontinent.eu","European review of geopolitics and ideas.","Revista europeia de geopolítica e ideias.",["geo"]],
+ ["Democracy in Africa","pub","INT","https://democracyinafrica.org","Research and commentary platform on African democracy.","Plataforma de pesquisa e análise sobre a democracia africana.",["dem"]],
+ ["Revista ID","pub","BR","https://www.revistaid.com.br/","Inteligência Democrática, a Substack magazine where several columnists write on democracy, politics and society.","Revista Inteligência Democrática, publicada no Substack, com artigos de vários colunistas sobre democracia, política e sociedade.",["dem", "tec"],"revista-id","Revista Inteligência Democrática","https://www.revistaid.com.br/feed"],
+ ["Dagobah","pub","BR","https://dagobah.com.br/","Review of democratic political analysis. Recent pieces are by Augusto de Franco, including translations of foreign essays.","Revista de análises políticas democráticas. Os textos recentes são assinados por Augusto de Franco, incluindo traduções de ensaios estrangeiros.",["dem", "tec"],"dagobah","Dagobah, Revista de Análises Políticas","https://dagobah.com.br/feed/"]
+].map(r=>({name:r[0],type:r[1],cc:r[2],region:regOf(r[2]),url:r[3],desc:r[4],desc_pt:r[5],themes:r[6],id:r[7]||"",full:r[8]||r[0],rss:r[9]||""}));
+const PUBS=Object.fromEntries(ORGS.filter(o=>o.id).map(o=>[o.id,o]));
+
+const AV = [
+["transatlantico","Transatlântico","Transatlantic","Minissérie","2023","sub","Netflix","","","https://www.justwatch.com/br/serie/transatlantic","n","Segunda Guerra e Holocausto"],
+["resistencia","Resistência","Resistance","Filme","2020","sub","Prime Video","","Amazon Video, Apple TV","https://www.justwatch.com/br/filme/resistance-2020","n","Segunda Guerra e Holocausto"],
+["toda-luz-que-nao-podemos-ver","Toda Luz que Não Podemos Ver","All the Light We Cannot See","Minissérie","2023","sub","Netflix","","","https://www.justwatch.com/br/serie/all-the-light-we-cannot-see","n","Segunda Guerra e Holocausto"],
+["o-banqueiro-da-resistencia","O Banqueiro da Resistência","Bankier van het Verzet","Filme","2018","none","","","","https://www.justwatch.com/br/filme/the-resistance-banker","n","Segunda Guerra e Holocausto"],
+["o-destino-de-haffmann","O Destino de Haffmann","Adieu Monsieur Haffmann","Filme","2021","sub","Filmelier Plus (Amazon Channel)","","Amazon Video, Apple TV","https://www.justwatch.com/br/filme/adieu-monsieur-haffmann","n","Segunda Guerra e Holocausto"],
+["bastardos-inglorios","Bastardos Inglórios","Inglourious Basterds","Filme","2009","sub","Prime Video, Telecine (Amazon Channel), Universal+ (Amazon Channel)","","Claro video, Amazon Video, Apple TV","https://www.justwatch.com/br/filme/bastardos-inglorios","n","Segunda Guerra e Holocausto"],
+["nada-de-novo-no-front","Nada de Novo no Front","Im Westen nichts Neues","Filme","2022","sub","Netflix","","","https://www.justwatch.com/br/filme/all-quiet-on-the-western-front-2022","n","Guerra"],
+["dunkirk","Dunkirk","Dunkirk","Filme","2017","sub","HBO Max","","Amazon Video, Apple TV","https://www.justwatch.com/br/filme/dunkirk","n","Segunda Guerra e Holocausto"],
+["zona-de-interesse","Zona de Interesse","The Zone of Interest","Filme","2023","sub","Prime Video, Diamond Films (Amazon Channel)","","Amazon Video, Apple TV","https://www.justwatch.com/br/filme/the-zone-of-interest","n","Segunda Guerra e Holocausto"],
+["nunca-deixe-de-lembrar","Nunca Deixe de Lembrar","Werk ohne Autor","Filme","2018","rent","","","Compra na Amazon Video e na Apple TV","https://www.justwatch.com/br/filme/nunca-deixes-de-olhar","n","Segunda Guerra e Holocausto"],
+["hannah-arendt","Hannah Arendt","Hannah Arendt","Filme","2012","none","","","","https://www.justwatch.com/br/filme/hannah-arendt","n","Totalitarismo"],
+["homens-comuns","Homens Comuns","Ordinary Men: The Forgotten Holocaust","Documentário","2022","none","","","","https://www.justwatch.com/br/filme/ordinary-men-the-forgotten-holocaust","n","Segunda Guerra e Holocausto"],
+["shoah","Shoah","Shoah","Documentário","1985","rent","","","Aluguel na Pijama Films","https://www.justwatch.com/br/filme/shoah-exterminio","n","Segunda Guerra e Holocausto"],
+["o-ultimo-dos-injustos","O Último dos Injustos","Le Dernier des injustes","Documentário","2013","nf","","","","https://www.justwatch.com/br/busca?q=O%20%C3%9Altimo%20dos%20Injustos","n","Segunda Guerra e Holocausto"],
+["a-tristeza-e-a-piedade","A Tristeza e a Piedade","Le Chagrin et la Pitié","Documentário","1969","none","","","","https://www.justwatch.com/br/filme/a-tristeza-e-a-piedade","n","Segunda Guerra e Holocausto"],
+["the-commandants-shadow","A Sombra do Comandante","The Commandant's Shadow","Documentário","2024","sub","HBO Max","","Amazon Video, Apple TV","https://www.justwatch.com/br/filme/the-commandants-shadow","n","Segunda Guerra e Holocausto"],
+["a-french-village","A French Village","Un village français","Série","2009","none","","","","https://www.justwatch.com/br/serie/uma-aldeia-francesa","n","Segunda Guerra e Holocausto"],
+["wolyn","Wołyń","Wołyń","Filme","2016","none","","","","https://www.justwatch.com/br/filme/hatred","n","Segunda Guerra e Holocausto"],
+["a-sombra-de-stalin","A Sombra de Stalin","Mr. Jones","Filme","2019","sub","Prime Video","Runtime","Apple TV","https://www.justwatch.com/br/filme/mr-jones-a-verdade-da-mentira","n","Totalitarismo"],
+["o-circulo-do-poder","O Círculo do Poder","The Inner Circle","Filme","1991","nf","","","","https://www.justwatch.com/br/busca?q=O%20C%C3%ADrculo%20do%20Poder","n","Totalitarismo"],
+["joseph-kilian","Joseph Kilián","Postava k podpírání","Filme","1963","nf","","","","https://www.justwatch.com/br/busca?q=Joseph%20Kilian","n","Totalitarismo"],
+["esperando-os-barbaros","Esperando os Bárbaros","Waiting for the Barbarians","Filme","2019","sub","Paramount+","","Amazon Video","https://www.justwatch.com/br/filme/waiting-for-the-barbarians","n","Autoritarismo"],
+["o-regime","O Regime","The Regime","Minissérie","2024","sub","HBO Max","","","https://www.justwatch.com/br/serie/the-regime","n","Autoritarismo"],
+["winter-on-fire","Winter on Fire","Winter on Fire: Ukraine's Fight for Freedom","Documentário","2015","sub","Netflix","","","https://www.justwatch.com/br/filme/winter-on-fire-ukraines-fight-for-freedom","n","Rússia e Ucrânia"],
+["putin-and-the-presidents","Putin and the Presidents","Putin and the Presidents (FRONTLINE)","Documentário","2023","free","","YouTube (canal FRONTLINE)","","https://www.youtube.com/watch?v=aJI8XTa_DII","n","Rússia e Ucrânia"],
+["shadow-men","Shadow Men","Shadow Men: Inside Wagner, Russia's Secret War Company","Documentário","","free","","Site do Wall Street Journal","","https://www.wsj.com/video/series/shadow-men/shadow-men-inside-wagner-russias-secret-war-company/29735C37-0B4E-4E70-8E8C-C46FB711370C","n","Rússia e Ucrânia"],
+["the-square","The Square","Al Midan","Documentário","2013","nf","","","","https://www.justwatch.com/br/busca?q=The%20Square%202013","n","Resistência e dissidência"],
+["bobby-kennedy-para-presidente","Bobby Kennedy para Presidente","Bobby Kennedy for President","Minissérie documental","2018","sub","Netflix","","","https://www.justwatch.com/br/serie/bobby-kennedy-for-president","n","Política e instituições"],
+["boys-state","Boys State","Boys State","Documentário","2020","sub","Apple TV","","","https://www.justwatch.com/br/filme/boys-state","n","Política e instituições"],
+["the-crown-temporada-3-episodio-5","The Crown, temporada 3, episódio 5","The Crown S3E5: Coup","Episódio de série","2019","sub","Netflix","","","https://www.justwatch.com/br/serie/the-crown","n","Política e instituições"],
+["borgen","Borgen","Borgen","Série","2010","sub","Netflix","","","https://www.justwatch.com/br/serie/borgen","n","Política e instituições"],
+["secret-city","Secret City","Secret City","Série","2016","nf","","","","https://www.justwatch.com/br/busca?q=Secret%20City","n","Política e instituições"],
+["os-pacientes-do-dr-garcia","Os Pacientes do Dr. García","Los pacientes del doctor García","Série","2025","sub","Netflix","","","https://www.justwatch.com/br/serie/los-pacientes-del-doctor-garcia","n","Política e instituições"],
+["marseille","Marseille","Marseille","Série","2016","sub","Netflix","","","https://www.justwatch.com/br/serie/marseille","n","Política e instituições"],
+["teera","Teerã","Tehran","Série","2020","sub","Apple TV","","","https://www.justwatch.com/br/serie/teerao","n","Oriente Médio"],
+["fauda","Fauda","Fauda","Série","2015","sub","Netflix","","","https://www.justwatch.com/br/serie/pvdh","n","Oriente Médio"],
+["golda","Golda: A Mulher de uma Nação","Golda","Filme","2023","sub","Prime Video, Diamond Films (Amazon Channel)","","Amazon Video, Apple TV","https://www.justwatch.com/br/filme/golda","n","Oriente Médio"],
+["holding-liat","Holding Liat","Holding Liat","Documentário","2025","none","","","","https://www.justwatch.com/br/filme/holding-liat","n","Oriente Médio"],
+["por-dentro-do-hamas","Por Dentro do Hamas","Inside Hamas (The Whole Story, CNN)","Documentário","2023","free","","YouTube (CNN)","","https://www.youtube.com/watch?v=M_66Le_IcLo","n","Oriente Médio"],
+["hezbollah-inc","Hezbollah Inc","Hezbollah Inc","Documentário","","free","","RTP Play (Portugal)","","https://www.rtp.pt/programa/tv/p44662","n","Oriente Médio"],
+["it-is-no-dream","It Is No Dream","It Is No Dream: The Life of Theodor Herzl","Documentário","2012","free","","Plex (com anúncios)","","https://www.justwatch.com/br/filme/it-is-no-dream-the-life-of-theodor-herzl","n","Oriente Médio"],
+["layla-m","Layla M.","Layla M.","Filme","2016","nf","","","","https://www.justwatch.com/br/busca?q=Layla%20M.","n","Extremismo e radicalização"],
+["como-se-tornar-um-lider-de-seita","Como se Tornar um Líder de Seita","How to Become a Cult Leader","Minissérie documental","2023","sub","Netflix","","","https://www.justwatch.com/br/serie/how-to-become-a-cult-leader","n","Extremismo e radicalização"],
+["era-uma-vez-na-irlanda-do-norte","Era uma Vez na Irlanda do Norte","Once Upon a Time in Northern Ireland","Minissérie documental","2023","nf","","","","https://www.justwatch.com/br/busca?q=Once%20Upon%20a%20Time%20in%20Northern%20Ireland","n","Extremismo e radicalização"],
+["first-they-killed-my-father","Primeiro, Mataram o Meu Pai","First They Killed My Father","Filme","2017","sub","Netflix","","","https://www.justwatch.com/br/filme/first-they-killed-my-father-a-daughter-of-cambodia-remembers","n","Totalitarismo"],
+["the-underground-railroad","The Underground Railroad","The Underground Railroad","Minissérie","2021","sub","Prime Video","","","https://www.justwatch.com/br/serie/the-underground-railroad","n","Liberdade e direitos"],
+["umberto-eco-a-biblioteca-do-mundo","Umberto Eco: A Biblioteca do Mundo","Umberto Eco: La biblioteca del mondo","Documentário","2022","none","","","","https://www.justwatch.com/br/filme/umberto-eco-a-library-of-the-world","n","Cultura e ideias"],
+["como-viver-ate-os-100-anos","Como Viver até os 100 Anos","Live to 100: Secrets of the Blue Zones","Minissérie documental","2023","sub","Netflix","","","https://www.justwatch.com/br/serie/live-to-100-secrets-of-the-blue-zones","s","Comunidade e longevidade"],
+["urbanized","Urbanized","Urbanized","Documentário","2011","none","","","","https://www.justwatch.com/br/filme/urbanized","s","Cidades"],
+["dias-perfeitos","Dias Perfeitos","Perfect Days","Filme","2023","sub","Netflix, MUBI","","Amazon Video, Apple TV","https://www.justwatch.com/br/filme/perfect-days","s","Vida cotidiana"],
+["yellowstone","Yellowstone","Yellowstone","Série","2018","sub","Paramount+, Netflix (até a 4ª temporada)","","Compra na Amazon Video","https://www.justwatch.com/br/serie/yellowstone-2018","s","Comunidade e território"],
+["1883","1883","1883","Série","2021","sub","Netflix, Paramount+, Claro tv+","","","https://www.justwatch.com/br/serie/1883","s","Comunidade e território"],
+["a-historia-de-roseto","A História de Roseto","The Remarkable Story of Roseto Shows the Power of Community","Vídeo","","free","","YouTube","","https://www.youtube.com/watch?v=MnbPzXDco90","s","Comunidade e longevidade"]
+].map(r=>({id:r[0],title:r[1],orig:r[2],kind:r[3],year:r[4],sit:r[5],sub:r[6],free:r[7],rent:r[8],url:r[9],cat:r[10],theme:r[11]}));
+
+/* ============ I18N ============ */
+const L = {
+ pt:{k1_doc:"Documentário",k1_series:"Série",k1_film:"Filme",ot_media:"Jornalismo independente",in_exile:"no exílio",region_asia:"Ásia e Pacífico",region_mena:"Oriente Médio",region_afr:"África",region_eu:"Europa",region_na:"América do Norte",region_latam:"América Latina",see_all_orgs:"Ver todas as organizações",pubs_side:"Publicações independentes",locale:"pt-BR",tagline:"Análises do mundo contemporâneo pela lente da democracia liberal",nav_home:"Início",nav_analyses:"Análises",nav_analysts:"Analistas",nav_topics:"Temas",nav_watch:"Assistir",nav_orgs:"Organizações",nav_newsletter:"Newsletter",nav_about:"Como funciona",
+  search:"Buscar",search_ph:"Buscar analista, análise ou título",close:"Fechar",menu:"Menu",results_people:"Analistas",results_items:"Análises",results_av:"Para assistir",no_results:"Nada encontrado para essa busca.",
+  featured:"Destaque",radar:"No radar",latest:"Mais recentes",see_all_analyses:"Ver todas as análises",all:"Todos",all_f:"Todas",original_in:"original em",summary_label:"Resumo automático",listen:"Ouvir no original",read:"Ler no original",watchv:"Assistir no original",more_from:"Mais de",
+  paywall:"Conteúdo exclusivo para assinantes do veículo. Mostramos título e link, sem resumo.",content_note:"",
+  analysts_title:"Quem acompanhamos",see_all_analysts:"Ver todos os analistas",observatories:"Observatórios",observatories_text:"Índices independentes que medem a saúde da democracia no mundo e servem de referência para as análises.",
+  watch_title:"Para assistir",watch_text:"Filmes, séries e documentários que ajudam a entender o autoritarismo, a guerra e a construção das democracias, com indicação de onde assistir.",watch_all:"Ver todos os títulos",
+  nl_title:"A semana em uma leitura",nl_text:"Toda sexta-feira, as análises mais relevantes de cada tema, resumidas no seu idioma.",email:"Seu e-mail",subscribe:"Assinar",nl_done:"Inscrição registrada. Neste protótipo nenhum e-mail é enviado.",
+  st_people:"analistas, jornalistas e políticos acompanhados",st_orgs:"organizações, think tanks e observatórios",st_langs:"idiomas na interface, com resumos traduzidos",st_av:"filmes, séries e documentários com onde assistir",
+  th_dem:"Democracia e instituições",th_geo:"Geopolítica",th_eco:"Economia",th_tec:"Tecnologia e liberdades",
+  thd_dem:"Estado de direito, eleições, populismo, autoritarismo e polarização. Como as democracias se sustentam, se desgastam e se recuperam.",
+  thd_geo:"Relações internacionais, guerras e blocos de poder na América Latina, América do Norte, Europa, Rússia, África, Oriente Médio e Ásia.",
+  thd_eco:"Economia política, desenvolvimento e o papel das instituições no crescimento e na prosperidade.",
+  thd_tec:"Inteligência artificial, redes, liberdade de expressão, privacidade e direitos humanos no ambiente digital.",
+  fmt_text:"Texto",fmt_video:"Vídeo",fmt_podcast:"Podcast",
+  cat_think:"Pensadores e acadêmicos",cat_econ:"Economistas",cat_journo:"Jornalistas e analistas",cat_pol:"Políticos e ativistas",
+  region:"Região",region_int:"Global",format:"Formato",topic:"Tema",language:"Idioma",category:"Categoria",
+  n_results:n=>n===1?"1 resultado":n+" resultados",empty:"Nenhum resultado com esses filtros por enquanto. Quando os analistas publicarem algo novo, aparece aqui automaticamente.",
+  analyses_title:"Análises",analyses_text:"Tudo o que os analistas acompanhados publicaram, em ordem cronológica, com resumo no seu idioma e link para o original.",
+  analysts_text:"Pensadores, economistas, jornalistas e políticos que o Villa acompanha. A coleta é automática a partir dos canais de cada um.",
+  n_analyses:n=>n===1?"1 análise":n+" análises",collect_pending:"Coleta a configurar",
+  sources_monitored:"Canais monitorados",active:"Ativo",to_setup:"A cadastrar",ch_site:"Site",ch_newsletter:"Newsletter",ch_video:"Vídeos",ch_x:"X (Twitter)",ch_youtube:"YouTube",ch_rss:"Feed RSS",
+  collect_note:"Quando um canal é cadastrado na base, o conteúdo novo passa a aparecer aqui automaticamente.",
+  frequent_topics:"Temas",related:"Também acompanhe",publications:"Publicações recentes",no_pubs:"Ainda não há publicações coletadas para este analista. Assim que os canais forem cadastrados, as análises aparecem aqui.",
+  f_country:"País",f_org:"Vínculo",f_lang:"Publica em",f_cat:"Área",follow:"Acompanhar na newsletter",following:"Acompanhando",
+  orgs_title:"Organizações",orgs_text:"Índices, think tanks, organizações de direitos, redações independentes e publicações que sustentam o debate sobre democracia liberal.",
+  ot_index:"Índices de democracia",ot_tank:"Think tanks",ot_fund:"Fundações",ot_net:"Direitos e sociedade civil",ot_pub:"Publicações",
+  w_where:"Onde",w_sub:"Assinatura",w_free:"Grátis",w_rent:"Aluguel ou compra",w_none:"Sem streaming encontrado",w_nf:"Não localizado",w_kind:"Tipo",k_film:"Filmes",k_series:"Séries",k_doc:"Documentários",platform:"Plataforma",any_platform:"Qualquer plataforma",
+  see_where:"Ver onde assistir",society_title:"Sociedade e comunidade",society_text:"Títulos fora do núcleo político que tratam de vida em comunidade, território e cotidiano.",w_checked:"Por enquanto, a disponibilidade segue o catálogo brasileiro do JustWatch, consultado em 24/10/2026. No site final, ela acompanha o país de quem lê.",
+  wg_ww2:"Segunda Guerra e Holocausto",wg_auth:"Totalitarismo e autoritarismo",wg_rus:"Rússia e Ucrânia",wg_me:"Oriente Médio",wg_pol:"Política e instituições",wg_ext:"Extremismo e radicalização",wg_other:"Outros temas",
+  topic_people:"Analistas deste tema",topic_refs:"Referências do tema",topic_watch:"Para assistir sobre o tema",
+  nl_page_title:"Newsletter",nl_page_text:"Um resumo por semana com o que os analistas mais relevantes publicaram, organizado por tema e escrito no seu idioma.",nl_topics:"Temas que você quer receber",nl_lang:"Idioma da newsletter",nl_preview:"Prévia da próxima edição",nl_edition:"Edição de sexta-feira, 30 de outubro de 2026",
+  about_title:"Como funciona",about_lede:"O Villa reúne, organiza e resume o que pensadores, economistas, jornalistas e políticos comprometidos com a democracia liberal publicam sobre o mundo contemporâneo.",
+  step1_t:"Coleta",step1:"Monitoramos automaticamente sites, newsletters, canais de vídeo e podcasts de cada pessoa e organização da base.",
+  step2_t:"Classificação",step2:"Cada publicação nova é classificada por tema, formato, origem e idioma.",
+  step3_t:"Resumo e tradução",step3:"Uma IA escreve um resumo curto e o traduz para o idioma de quem lê. O texto original nunca é reproduzido.",
+  step4_t:"Publicação",step4:"A análise aparece no site com título, resumo e link para o original, e entra na newsletter da semana.",
+  about_lens_t:"A lente",about_lens:"Acompanhamos vozes de diferentes tradições que compartilham alguns compromissos básicos, como eleições livres, Estado de direito, liberdade de expressão, imprensa independente e direitos individuais. A curadoria é de quem acompanhamos, não do que cada um diz.",
+  about_rights_t:"Direitos e paywall",about_rights:"Mostramos apenas título, um resumo próprio e o link para o original. Conteúdos fechados para assinantes aparecem só com título e link, sem resumo.",
+  about_lang_t:"Idiomas",about_lang:"A interface está em inglês, português, espanhol, francês e italiano. Os resumos são gerados no idioma de quem lê, e o original fica a um clique.",
+  proto:"Protótipo. Títulos, autores, datas e links das análises são reais e foram coletados em outubro de 2026. Os resumos foram escritos para demonstração.",
+  footer_nav:"Navegar",footer_topics:"Temas",footer_about:"Sobre",footer_lang:"Idiomas",vp_kicker:"O que é o Villa",vp_title:"Entenda o mundo pela lente da democracia liberal",
+  vp_lede:"O Villa acompanha {n} pensadores, economistas, jornalistas e políticos de {c} países. Reúne o que eles publicam em textos, vídeos e podcasts e entrega cada análise com um resumo curto no seu idioma e o link para o original. É para quem quer acompanhar o debate sério sobre política, geopolítica e economia sem depender do algoritmo das redes sociais nem visitar dezenas de sites por dia.",
+  vp_cta_feed:"Ver o feed",vp_cta_nl:"Receber a newsletter",
+  vp_p1_t:"Vozes escolhidas",vp_p1:"Escolhemos quem acompanhar pelo compromisso com eleições livres, Estado de direito e liberdade de expressão, e pela crítica a autoritários de todos os lados. Cada voz fala por si.",
+  vp_p2_t:"Resumo no seu idioma",vp_p2:"Cada análise ganha um resumo curto em inglês, português, espanhol, francês ou italiano.",
+  vp_p3_t:"Sempre o original",vp_p3:"O link leva ao texto, vídeo ou podcast de quem publicou. Conteúdo para assinantes aparece só com título e link.",
+  vp_p4_t:"Ordem cronológica",vp_p4:"O feed segue a ordem de publicação, sem algoritmo de engajamento. Você escolhe quem seguir e quais temas ver.",
+  feed_title:"Feed",feed_sub:"Tudo o que os analistas acompanhados publicaram, do mais recente para o mais antigo.",
+  tab_all:"Tudo",tab_following:"Seguindo",tab_saved:"Salvos",new:"Novo",save:"Salvar",saved:"Salvo",copy_link:"Copiar link",copied:"Link copiado",copy_fail:"Não foi possível copiar. Selecione o endereço no navegador.",follow_short:"Seguir",
+  load_more:"Carregar mais",empty_following:"Você ainda não segue ninguém. Siga analistas para montar um feed só com as vozes que mais interessam a você.",empty_saved:"Nada salvo por enquanto. Use o botão Salvar nas análises para guardá-las aqui.",
+  who_follow:"Quem seguir",month_topics:"Temas do mês",month_note:"Análises publicadas nos últimos 31 dias.",
+  b_today:"Hoje",b_yesterday:"Ontem",b_week:"Esta semana",b_lastweek:"Semana passada",b_earlier:"Antes",
+  publication:"Publicação",columnist:"Autor convidado",visit_site:"Visitar o site",pub_authors:"Autores recentes",cat1_think:"Pensador e acadêmico",cat1_econ:"Economista",cat1_journo:"Jornalista e analista",cat1_pol:"Político e ativista",
+  back:"Voltar",of:"de"},
+ en:{k1_doc:"Documentary",k1_series:"Series",k1_film:"Film",ot_media:"Independent journalism",in_exile:"in exile",region_asia:"Asia and Pacific",region_mena:"Middle East",region_afr:"Africa",region_eu:"Europe",region_na:"North America",region_latam:"Latin America",see_all_orgs:"See all organisations",pubs_side:"Independent publications",locale:"en-GB",tagline:"Analysis of the contemporary world through the lens of liberal democracy",nav_home:"Home",nav_analyses:"Analysis",nav_analysts:"Analysts",nav_topics:"Topics",nav_watch:"Watch",nav_orgs:"Organisations",nav_newsletter:"Newsletter",nav_about:"How it works",
+  search:"Search",search_ph:"Search analysts, analysis or titles",close:"Close",menu:"Menu",results_people:"Analysts",results_items:"Analysis",results_av:"To watch",no_results:"Nothing found for that search.",
+  featured:"Featured",radar:"On the radar",latest:"Latest",see_all_analyses:"See all analysis",all:"All",all_f:"All",original_in:"original in",summary_label:"Automatic summary",listen:"Listen to the original",read:"Read the original",watchv:"Watch the original",more_from:"More from",
+  paywall:"Subscriber-only content. We show the title and link, without a summary.",content_note:"",
+  analysts_title:"Who we follow",see_all_analysts:"See all analysts",observatories:"Observatories",observatories_text:"Independent indices that measure the health of democracy worldwide and anchor the analysis.",
+  watch_title:"To watch",watch_text:"Films, series and documentaries that help explain authoritarianism, war and how democracies are built, with where to stream them.",watch_all:"See all titles",
+  nl_title:"The week in one read",nl_text:"Every Friday, the most relevant analysis on each topic, summarised in your language.",email:"Your email",subscribe:"Subscribe",nl_done:"Subscription recorded. This prototype sends no emails.",
+  st_people:"analysts, journalists and politicians followed",st_orgs:"organisations, think tanks and observatories",st_langs:"interface languages, with translated summaries",st_av:"films, series and documentaries with where to watch",
+  th_dem:"Democracy and institutions",th_geo:"Geopolitics",th_eco:"Economy",th_tec:"Technology and freedoms",
+  thd_dem:"Rule of law, elections, populism, authoritarianism and polarisation. How democracies hold, erode and recover.",thd_geo:"International relations, wars and power blocs across Latin America, North America, Europe, Russia, Africa, the Middle East and Asia.",thd_eco:"Political economy, development and the role of institutions in growth and prosperity.",thd_tec:"Artificial intelligence, networks, free speech, privacy and human rights online.",
+  fmt_text:"Text",fmt_video:"Video",fmt_podcast:"Podcast",cat_think:"Thinkers and scholars",cat_econ:"Economists",cat_journo:"Journalists and analysts",cat_pol:"Politicians and activists",
+  region:"Region",region_int:"Global",format:"Format",topic:"Topic",language:"Language",category:"Category",
+  n_results:n=>n===1?"1 result":n+" results",empty:"No results with these filters yet. New analysis will appear here automatically.",
+  analyses_title:"Analysis",analyses_text:"Everything the analysts we follow have published, newest first, with a summary in your language and a link to the original.",
+  analysts_text:"Thinkers, economists, journalists and politicians Villa follows. Collection runs automatically from each person’s channels.",
+  n_analyses:n=>n===1?"1 piece":n+" pieces",collect_pending:"Collection not set up",
+  sources_monitored:"Monitored channels",active:"Active",to_setup:"To add",ch_site:"Website",ch_newsletter:"Newsletter",ch_video:"Videos",ch_x:"X (Twitter)",ch_youtube:"YouTube",ch_rss:"RSS feed",
+  collect_note:"Once a channel is added to the database, new content appears here automatically.",
+  frequent_topics:"Topics",related:"Also follow",publications:"Recent publications",no_pubs:"No publications collected for this analyst yet. They will appear here once channels are added.",
+  f_country:"Country",f_org:"Affiliation",f_lang:"Publishes in",f_cat:"Field",follow:"Follow in the newsletter",following:"Following",
+  orgs_title:"Organisations",orgs_text:"Indices, think tanks, rights groups, independent newsrooms and publications that anchor the debate on liberal democracy.",
+  ot_index:"Democracy indices",ot_tank:"Think tanks",ot_fund:"Foundations",ot_net:"Rights and civil society",ot_pub:"Publications",
+  w_where:"Where",w_sub:"Subscription",w_free:"Free",w_rent:"Rent or buy",w_none:"No streaming found",w_nf:"Not found",w_kind:"Type",k_film:"Films",k_series:"Series",k_doc:"Documentaries",platform:"Platform",any_platform:"Any platform",
+  see_where:"See where to watch",society_title:"Society and community",society_text:"Titles outside the political core about community life, place and everyday life.",w_checked:"For now, availability follows the Brazilian JustWatch catalogue, checked on 24 Oct 2026. In the live site it will follow the reader’s country.",
+  wg_ww2:"Second World War and the Holocaust",wg_auth:"Totalitarianism and authoritarianism",wg_rus:"Russia and Ukraine",wg_me:"Middle East",wg_pol:"Politics and institutions",wg_ext:"Extremism and radicalisation",wg_other:"Other topics",
+  topic_people:"Analysts on this topic",topic_refs:"References",topic_watch:"To watch on this topic",
+  nl_page_title:"Newsletter",nl_page_text:"One weekly summary of what the most relevant analysts published, organised by topic and written in your language.",nl_topics:"Topics you want",nl_lang:"Newsletter language",nl_preview:"Preview of the next issue",nl_edition:"Friday issue, 30 October 2026",
+  about_title:"How it works",about_lede:"Villa gathers, organises and summarises what thinkers, economists, journalists and politicians committed to liberal democracy publish about the contemporary world.",
+  step1_t:"Collection",step1:"We automatically monitor the websites, newsletters, video channels and podcasts of every person and organisation in the database.",step2_t:"Classification",step2:"Each new piece is classified by topic, format, origin and language.",step3_t:"Summary and translation",step3:"AI writes a short summary and translates it into the reader’s language. The original text is never reproduced.",step4_t:"Publication",step4:"The piece appears on the site with title, summary and a link to the original, and joins the weekly newsletter.",
+  about_lens_t:"The lens",about_lens:"We follow voices from different traditions that share basic commitments: free elections, the rule of law, free speech, an independent press and individual rights. We curate whom we follow, not what each of them says.",
+  about_rights_t:"Rights and paywalls",about_rights:"We show only the title, our own summary and a link to the original. Subscriber-only content appears with title and link only.",
+  about_lang_t:"Languages",about_lang:"The interface is in English, Portuguese, Spanish, French and Italian. Summaries are generated in the reader’s language, and the original is one click away.",
+  proto:"Prototype. Titles, authors, dates and links are real, collected in October 2026. Summaries were written for demonstration.",
+  footer_nav:"Browse",footer_topics:"Topics",footer_about:"About",footer_lang:"Languages",vp_kicker:"What Villa is",vp_title:"Understand the world through the lens of liberal democracy",
+  vp_lede:"Villa follows {n} thinkers, economists, journalists and politicians from {c} countries. It gathers what they publish in text, video and podcasts and gives each piece a short summary in your language, with a link to the original. It is for readers who want the serious debate on politics, geopolitics and the economy without depending on social media feeds or checking dozens of sites a day.",
+  vp_cta_feed:"See the feed",vp_cta_nl:"Get the newsletter",
+  vp_p1_t:"Chosen voices",vp_p1:"We choose whom to follow by their commitment to free elections, the rule of law and free speech, and by their criticism of authoritarians on every side. Each voice speaks for itself.",
+  vp_p2_t:"Summary in your language",vp_p2:"Every piece gets a short summary in English, Portuguese, Spanish, French or Italian.",
+  vp_p3_t:"Always the original",vp_p3:"The link leads to the author’s own text, video or podcast. Subscriber-only content shows title and link only.",
+  vp_p4_t:"Chronological order",vp_p4:"The feed follows publication order, with no engagement algorithm. You choose whom to follow and which topics to see.",
+  feed_title:"Feed",feed_sub:"Everything the analysts we follow have published, newest first.",
+  tab_all:"All",tab_following:"Following",tab_saved:"Saved",new:"New",save:"Save",saved:"Saved",copy_link:"Copy link",copied:"Link copied",copy_fail:"Could not copy. Select the address in your browser.",follow_short:"Follow",
+  load_more:"Load more",empty_following:"You don’t follow anyone yet. Follow analysts to build a feed with only the voices you care about.",empty_saved:"Nothing saved yet. Use Save on any piece to keep it here.",
+  who_follow:"Who to follow",month_topics:"Topics this month",month_note:"Pieces published in the last 31 days.",
+  b_today:"Today",b_yesterday:"Yesterday",b_week:"This week",b_lastweek:"Last week",b_earlier:"Earlier",
+  publication:"Publication",columnist:"Contributor",visit_site:"Visit the site",pub_authors:"Recent authors",cat1_think:"Thinker and scholar",cat1_econ:"Economist",cat1_journo:"Journalist and analyst",cat1_pol:"Politician and activist",
+  back:"Back",of:"of"}
+};
+L.es=Object.assign({},L.en,{k1_doc:"Documental",k1_series:"Serie",k1_film:"Película",orgs_text:"Índices, think tanks, organizaciones de derechos, redacciones independientes y publicaciones que sostienen el debate sobre la democracia liberal.",ot_pub:"Publicaciones",ot_media:"Periodismo independiente",ot_net:"Derechos y sociedad civil",in_exile:"en el exilio",region_asia:"Asia y Pacífico",region_mena:"Oriente Medio",region_afr:"África",region_eu:"Europa",region_na:"América del Norte",region_latam:"América Latina",w_checked:"Por ahora la disponibilidad sigue el catálogo brasileño de JustWatch, consultado el 24/10/2026. En el sitio final seguirá el país del lector.",about_lang:"La interfaz está en inglés, portugués, español, francés e italiano. Los resúmenes se generan en el idioma del lector y el original está a un clic.",thd_geo:"Relaciones internacionales, guerras y bloques de poder en América Latina, América del Norte, Europa, Rusia, África, Oriente Medio y Asia.",see_all_orgs:"Ver todas las organizaciones",pubs_side:"Publicaciones independientes",watch_text:"Películas, series y documentales que ayudan a entender el autoritarismo, la guerra y la construcción de las democracias, con indicación de dónde verlos.",vp_p2:"Cada pieza recibe un resumen breve en inglés, portugués, español, francés o italiano.",vp_p1:"Elegimos a quién seguir por su compromiso con las elecciones libres, el Estado de derecho y la libertad de expresión, y por su crítica a los autoritarios de todos los signos. Cada voz habla por sí misma.",vp_lede:"Villa sigue a {n} pensadores, economistas, periodistas y políticos de {c} países. Reúne lo que publican en textos, vídeos y pódcasts y ofrece cada pieza con un resumen breve en tu idioma y el enlace al original. Está pensado para quien quiere seguir el debate serio sobre política, geopolítica y economía sin depender del algoritmo de las redes sociales ni visitar decenas de sitios al día.",tab_all:"Todo",tab_following:"Siguiendo",tab_saved:"Guardados",new:"Nuevo",save:"Guardar",saved:"Guardado",copy_link:"Copiar enlace",copied:"Enlace copiado",follow_short:"Seguir",following:"Siguiendo",load_more:"Cargar más",b_today:"Hoy",b_yesterday:"Ayer",b_week:"Esta semana",b_lastweek:"La semana pasada",b_earlier:"Antes",who_follow:"A quién seguir",month_topics:"Temas del mes",vp_kicker:"Qué es Villa",vp_title:"Entiende el mundo desde la democracia liberal",vp_cta_feed:"Ver el feed",vp_cta_nl:"Recibir el boletín",locale:"es-ES",tagline:"Análisis del mundo contemporáneo desde la democracia liberal",nav_home:"Inicio",nav_analyses:"Análisis",nav_analysts:"Analistas",nav_topics:"Temas",nav_watch:"Ver",nav_orgs:"Organizaciones",nav_newsletter:"Boletín",nav_about:"Cómo funciona",search:"Buscar",search_ph:"Buscar analista, análisis o título",close:"Cerrar",featured:"Destacado",radar:"En el radar",latest:"Lo más reciente",see_all_analyses:"Ver todos los análisis",all:"Todos",all_f:"Todas",original_in:"original en",summary_label:"Resumen automático",listen:"Escuchar el original",read:"Leer el original",watchv:"Ver el original",more_from:"Más de",paywall:"Contenido exclusivo para suscriptores. Mostramos título y enlace, sin resumen.",content_note:"En este prototipo los resúmenes aparecen en inglés. En el sitio final se generan en tu idioma.",analysts_title:"A quién seguimos",see_all_analysts:"Ver todos los analistas",observatories:"Observatorios",watch_title:"Para ver",watch_all:"Ver todos los títulos",nl_title:"La semana en una lectura",nl_text:"Cada viernes, los análisis más relevantes de cada tema, resumidos en tu idioma.",email:"Tu correo",subscribe:"Suscribirse",th_dem:"Democracia e instituciones",th_geo:"Geopolítica",th_eco:"Economía",th_tec:"Tecnología y libertades",fmt_text:"Texto",fmt_video:"Vídeo",fmt_podcast:"Pódcast",cat_think:"Pensadores y académicos",cat_econ:"Economistas",cat_journo:"Periodistas y analistas",cat_pol:"Políticos y activistas",region:"Región",region_int:"Global",format:"Formato",topic:"Tema",language:"Idioma",category:"Categoría",n_results:n=>n===1?"1 resultado":n+" resultados",analyses_title:"Análisis",n_analyses:n=>n===1?"1 análisis":n+" análisis",publications:"Publicaciones recientes",related:"Sigue también",orgs_title:"Organizaciones",w_where:"Dónde",w_sub:"Suscripción",w_free:"Gratis",w_rent:"Alquiler o compra",w_none:"Sin streaming disponible",w_nf:"No encontrado",w_kind:"Tipo",k_film:"Películas",k_series:"Series",k_doc:"Documentales",platform:"Plataforma",any_platform:"Cualquier plataforma",see_where:"Ver dónde",society_title:"Sociedad y comunidad",about_title:"Cómo funciona",footer_nav:"Navegar",footer_topics:"Temas",footer_about:"Acerca de",footer_lang:"Idiomas"});
+L.fr=Object.assign({},L.en,{k1_doc:"Documentaire",k1_series:"Série",k1_film:"Film",orgs_text:"Indices, think tanks, organisations de défense des droits, rédactions indépendantes et publications qui nourrissent le débat sur la démocratie libérale.",ot_pub:"Publications",ot_media:"Journalisme indépendant",ot_net:"Droits et société civile",in_exile:"en exil",region_asia:"Asie-Pacifique",region_mena:"Moyen-Orient",region_afr:"Afrique",region_eu:"Europe",region_na:"Amérique du Nord",region_latam:"Amérique latine",w_checked:"Pour l’instant, la disponibilité suit le catalogue brésilien de JustWatch, consulté le 24/10/2026. Sur le site final, elle suivra le pays du lecteur.",about_lang:"L’interface est disponible en anglais, portugais, espagnol, français et italien. Les résumés sont générés dans la langue du lecteur, et l’original est à un clic.",thd_geo:"Relations internationales, guerres et blocs de puissance en Amérique latine, en Amérique du Nord, en Europe, en Russie, en Afrique, au Moyen-Orient et en Asie.",see_all_orgs:"Voir toutes les organisations",pubs_side:"Publications indépendantes",watch_text:"Films, séries et documentaires qui aident à comprendre l’autoritarisme, la guerre et la construction des démocraties, avec où les regarder.",vp_p2:"Chaque contribution reçoit un court résumé en anglais, portugais, espagnol, français ou italien.",vp_p1:"Nous choisissons qui suivre selon leur attachement aux élections libres, à l’État de droit et à la liberté d’expression, et selon leur critique des autoritaires de tous bords. Chaque voix parle pour elle-même.",vp_lede:"Villa suit {n} penseurs, économistes, journalistes et responsables politiques de {c} pays. Il rassemble ce qu’ils publient en textes, vidéos et podcasts et propose chaque contribution avec un court résumé dans votre langue et le lien vers l’original. Il s’adresse à celles et ceux qui veulent suivre le débat sérieux sur la politique, la géopolitique et l’économie sans dépendre de l’algorithme des réseaux sociaux ni consulter des dizaines de sites par jour.",tab_all:"Tout",tab_following:"Abonnements",tab_saved:"Enregistrés",new:"Nouveau",save:"Enregistrer",saved:"Enregistré",copy_link:"Copier le lien",copied:"Lien copié",follow_short:"Suivre",following:"Suivi",load_more:"Charger plus",b_today:"Aujourd’hui",b_yesterday:"Hier",b_week:"Cette semaine",b_lastweek:"La semaine dernière",b_earlier:"Plus tôt",who_follow:"Qui suivre",month_topics:"Thèmes du mois",vp_kicker:"Ce qu’est Villa",vp_title:"Comprendre le monde à travers la démocratie libérale",vp_cta_feed:"Voir le fil",vp_cta_nl:"Recevoir la newsletter",locale:"fr-FR",tagline:"Analyses du monde contemporain à travers le prisme de la démocratie libérale",nav_home:"Accueil",nav_analyses:"Analyses",nav_analysts:"Analystes",nav_topics:"Thèmes",nav_watch:"À voir",nav_orgs:"Organisations",nav_newsletter:"Newsletter",nav_about:"Comment ça marche",search:"Rechercher",search_ph:"Rechercher un analyste, une analyse ou un titre",close:"Fermer",featured:"À la une",radar:"Dans le radar",latest:"Les plus récentes",see_all_analyses:"Voir toutes les analyses",all:"Tous",all_f:"Toutes",original_in:"original en",summary_label:"Résumé automatique",listen:"Écouter l’original",read:"Lire l’original",watchv:"Voir l’original",more_from:"Plus de",paywall:"Contenu réservé aux abonnés. Nous affichons le titre et le lien, sans résumé.",content_note:"Dans ce prototype, les résumés s’affichent en anglais. Sur le site final, ils sont générés dans votre langue.",analysts_title:"Qui nous suivons",see_all_analysts:"Voir tous les analystes",observatories:"Observatoires",watch_title:"À voir",watch_all:"Voir tous les titres",nl_title:"La semaine en une lecture",nl_text:"Chaque vendredi, les analyses les plus importantes de chaque thème, résumées dans votre langue.",email:"Votre e-mail",subscribe:"S’abonner",th_dem:"Démocratie et institutions",th_geo:"Géopolitique",th_eco:"Économie",th_tec:"Technologie et libertés",fmt_text:"Texte",fmt_video:"Vidéo",fmt_podcast:"Podcast",cat_think:"Penseurs et universitaires",cat_econ:"Économistes",cat_journo:"Journalistes et analystes",cat_pol:"Responsables politiques et militants",region:"Région",region_int:"Monde",format:"Format",topic:"Thème",language:"Langue",category:"Catégorie",n_results:n=>n<=1?n+" résultat":n+" résultats",analyses_title:"Analyses",n_analyses:n=>n<=1?n+" analyse":n+" analyses",publications:"Publications récentes",related:"À suivre aussi",orgs_title:"Organisations",w_where:"Où",w_sub:"Abonnement",w_free:"Gratuit",w_rent:"Location ou achat",w_none:"Pas de streaming trouvé",w_nf:"Introuvable",w_kind:"Type",k_film:"Films",k_series:"Séries",k_doc:"Documentaires",platform:"Plateforme",any_platform:"Toutes les plateformes",see_where:"Voir où regarder",society_title:"Société et communauté",about_title:"Comment ça marche",footer_nav:"Naviguer",footer_topics:"Thèmes",footer_about:"À propos",footer_lang:"Langues"});
+L.it=Object.assign({},L.en,{k1_doc:"Documentario",k1_series:"Serie",k1_film:"Film",orgs_text:"Indici, think tank, organizzazioni per i diritti, redazioni indipendenti e pubblicazioni che alimentano il dibattito sulla democrazia liberale.",ot_pub:"Pubblicazioni",ot_media:"Giornalismo indipendente",ot_net:"Diritti e società civile",in_exile:"in esilio",region_asia:"Asia e Pacifico",region_mena:"Medio Oriente",region_afr:"Africa",region_eu:"Europa",region_na:"Nord America",region_latam:"America Latina",w_checked:"Per ora la disponibilità segue il catalogo brasiliano di JustWatch, consultato il 24/10/2026. Nel sito definitivo seguirà il paese di chi legge.",about_lang:"L’interfaccia è in inglese, portoghese, spagnolo, francese e italiano. I riassunti sono generati nella lingua di chi legge e l’originale è a un clic.",thd_geo:"Relazioni internazionali, guerre e blocchi di potere in America Latina, Nord America, Europa, Russia, Africa, Medio Oriente e Asia.",see_all_orgs:"Vedi tutte le organizzazioni",pubs_side:"Pubblicazioni indipendenti",watch_text:"Film, serie e documentari che aiutano a capire l’autoritarismo, la guerra e la costruzione delle democrazie, con indicazione di dove vederli.",vp_p2:"Ogni contributo riceve un breve riassunto in inglese, portoghese, spagnolo, francese o italiano.",vp_p1:"Scegliamo chi seguire in base all’impegno per elezioni libere, Stato di diritto e libertà di espressione, e alla critica degli autoritari di ogni colore. Ogni voce parla per sé.",vp_lede:"Villa segue {n} pensatori, economisti, giornalisti e politici di {c} paesi. Raccoglie ciò che pubblicano in testi, video e podcast e offre ogni contributo con un breve riassunto nella tua lingua e il link all’originale. È pensato per chi vuole seguire il dibattito serio su politica, geopolitica ed economia senza dipendere dall’algoritmo dei social né visitare decine di siti al giorno.",tab_all:"Tutto",tab_following:"Seguiti",tab_saved:"Salvati",new:"Nuovo",save:"Salva",saved:"Salvato",copy_link:"Copia link",copied:"Link copiato",follow_short:"Segui",following:"Segui già",load_more:"Carica altro",b_today:"Oggi",b_yesterday:"Ieri",b_week:"Questa settimana",b_lastweek:"La settimana scorsa",b_earlier:"Prima",who_follow:"Chi seguire",month_topics:"Temi del mese",vp_kicker:"Cos’è Villa",vp_title:"Capire il mondo attraverso la democrazia liberale",vp_cta_feed:"Vedi il feed",vp_cta_nl:"Ricevi la newsletter",locale:"it-IT",tagline:"Analisi del mondo contemporaneo attraverso la lente della democrazia liberale",nav_home:"Home",nav_analyses:"Analisi",nav_analysts:"Analisti",nav_topics:"Temi",nav_watch:"Da vedere",nav_orgs:"Organizzazioni",nav_newsletter:"Newsletter",nav_about:"Come funziona",search:"Cerca",search_ph:"Cerca analista, analisi o titolo",close:"Chiudi",featured:"In evidenza",radar:"Sul radar",latest:"Più recenti",see_all_analyses:"Vedi tutte le analisi",all:"Tutti",all_f:"Tutte",original_in:"originale in",summary_label:"Riassunto automatico",listen:"Ascolta l’originale",read:"Leggi l’originale",watchv:"Guarda l’originale",more_from:"Altro di",paywall:"Contenuto riservato agli abbonati. Mostriamo titolo e link, senza riassunto.",content_note:"In questo prototipo i riassunti compaiono in inglese. Nel sito definitivo vengono generati nella tua lingua.",analysts_title:"Chi seguiamo",see_all_analysts:"Vedi tutti gli analisti",observatories:"Osservatori",watch_title:"Da vedere",watch_all:"Vedi tutti i titoli",nl_title:"La settimana in una lettura",nl_text:"Ogni venerdì, le analisi più rilevanti di ogni tema, riassunte nella tua lingua.",email:"La tua email",subscribe:"Iscriviti",th_dem:"Democrazia e istituzioni",th_geo:"Geopolitica",th_eco:"Economia",th_tec:"Tecnologia e libertà",fmt_text:"Testo",fmt_video:"Video",fmt_podcast:"Podcast",cat_think:"Pensatori e accademici",cat_econ:"Economisti",cat_journo:"Giornalisti e analisti",cat_pol:"Politici e attivisti",region:"Regione",region_int:"Globale",format:"Formato",topic:"Tema",language:"Lingua",category:"Categoria",n_results:n=>n===1?"1 risultato":n+" risultati",analyses_title:"Analisi",n_analyses:n=>n===1?"1 analisi":n+" analisi",publications:"Pubblicazioni recenti",related:"Segui anche",orgs_title:"Organizzazioni",w_where:"Dove",w_sub:"Abbonamento",w_free:"Gratis",w_rent:"Noleggio o acquisto",w_none:"Nessuno streaming trovato",w_nf:"Non trovato",w_kind:"Tipo",k_film:"Film",k_series:"Serie",k_doc:"Documentari",platform:"Piattaforma",any_platform:"Qualsiasi piattaforma",see_where:"Vedi dove guardarlo",society_title:"Società e comunità",about_title:"Come funziona",footer_nav:"Naviga",footer_topics:"Temi",footer_about:"Chi siamo",footer_lang:"Lingue"});
+
+/* ============ STATE ============ */
+const store={get(k,d){try{const v=localStorage.getItem("villa:"+k);return v===null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem("villa:"+k,v)}catch(e){}}};
+const pj=v=>{try{const o=JSON.parse(v);return o&&typeof o==="object"?o:{}}catch(e){return {}}};
+const S={lang:store.get("uilang","en"),
+  home:{theme:"all"},
+  an:{theme:"all",fmt:"all",region:"all",lang:"all",q:""},
+  pe:{cat:"all",region:"all",theme:"all",q:""},
+  pf:{fmt:"all"},
+  tp:{fmt:"all",region:"all"},
+  av:{group:"all",kind:"all",where:"all",plat:"all"},
+  nl:{done:false,themes:["dem","geo","eco","tec"]},
+  feed:{tab:"all",theme:"all",fmt:"all",n:8},
+  follow:pj(store.get("follow","{}")),
+  saved:pj(store.get("saved","{}"))
+};
+if(!L[S.lang])S.lang="en";
+const t=k=>{const d=L[S.lang];return (d&&d[k]!==undefined)?d[k]:L.en[k]};
+
+/* ============ HELPERS ============ */
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const byId=Object.fromEntries(PEOPLE.map(p=>[p.id,p]));
+const ini=n=>n.split(" ").filter(w=>w.length>2||/^[A-ZÀ-Ý]/.test(w)&&w.length>1).map(w=>w[0]).slice(0,2).join("");
+const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+function fdate(d){try{const p=d.split("-").map(Number);if(p.length===2)return new Intl.DateTimeFormat(t("locale"),{month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(p[0],p[1]-1,15)));return new Intl.DateTimeFormat(t("locale"),{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(p[0],p[1]-1,p[2])))}catch(e){return d}}
+const itemsSorted=()=>ITEMS.slice().sort((a,b)=>a.date<b.date?1:-1);
+const countBy=id=>ITEMS.filter(i=>i.who.includes(id)).length;
+const authorName=i=>i.who.length?i.who.map(id=>byId[id].name).join(", "):(i.by||"");
+const authorHref=i=>i.who.length?"#a-"+i.who[0]:"#p-"+i.pub;
+const itemRegion=i=>i.who.length?byId[i.who[0]].region:(PUBS[i.pub]?PUBS[i.pub].region:"int");
+const DN={};
+function cname(cc){if(!cc||cc==="INT")return t("region_int");if(cc==="EUR")return t("region_eu");const ex=cc==="RU-EX";const c=ex?"RU":cc;let n=c;try{const l=t("locale");DN[l]=DN[l]||new Intl.DisplayNames([l],{type:"region"});n=DN[l].of(c)||c}catch(e){}return ex?n+" ("+t("in_exile")+")":n}
+const pArea=p=>S.lang==="pt"?p.area:((AREAS[p.area]||{})[S.lang]||(AREAS[p.area]||{}).en||p.area);
+const oDesc=o=>S.lang==="pt"?(o.desc_pt||o.desc):o.desc;
+const sumOf=i=>S.lang==="pt"?(i.sum||i.sum_en):(i.sum_en||i.sum);
+const avTitle=a=>S.lang==="pt"?a.title:(a.orig||a.title);
+const AVTH={"Guerra": {"en": "War", "es": "Guerra", "fr": "Guerre", "it": "Guerra"}, "Resistência e dissidência": {"en": "Resistance and dissent", "es": "Resistencia y disidencia", "fr": "Résistance et dissidence", "it": "Resistenza e dissenso"}, "Rússia e Ucrânia": {"en": "Russia and Ukraine", "es": "Rusia y Ucrania", "fr": "Russie et Ukraine", "it": "Russia e Ucraina"}, "Oriente Médio": {"en": "Middle East", "es": "Oriente Medio", "fr": "Moyen-Orient", "it": "Medio Oriente"}, "Cultura e ideias": {"en": "Culture and ideas", "es": "Cultura e ideas", "fr": "Culture et idées", "it": "Cultura e idee"}, "Cidades": {"en": "Cities", "es": "Ciudades", "fr": "Villes", "it": "Città"}, "Segunda Guerra e Holocausto": {"en": "Second World War and the Holocaust", "es": "Segunda Guerra Mundial y Holocausto", "fr": "Seconde Guerre mondiale et Shoah", "it": "Seconda guerra mondiale e Olocausto"}, "Liberdade e direitos": {"en": "Freedom and rights", "es": "Libertad y derechos", "fr": "Liberté et droits", "it": "Libertà e diritti"}, "Autoritarismo": {"en": "Authoritarianism", "es": "Autoritarismo", "fr": "Autoritarisme", "it": "Autoritarismo"}, "Extremismo e radicalização": {"en": "Extremism and radicalisation", "es": "Extremismo y radicalización", "fr": "Extrémisme et radicalisation", "it": "Estremismo e radicalizzazione"}, "Comunidade e território": {"en": "Community and place", "es": "Comunidad y territorio", "fr": "Communauté et territoire", "it": "Comunità e territorio"}, "Comunidade e longevidade": {"en": "Community and longevity", "es": "Comunidad y longevidad", "fr": "Communauté et longévité", "it": "Comunità e longevità"}, "Totalitarismo": {"en": "Totalitarianism", "es": "Totalitarismo", "fr": "Totalitarisme", "it": "Totalitarismo"}, "Vida cotidiana": {"en": "Everyday life", "es": "Vida cotidiana", "fr": "Vie quotidienne", "it": "Vita quotidiana"}, "Política e instituições": {"en": "Politics and institutions", "es": "Política e instituciones", "fr": "Politique et institutions", "it": "Politica e istituzioni"}};
+const avTheme=a=>S.lang==="pt"?a.theme:((AVTH[a.theme]||{})[S.lang]||a.theme);
+const avKindL=a=>t("k1_"+avKind(a.kind));
+const regionOpts=(list)=>[["all",t("all_f")]].concat(REGIONS.filter(r=>list.some(x=>x.region===r)).map(r=>[r,t("region_"+r)]));
+const nCountries=()=>new Set(PEOPLE.map(p=>p.cc).filter(c=>c&&c!=="INT")).size;
+const pubIni=o=>({"revista-id":"ID","dagobah":"DG"})[o.id]||o.name.replace(/[^A-Za-zÀ-ÿ ]/g,"").split(" ").filter(Boolean).map(w=>w[0]).join("").slice(0,2).toUpperCase();
+const ARROW='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+const LOCK='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="flex:none;margin-top:2px"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const cta=f=>f==="video"?t("watchv"):f==="podcast"?t("listen"):t("read");
+function pills(group,key,opts,cur){return '<div class="pills" role="group">'+opts.map(([v,l])=>'<button type="button" class="pill" data-set="'+group+'.'+key+'" data-val="'+esc(v)+'" aria-pressed="'+(cur===v)+'">'+esc(l)+'</button>').join("")+'</div>'}
+const TH=["dem","geo","eco","tec"];
+const themeOpts=(lbl)=>[["all",lbl||t("all")]].concat(TH.map(x=>[x,t("th_"+x)]));
+function note(){const n=t("content_note");return n?'<p class="notice">'+esc(n)+'</p>':""}
+
+function card(i){
+  const who=i.who.length?i.who.map(id=>'<a href="#a-'+id+'">'+esc(byId[id].name)+'</a>').join(", "):'<a href="#p-'+i.pub+'">'+esc(i.by)+'</a>';
+  return '<article class="card"><div class="top"><span class="kicker">'+esc(t("th_"+i.theme))+'</span><span class="tags"><span class="tag solid">'+esc(t("fmt_"+i.fmt))+'</span><span class="tag">'+esc(i.lang)+'</span></span></div>'+
+  '<h3>'+esc(i.title)+'</h3><p class="meta">'+who+' · '+esc(i.src)+' · '+esc(fdate(i.date))+'</p>'+
+  (i.paywall?'<p class="paywall">'+LOCK+'<span>'+esc(t("paywall"))+'</span></p>':'<p class="sum">'+esc(sumOf(i))+'</p>')+
+  '<a class="go" href="'+esc(i.url)+'" target="_blank" rel="noopener">'+esc(cta(i.fmt))+ARROW+'</a></article>';
+}
+function personLink(p,showCount){
+  const n=countBy(p.id);
+  return '<a class="person" href="#a-'+p.id+'"><span class="avatar" aria-hidden="true">'+esc(ini(p.name))+'</span><span style="min-width:0"><span class="nm">'+esc(p.name)+'</span><span class="ar">'+esc(pArea(p))+' · '+esc(cname(p.cc))+'</span></span>'+
+  (showCount?(n?'<span class="ct">'+esc(t("n_analyses")(n))+'</span>':'<span class="ct pending">'+esc(t("collect_pending"))+'</span>'):"")+'</a>';
+}
+function avGroup(th){if(th==="Segunda Guerra e Holocausto")return"ww2";if(th==="Totalitarismo"||th==="Autoritarismo")return"auth";if(th==="Rússia e Ucrânia")return"rus";if(th==="Oriente Médio")return"me";if(th==="Política e instituições")return"pol";if(th==="Extremismo e radicalização")return"ext";return"other"}
+function avKind(k){if(k==="Filme")return"film";if(/Document|Vídeo/.test(k))return"doc";return"series"}
+function avPlats(a){return (a.sub+", "+a.free+", "+a.rent).split(",").map(s=>s.replace(/\(.*?\)/g,"").replace(/^(Compra|Aluguel) n[ao]s? /,"").replace(/ e na /," , ").trim()).flatMap(s=>s.split(" , ")).filter(Boolean)}
+function poster(a){
+  const sitLbl={sub:t("w_sub"),free:t("w_free"),rent:t("w_rent"),none:t("w_none"),nf:t("w_nf")}[a.sit];
+  const detail=a.sit==="sub"?a.sub:a.sit==="free"?a.free:a.sit==="rent"?a.rent:"";
+  return '<article class="poster"><span class="kicker" style="color:var(--signal-text)">'+esc(avKindL(a))+(a.year?' · '+esc(a.year):"")+'</span>'+
+  '<div style="display:flex;flex-direction:column;gap:8px"><h3>'+esc(avTitle(a))+'</h3>'+(S.lang==="pt"&&a.orig&&a.orig!==a.title?'<span class="orig">'+esc(a.orig)+'</span>':"")+'</div>'+
+  '<div class="foot"><span class="muted">'+esc(avTheme(a))+'</span><span class="avail av-'+a.sit+'"><i></i>'+esc(sitLbl)+'</span>'+(detail?'<span>'+esc(detail)+'</span>':"")+
+  '<a class="see" href="'+esc(a.url)+'" target="_blank" rel="noopener">'+esc(t("see_where"))+ARROW+'</a></div></article>';
+}
+
+/* ============ VIEWS ============ */
+function relDay(d){
+  const p=d.split("-").map(Number);const dt=Date.UTC(p[0],p[1]-1,p[2]||15);
+  const now=new Date();const today=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+  return Math.round((today-dt)/86400000);
+}
+function bucket(i){
+  const n=relDay(i.date);
+  if(i.date.length===7||n>45){try{const p=i.date.split("-").map(Number);return new Intl.DateTimeFormat(t("locale"),{month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(p[0],p[1]-1,15)))}catch(e){return i.date.slice(0,7)}}
+  if(n<=0)return t("b_today");if(n===1)return t("b_yesterday");if(n<7)return t("b_week");if(n<14)return t("b_lastweek");return t("b_earlier");
+}
+function ago(i){
+  const n=relDay(i.date);if(i.date.length===7||n>6)return fdate(i.date);
+  try{return new Intl.RelativeTimeFormat(t("locale"),{numeric:"auto"}).format(-n,"day")}catch(e){return fdate(i.date)}
+}
+function post(i){
+  const pub=PUBS[i.pub];const p=i.who.length?byId[i.who[0]]:{id:i.pub,name:pub.name,cat:"",isPub:true};const fol=!!S.follow[p.id];const saved=!!S.saved[i.id];const fresh=relDay(i.date)<=3&&i.date.length>7;
+  const media=i.fmt==="video"||i.fmt==="podcast";
+  return '<article class="post" id="post-'+i.id+'">'+
+  '<div class="post-head"><a href="'+(p.isPub?"#p-":"#a-")+p.id+'" class="avatar'+(p.isPub?' pub':'')+'" aria-hidden="true" tabindex="-1" style="text-decoration:none">'+esc(p.isPub?pubIni(pub):ini(p.name))+'</a>'+
+   '<div style="min-width:0;flex:1"><a href="'+authorHref(i)+'" class="pname">'+esc(authorName(i))+'</a><span class="pmeta">'+esc(p.isPub?t("columnist"):t("cat1_"+p.cat))+' · '+(i.pub?'<a href="#p-'+i.pub+'">'+esc(i.src)+'</a>':esc(i.src))+'</span></div>'+
+   '<div class="ptime">'+(fresh?'<span class="tag signal">'+esc(t("new"))+'</span>':'')+'<span>'+esc(ago(i))+'</span></div></div>'+
+  '<div class="post-body"><span class="kicker">'+esc(t("th_"+i.theme))+' · '+esc(t("fmt_"+i.fmt))+' · '+esc(i.lang)+'</span>'+
+   '<h3><a href="'+esc(i.url)+'" target="_blank" rel="noopener">'+esc(i.title)+'</a></h3>'+
+   (media?'<a class="media" href="'+esc(i.url)+'" target="_blank" rel="noopener"><span class="play" aria-hidden="true">'+(i.fmt==="video"?'<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>':'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>')+'</span><span><b>'+esc(t("fmt_"+i.fmt))+'</b> · '+esc(i.src)+'</span></a>':'')+
+   (i.paywall?'<p class="paywall">'+LOCK+'<span>'+esc(t("paywall"))+'</span></p>':'<p class="sum">'+esc(sumOf(i))+'</p>')+'</div>'+
+  '<div class="post-actions"><a class="act strong" href="'+esc(i.url)+'" target="_blank" rel="noopener">'+esc(cta(i.fmt))+ARROW+'</a>'+
+   '<button type="button" class="act" data-save="'+i.id+'" aria-pressed="'+saved+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="'+(saved?"currentColor":"none")+'" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>'+esc(saved?t("saved"):t("save"))+'</button>'+
+   '<button type="button" class="act" data-copy="'+esc(i.url)+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>'+esc(t("copy_link"))+'</span></button>'+
+   '<button type="button" class="act" data-follow="'+p.id+'" aria-pressed="'+fol+'">'+esc(fol?t("following"):t("follow_short")+" "+(p.isPub?p.name:p.name.split(" ")[0]))+'</button></div></article>';
+}
+function feedList(){
+  const F=S.feed;const all=itemsSorted();
+  let list=all.filter(i=>(F.theme==="all"||i.theme===F.theme)&&(F.fmt==="all"||i.fmt===F.fmt));
+  if(F.tab==="following")list=list.filter(i=>i.who.some(id=>S.follow[id])||(i.pub&&S.follow[i.pub]));
+  if(F.tab==="saved")list=list.filter(i=>S.saved[i.id]);
+  return list;
+}
+function feedHTML(){
+  const F=S.feed;const list=feedList();const shown=list.slice(0,F.n);
+  if(!list.length){
+    const msg=F.tab==="following"?t("empty_following"):F.tab==="saved"?t("empty_saved"):t("empty");
+    return '<div class="empty">'+esc(msg)+(F.tab==="following"?'<div style="margin-top:14px" class="people">'+["timothy-snyder","anne-applebaum","ian-bremmer","ricardo-hausmann"].map(id=>followRow(byId[id])).join("")+'</div>':'')+'</div>';
+  }
+  let out="",last="";
+  shown.forEach(i=>{const b=bucket(i);if(b!==last){out+='<h3 class="day"><span>'+esc(b)+'</span></h3>';last=b}out+=post(i)});
+  if(list.length>shown.length)out+='<button type="button" class="btn" data-more="1" style="align-self:center">'+esc(t("load_more"))+' ('+(list.length-shown.length)+')</button>';
+  return out;
+}
+function followRow(p){
+  const fol=!!S.follow[p.id];
+  return '<div class="frow"><a href="#a-'+p.id+'" class="avatar" aria-hidden="true" tabindex="-1" style="text-decoration:none">'+esc(ini(p.name))+'</a><span style="min-width:0;flex:1"><a href="#a-'+p.id+'" class="pname">'+esc(p.name)+'</a><span class="pmeta">'+esc(pArea(p))+'</span></span><button type="button" class="mini" data-follow="'+p.id+'" aria-pressed="'+fol+'">'+esc(fol?t("following"):t("follow_short"))+'</button></div>';
+}
+function vHome(){
+  const F=S.feed;
+  const tabs=[["all",t("tab_all")],["following",t("tab_following")+(Object.values(S.follow).filter(Boolean).length?" ("+Object.values(S.follow).filter(Boolean).length+")":"")],["saved",t("tab_saved")]];
+  const suggest=PEOPLE.filter(p=>!S.follow[p.id]).sort((a,b)=>countBy(b.id)-countBy(a.id)).slice(0,5);
+  const month=itemsSorted().filter(i=>relDay(i.date)<=31&&i.date.length>7);
+  const byTheme=TH.map(x=>[x,month.filter(i=>i.theme===x).length]).sort((a,b)=>b[1]-a[1]);
+  const maxT=Math.max(1,...byTheme.map(b=>b[1]));
+  const watchPick=["zona-de-interesse","o-regime","borgen","winter-on-fire","fauda"].map(id=>AV.find(a=>a.id===id));
+  return ''+
+  '<section class="vp"><div class="wrap vp-grid">'+
+   '<div class="vp-main"><span class="kicker" style="color:var(--signal-text)">'+esc(t("vp_kicker"))+'</span>'+
+    '<h1 class="display vp-title">'+esc(t("vp_title"))+'</h1>'+
+    '<p class="lede">'+esc(t("vp_lede").replace("{n}",PEOPLE.length).replace("{c}",nCountries()))+'</p>'+
+    '<div class="pills"><button type="button" class="btn primary" data-scroll="feed">'+esc(t("vp_cta_feed"))+'</button><a class="btn" href="#newsletter">'+esc(t("vp_cta_nl"))+'</a><a class="btn" href="#sobre" style="border-color:transparent;text-decoration:underline">'+esc(t("nav_about"))+'</a></div></div>'+
+   '<ul class="vp-pillars">'+[1,2,3,4].map(n=>'<li><b>'+esc(t("vp_p"+n+"_t"))+'</b><span>'+esc(t("vp_p"+n))+'</span></li>').join("")+'</ul>'+
+  '</div>'+
+  '<div class="wrap"><div class="vp-stats">'+[[PEOPLE.length,t("st_people")],[ORGS.length,t("st_orgs")],[5,t("st_langs")],[AV.length,t("st_av")]].map(([n,l])=>'<div class="stat"><b>'+n+'</b><span>'+esc(l)+'</span></div>').join("")+'</div></div></section>'+
+
+  '<section class="block" id="feed" style="padding-top:40px"><div class="wrap feed-grid">'+
+   '<div class="feed-col">'+
+    '<div class="feed-head"><h2 class="display h-l">'+esc(t("feed_title"))+'</h2><p class="muted" style="margin:0;font-size:15px">'+esc(t("feed_sub"))+'</p></div>'+
+    '<div class="feed-controls">'+
+     '<div class="tabs" role="tablist">'+tabs.map(([v,l])=>'<button type="button" role="tab" class="tab" data-set="feed.tab" data-val="'+v+'" aria-selected="'+(F.tab===v)+'">'+esc(l)+'</button>').join("")+'</div>'+
+     '<div class="filter-row"><span class="kicker">'+esc(t("topic"))+'</span>'+pills("feed","theme",themeOpts(),F.theme)+'</div>'+
+     '<div class="filter-row"><span class="kicker">'+esc(t("format"))+'</span>'+pills("feed","fmt",[["all",t("all")],["text",t("fmt_text")],["video",t("fmt_video")],["podcast",t("fmt_podcast")]],F.fmt)+'</div>'+
+     note()+
+    '</div>'+
+    '<div class="feed" id="feed-list" aria-live="polite">'+feedHTML()+'</div>'+
+   '</div>'+
+   '<aside class="feed-side">'+
+    '<div class="side-box"><h2>'+esc(t("who_follow"))+'</h2>'+suggest.map(followRow).join("")+'<a href="#analistas" class="more">'+esc(t("see_all_analysts"))+' ('+PEOPLE.length+')</a></div>'+
+    '<div class="side-box"><h2>'+esc(t("month_topics"))+'</h2><ul class="bars">'+byTheme.map(([x,n])=>'<li><a href="#tema-'+x+'"><span class="bl">'+esc(t("th_"+x))+'</span><span class="bt" aria-hidden="true"><i style="width:'+Math.round(n/maxT*100)+'%"></i></span><span class="bn">'+n+'</span></a></li>').join("")+'</ul><p class="muted" style="margin:8px 0 0;font-size:12px">'+esc(t("month_note"))+'</p></div>'+
+    '<div class="side-box"><h2>'+esc(t("pubs_side"))+'</h2>'+["revista-id","dagobah"].map(id=>{const o=PUBS[id];const n=ITEMS.filter(i=>i.pub===id).length;return '<a class="wrow" href="#p-'+id+'"><b>'+esc(o.full)+'</b><span class="muted">'+esc(t("n_analyses")(n))+'</span></a>'}).join("")+'<a href="#organizacoes" class="more">'+esc(t("nav_orgs"))+'</a></div>'+
+    '<div class="side-box"><h2>'+esc(t("watch_title"))+'</h2>'+watchPick.slice(0,4).map(a=>'<a class="wrow" href="'+esc(a.url)+'" target="_blank" rel="noopener"><b>'+esc(avTitle(a))+'</b><span class="muted">'+esc(avKindL(a))+' · '+esc((a.sub||a.free||a.rent).split(",")[0])+'</span></a>').join("")+'<a href="#assistir" class="more">'+esc(t("watch_all"))+'</a></div>'+
+    '<div class="side-box nl-mini"><h2>'+esc(t("nl_title"))+'</h2><p style="margin:0 0 12px;font-size:14px">'+esc(t("nl_text"))+'</p>'+(S.nl.done?'<p class="ok-msg" role="status">'+esc(t("nl_done"))+'</p>':'<form data-nl="1" style="display:flex;flex-direction:column;gap:8px"><label for="nl-side" class="sr">'+esc(t("email"))+'</label><input id="nl-side" type="email" required placeholder="'+esc(t("email"))+'"><button type="submit" class="btn primary" style="justify-content:center">'+esc(t("subscribe"))+'</button></form>')+'</div>'+
+   '</aside>'+
+  '</div></section>'+
+
+  '<section class="block soft-band"><div class="wrap"><div class="sec-head"><h2 class="display h-l">'+esc(t("observatories"))+'</h2></div><p class="muted" style="margin:0 0 20px;max-width:44em">'+esc(t("observatories_text"))+'</p><div class="orgs">'+ORGS.filter(o=>o.type==="index").slice(0,8).map(o=>'<a class="org" href="'+esc(o.url)+'" target="_blank" rel="noopener"><b>'+esc(o.name)+'</b><span>'+esc(oDesc(o))+'</span></a>').join("")+'</div><p style="margin:20px 0 0"><a href="#organizacoes" class="more" style="font-weight:700">'+esc(t("see_all_orgs"))+' ('+ORGS.length+')</a></p></div></section>'+
+  nlBand();
+}
+
+function nlBand(){
+  return '<section class="nl" id="nl-band"><div class="wrap"><div style="flex:1 1 420px;display:flex;flex-direction:column;gap:10px"><h2 class="display h-l">'+esc(t("nl_title"))+'</h2><p style="margin:0;font-size:17px;max-width:32em">'+esc(t("nl_text"))+'</p></div>'+
+  (S.nl.done?'<p class="ok-msg" role="status">'+esc(t("nl_done"))+'</p>':'<form data-nl="1"><label for="nl-email" class="sr">'+esc(t("email"))+'</label><input id="nl-email" type="email" required placeholder="'+esc(t("email"))+'"><button type="submit">'+esc(t("subscribe"))+'</button></form>')+'</div></section>';
+}
+function vAnalyses(){
+  const A=S.an;
+  return '<div class="wrap"><section class="block" style="padding-bottom:24px"><h1 class="display h-xl">'+esc(t("analyses_title"))+'</h1><p class="lede muted" style="margin-top:14px">'+esc(t("analyses_text"))+'</p>'+note()+'</section>'+
+  '<div class="filters"><div class="filter-row"><label class="field" style="flex:1 1 320px" for="an-q"><span class="sr">'+esc(t("search"))+'</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="an-q" type="search" data-q="an" value="'+esc(A.q)+'" placeholder="'+esc(t("search_ph"))+'"></label></div>'+
+  '<div class="filter-row"><span class="kicker">'+esc(t("topic"))+'</span>'+pills("an","theme",themeOpts(),A.theme)+'</div>'+
+  '<div class="filter-row"><span class="kicker">'+esc(t("format"))+'</span>'+pills("an","fmt",[["all",t("all")],["text",t("fmt_text")],["video",t("fmt_video")],["podcast",t("fmt_podcast")]],A.fmt)+'</div>'+
+  '<div class="filter-row"><span class="kicker">'+esc(t("region"))+'</span>'+pills("an","region",regionOpts(ITEMS.map(i=>({region:itemRegion(i)}))),A.region)+'<span class="kicker" style="margin-left:12px">'+esc(t("language"))+'</span>'+pills("an","lang",[["all",t("all")],["PT","PT"],["EN","EN"],["ES","ES"]],A.lang)+'</div></div>'+
+  '<div id="an-res" style="padding-block:24px 48px"></div></div>';
+}
+function anResults(){
+  const A=S.an,q=norm(A.q.trim());
+  const list=itemsSorted().filter(i=>(A.theme==="all"||i.theme===A.theme)&&(A.fmt==="all"||i.fmt===A.fmt)&&(A.lang==="all"||i.lang===A.lang)&&(A.region==="all"||itemRegion(i)===A.region)&&(!q||norm(i.title+" "+authorName(i)+" "+i.src+" "+(i.sum||"")).includes(q)));
+  return '<p class="count" style="margin:0 0 16px">'+esc(t("n_results")(list.length))+'</p>'+(list.length?'<div class="grid">'+list.map(card).join("")+'</div>':'<p class="empty">'+esc(t("empty"))+'</p>');
+}
+function vAnalysts(){
+  const P=S.pe;
+  return '<div class="wrap"><section class="block" style="padding-bottom:24px"><h1 class="display h-xl">'+esc(t("nav_analysts"))+'</h1><p class="lede muted" style="margin-top:14px">'+esc(t("analysts_text"))+'</p></section>'+
+  '<div class="filters"><div class="filter-row"><label class="field" style="flex:1 1 320px" for="pe-q"><span class="sr">'+esc(t("search"))+'</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="pe-q" type="search" data-q="pe" value="'+esc(P.q)+'" placeholder="'+esc(t("search_ph"))+'"></label></div>'+
+  '<div class="filter-row"><span class="kicker">'+esc(t("category"))+'</span>'+pills("pe","cat",[["all",t("all")],["think",t("cat_think")],["econ",t("cat_econ")],["journo",t("cat_journo")],["pol",t("cat_pol")]],P.cat)+'</div>'+
+  '<div class="filter-row"><span class="kicker">'+esc(t("region"))+'</span>'+pills("pe","region",regionOpts(PEOPLE),P.region)+'</div>'+
+  '<div class="filter-row"><span class="kicker">'+esc(t("topic"))+'</span>'+pills("pe","theme",themeOpts(),P.theme)+'</div></div>'+
+  '<div id="pe-res" style="padding-block:24px 48px"></div></div>';
+}
+function peResults(){
+  const P=S.pe,q=norm(P.q.trim());
+  const list=PEOPLE.filter(p=>(P.cat==="all"||p.cat===P.cat)&&(P.region==="all"||p.region===P.region)&&(P.theme==="all"||p.themes.includes(P.theme))&&(!q||norm(p.name+" "+pArea(p)+" "+p.area+" "+cname(p.cc)+" "+p.org).includes(q)))
+    .sort((a,b)=>(countBy(b.id)-countBy(a.id))||a.name.localeCompare(b.name));
+  const groups=["think","econ","journo","pol"].map(c=>[c,list.filter(p=>p.cat===c)]).filter(g=>g[1].length);
+  return '<p class="count" style="margin:0 0 16px">'+esc(t("n_results")(list.length))+'</p>'+(list.length?groups.map(([c,ps])=>'<h2 class="kicker" style="margin:24px 0 12px;font-size:13px">'+esc(t("cat_"+c))+' · '+ps.length+'</h2><div class="people">'+ps.map(p=>personLink(p,true)).join("")+'</div>').join(""):'<p class="empty">'+esc(t("empty"))+'</p>');
+}
+function vProfile(id){
+  const p=byId[id];if(!p)return vNotFound();
+  const all=itemsSorted().filter(i=>i.who.includes(id));
+  const list=all.filter(i=>S.pf.fmt==="all"||i.fmt===S.pf.fmt);
+  const chKeys=["site","newsletter","video","youtube","x","rss"];
+  const related=PEOPLE.filter(o=>o.id!==id&&o.themes.some(x=>p.themes.includes(x))).sort((a,b)=>(countBy(b.id)-countBy(a.id))||((b.region===p.region)-(a.region===p.region))).slice(0,5);
+  const fol=!!S.follow[id];
+  const firstUrl=Object.values(p.ch)[0];
+  return '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="#inicio">'+esc(t("nav_home"))+'</a><span aria-hidden="true">/</span><a href="#analistas">'+esc(t("nav_analysts"))+'</a><span aria-hidden="true">/</span><span>'+esc(t("region_"+p.region))+'</span></nav>'+
+  '<section class="profile"><span class="avatar xl" aria-hidden="true">'+esc(ini(p.name))+'</span><div class="info"><div class="pills"><span class="tag signal">'+esc(t("cat_"+p.cat))+'</span>'+p.themes.map(x=>'<a class="tag" href="#tema-'+x+'" style="text-decoration:none">'+esc(t("th_"+x))+'</a>').join("")+'</div>'+
+  '<h1 class="display h-xl">'+esc(p.name)+'</h1>'+
+  '<dl class="facts"><div><dt>'+esc(t("f_cat"))+'</dt><dd>'+esc(pArea(p))+'</dd></div><div><dt>'+esc(t("f_country"))+'</dt><dd>'+esc(cname(p.cc))+'</dd></div>'+(p.org?'<div><dt>'+esc(t("f_org"))+'</dt><dd>'+esc(p.org)+'</dd></div>':"")+'<div><dt>'+esc(t("f_lang"))+'</dt><dd>'+esc(p.lang.toUpperCase())+'</dd></div></dl>'+
+  '<div class="pills"><button type="button" class="btn '+(fol?"":"primary")+'" data-follow="'+id+'" aria-pressed="'+fol+'">'+esc(fol?t("following"):t("follow"))+'</button>'+(firstUrl?'<a class="btn" href="'+esc(firstUrl)+'" target="_blank" rel="noopener">'+esc(p.org||t("ch_site"))+ARROW+'</a>':"")+'</div></div></section>'+
+  '<div class="split" style="padding-block:32px 48px"><section class="main-col"><div class="sec-head"><h2 class="display h-m">'+esc(t("publications"))+'</h2>'+(all.length?pills("pf","fmt",[["all",t("all")],["text",t("fmt_text")],["video",t("fmt_video")],["podcast",t("fmt_podcast")]],S.pf.fmt):"")+'</div>'+note()+
+   (all.length?(list.length?'<ol class="timeline">'+list.map(i=>{const d=fdate(i.date);return '<li><div class="when"><b>'+esc(i.date.length>7?i.date.slice(8,10):i.date.slice(5,7))+'</b><span class="kicker muted">'+esc(d)+'</span></div><div class="body"><span class="kicker">'+esc(t("th_"+i.theme))+' · '+esc(t("fmt_"+i.fmt))+' · '+esc(i.lang)+'</span><h3>'+esc(i.title)+'</h3><p class="muted" style="margin:0;font-size:14px">'+esc(i.src)+'</p>'+(i.paywall?'<p class="paywall">'+LOCK+'<span>'+esc(t("paywall"))+'</span></p>':'<p style="margin:0">'+esc(sumOf(i))+'</p>')+'<a class="go" style="font-weight:700;display:inline-flex;gap:6px;align-items:center;min-height:44px" href="'+esc(i.url)+'" target="_blank" rel="noopener">'+esc(cta(i.fmt))+ARROW+'</a></div></li>'}).join("")+'</ol>':'<p class="empty">'+esc(t("empty"))+'</p>'):'<p class="empty">'+esc(t("no_pubs"))+'</p>')+
+  '</section><aside class="side-col side-stack"><div class="rule-top"><h2>'+esc(t("sources_monitored"))+'</h2><div style="display:flex;flex-direction:column;gap:8px">'+
+   chKeys.map(k=>{const u=p.ch[k];return '<div class="src"><span><b style="display:block">'+esc(t("ch_"+k))+'</b>'+(u?'<a href="'+esc(u)+'" target="_blank" rel="noopener" class="muted" style="font-size:13px;overflow-wrap:anywhere">'+esc(u.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))+'</a>':"")+'</span><span class="'+(u?"status-ok":"status-pend")+'">'+esc(u?t("active"):t("to_setup"))+'</span></div>'}).join("")+
+   '</div><p class="muted" style="font-size:13px;margin:10px 0 0">'+esc(t("collect_note"))+'</p></div>'+
+   '<div class="rule-top"><h2>'+esc(t("related"))+'</h2><div style="display:flex;flex-direction:column;gap:8px">'+related.map(o=>personLink(o,false)).join("")+'</div></div></aside></div></div>';
+}
+function vTopic(code){
+  if(!TH.includes(code))return vNotFound();
+  const T=S.tp;
+  const list=itemsSorted().filter(i=>i.theme===code&&(T.fmt==="all"||i.fmt===T.fmt)&&(T.region==="all"||itemRegion(i)===T.region));
+  const people=PEOPLE.filter(p=>p.themes.includes(code)).sort((a,b)=>countBy(b.id)-countBy(a.id)).slice(0,8);
+  const refs=ORGS.filter(o=>o.themes.includes(code)).slice(0,5);
+  const wmap={dem:["pol","auth"],geo:["rus","me"],eco:["other"],tec:["ext"]}[code];
+  const watch=AV.filter(a=>a.cat==="n"&&wmap.includes(avGroup(a.theme))&&(a.sit==="sub"||a.sit==="free"||a.sit==="rent")).slice(0,5);
+  return '<section class="band"><div class="wrap" style="padding-block:40px 32px;display:flex;flex-direction:column;gap:20px">'+
+  '<div class="pills" role="group" aria-label="'+esc(t("topic"))+'">'+TH.map(x=>'<a class="pill" href="#tema-'+x+'" aria-current="'+(x===code?"page":"false")+'" style="display:inline-flex;align-items:center;text-decoration:none;'+(x===code?"background:var(--signal);border-color:var(--signal);color:var(--signal-ink)":"")+'">'+esc(t("th_"+x))+'</a>').join("")+'</div>'+
+  '<h1 class="display h-xl">'+esc(t("th_"+code))+'</h1><p class="lede muted">'+esc(t("thd_"+code))+'</p></div></section>'+
+  '<div class="wrap split" style="padding-block:24px 48px"><section class="main-col"><div class="filters"><div class="filter-row"><span class="kicker">'+esc(t("format"))+'</span>'+pills("tp","fmt",[["all",t("all")],["text",t("fmt_text")],["video",t("fmt_video")],["podcast",t("fmt_podcast")]],T.fmt)+'</div><div class="filter-row"><span class="kicker">'+esc(t("region"))+'</span>'+pills("tp","region",regionOpts(ITEMS.filter(i=>i.theme===code).map(i=>({region:itemRegion(i)}))),T.region)+'</div></div>'+
+  '<p class="count" style="margin:16px 0">'+esc(t("n_results")(list.length))+'</p>'+note()+(list.length?'<div style="display:flex;flex-direction:column;gap:16px">'+list.map(card).join("")+'</div>':'<p class="empty">'+esc(t("empty"))+'</p>')+'</section>'+
+  '<aside class="side-col side-stack"><div class="rule-top"><h2>'+esc(t("topic_people"))+'</h2><div style="display:flex;flex-direction:column;gap:8px">'+people.map(p=>personLink(p,true)).join("")+'</div></div>'+
+  '<div class="rule-top"><h2>'+esc(t("topic_refs"))+'</h2><div style="display:flex;flex-direction:column;gap:8px">'+refs.map(o=>'<a class="org" href="'+esc(o.url)+'" target="_blank" rel="noopener"><b>'+esc(o.name)+'</b><span>'+esc(oDesc(o))+'</span></a>').join("")+'</div></div>'+
+  (watch.length?'<div class="band" style="padding:20px;display:flex;flex-direction:column;gap:8px"><h2 class="display h-m" style="font-size:26px">'+esc(t("topic_watch"))+'</h2>'+watch.map(a=>'<a href="'+esc(a.url)+'" target="_blank" rel="noopener" style="display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--band-rule);text-decoration:none;min-height:44px;align-items:center"><span style="font-weight:700">'+esc(avTitle(a))+'</span><span class="muted" style="font-size:12px;white-space:nowrap">'+esc((a.sub||a.free||a.rent).split(",")[0])+'</span></a>').join("")+'<a href="#assistir" style="font-weight:700;margin-top:6px">'+esc(t("watch_all"))+'</a></div>':"")+
+  '</aside></div>';
+}
+function vPub(id){
+  const o=PUBS[id];if(!o)return vNotFound();
+  const list=itemsSorted().filter(i=>i.pub===id);
+  const authors=[...new Set(list.map(authorName))];
+  const fol=!!S.follow[id];
+  return '<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="#inicio">'+esc(t("nav_home"))+'</a><span aria-hidden="true">/</span><a href="#organizacoes">'+esc(t("nav_orgs"))+'</a><span aria-hidden="true">/</span><span>'+esc(t("ot_pub"))+'</span></nav>'+
+  '<section class="profile"><span class="avatar xl pub" aria-hidden="true">'+esc(pubIni(o))+'</span><div class="info"><div class="pills"><span class="tag signal">'+esc(t("publication"))+'</span><span class="tag">'+esc(cname(o.cc))+'</span>'+o.themes.map(x=>'<a class="tag" href="#tema-'+x+'" style="text-decoration:none">'+esc(t("th_"+x))+'</a>').join("")+'</div>'+
+  '<h1 class="display h-xl">'+esc(o.name)+'</h1><p class="lede">'+esc(oDesc(o))+'</p>'+
+  '<div class="pills"><button type="button" class="btn '+(fol?"":"primary")+'" data-follow="'+id+'" aria-pressed="'+fol+'">'+esc(fol?t("following"):t("follow_short")+" "+o.name)+'</button><a class="btn" href="'+esc(o.url)+'" target="_blank" rel="noopener">'+esc(t("visit_site"))+ARROW+'</a></div></div></section>'+
+  '<div class="split" style="padding-block:32px 48px"><section class="main-col"><div class="sec-head"><h2 class="display h-m">'+esc(t("publications"))+'</h2></div><div class="feed">'+(list.length?list.map(post).join(""):'<p class="empty">'+esc(t("no_pubs"))+'</p>')+'</div></section>'+
+  '<aside class="side-col side-stack"><div class="rule-top"><h2>'+esc(t("sources_monitored"))+'</h2><div style="display:flex;flex-direction:column;gap:8px">'+
+   '<div class="src"><span><b style="display:block">'+esc(t("ch_site"))+'</b><a href="'+esc(o.url)+'" target="_blank" rel="noopener" class="muted" style="font-size:13px;overflow-wrap:anywhere">'+esc(o.url.replace(/^https?:\/\/(www\.)?/,"").replace(/\/$/,""))+'</a></span><span class="status-ok">'+esc(t("active"))+'</span></div>'+
+   '<div class="src"><span><b style="display:block">'+esc(t("ch_rss"))+'</b><span class="muted" style="font-size:13px;overflow-wrap:anywhere">'+esc(o.rss.replace(/^https?:\/\/(www\.)?/,""))+'</span></span><span class="status-ok">'+esc(t("active"))+'</span></div>'+
+  '</div></div><div class="rule-top"><h2>'+esc(t("pub_authors"))+'</h2><ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px">'+authors.map(a=>{const pp=PEOPLE.find(x=>x.name===a);return '<li>'+(pp?'<a href="#a-'+pp.id+'" style="font-weight:700">'+esc(a)+'</a>':esc(a))+'</li>'}).join("")+'</ul></div></aside></div></div>';
+}
+function vOrgs(){
+  const types=["index","tank","net","media","pub"].filter(ty=>ORGS.some(o=>o.type===ty));
+  return '<div class="wrap"><section class="block" style="padding-bottom:16px"><h1 class="display h-xl">'+esc(t("orgs_title"))+'</h1><p class="lede muted" style="margin-top:14px">'+esc(t("orgs_text"))+'</p></section>'+
+  types.map(ty=>{const os=ORGS.filter(o=>o.type===ty);return '<section style="padding-block:20px"><h2 class="kicker rule-top" style="font-size:13px;margin:0 0 14px">'+esc(t("ot_"+ty))+' · '+os.length+'</h2><div class="orgs">'+os.map(o=>'<a class="org" href="'+(o.id?"#p-"+o.id:esc(o.url))+'"'+(o.id?"":' target="_blank" rel="noopener"')+'><b>'+esc(o.name)+'</b><span>'+esc(oDesc(o))+'</span><span class="kicker" style="margin-top:4px">'+esc(cname(o.cc))+'</span></a>').join("")+'</div></section>'}).join("")+'<div style="height:40px"></div></div>';
+}
+function vWatch(){
+  const W=S.av;
+  const core=AV.filter(a=>a.cat==="n");
+  const plats=["Netflix","Prime Video","HBO Max","Apple TV","Paramount+","MUBI","YouTube"];
+  const list=core.filter(a=>(W.group==="all"||avGroup(a.theme)===W.group)&&(W.kind==="all"||avKind(a.kind)===W.kind)&&(W.where==="all"||a.sit===W.where||(W.where==="none"&&a.sit==="nf"))&&(W.plat==="all"||avPlats(a).some(x=>x.indexOf(W.plat)===0)));
+  const soc=AV.filter(a=>a.cat==="s");
+  return '<section class="band"><div class="wrap" style="padding-block:40px 48px;display:flex;flex-direction:column;gap:24px">'+
+  '<h1 class="display h-xl">'+esc(t("watch_title"))+'</h1><p class="lede muted">'+esc(t("watch_text"))+'</p>'+
+  '<div style="display:flex;flex-direction:column;gap:14px;border-top:2px solid var(--band-ink);padding-top:18px">'+
+   '<div class="filter-row"><span class="kicker">'+esc(t("topic"))+'</span>'+pills("av","group",[["all",t("all")]].concat(["ww2","auth","rus","me","pol","ext","other"].map(g=>[g,t("wg_"+g)])),W.group)+'</div>'+
+   '<div class="filter-row"><span class="kicker">'+esc(t("w_kind"))+'</span>'+pills("av","kind",[["all",t("all")],["film",t("k_film")],["series",t("k_series")],["doc",t("k_doc")]],W.kind)+'</div>'+
+   '<div class="filter-row"><span class="kicker">'+esc(t("w_where"))+'</span>'+pills("av","where",[["all",t("all")],["sub",t("w_sub")],["free",t("w_free")],["rent",t("w_rent")],["none",t("w_none")]],W.where)+'</div>'+
+   '<div class="filter-row"><span class="kicker">'+esc(t("platform"))+'</span>'+pills("av","plat",[["all",t("any_platform")]].concat(plats.map(p=>[p,p])),W.plat)+'</div>'+
+   '<p class="muted" style="margin:0;font-size:14px">'+esc(t("n_results")(list.length))+' · '+esc(t("w_checked"))+'</p></div>'+
+  (list.length?'<div class="posters">'+list.map(poster).join("")+'</div>':'<p class="empty" style="border-color:var(--band-ink)">'+esc(t("empty"))+'</p>')+
+  '<div style="border-top:2px solid var(--band-ink);padding-top:24px;display:flex;flex-direction:column;gap:16px"><h2 class="display h-l">'+esc(t("society_title"))+'</h2><p class="muted" style="margin:0;max-width:44em">'+esc(t("society_text"))+'</p><div class="soc">'+
+   soc.map(a=>'<article><span class="kicker">'+esc(avKindL(a))+(a.year?' · '+esc(a.year):"")+'</span><h3>'+esc(avTitle(a))+'</h3><span class="muted" style="font-size:13px">'+esc(avTheme(a))+' · '+esc(a.sub||a.free||a.rent||t("w_none"))+'</span><a href="'+esc(a.url)+'" target="_blank" rel="noopener" style="font-weight:700;font-size:14px;min-height:44px;display:inline-flex;align-items:center;gap:6px">'+esc(t("see_where"))+ARROW+'</a></article>').join("")+
+  '</div></div></div></section>';
+}
+function vNewsletter(){
+  const sel=S.nl.themes;
+  const pick=TH.filter(x=>sel.includes(x)).map(x=>[x,itemsSorted().filter(i=>i.theme===x&&!i.paywall).slice(0,2)]).filter(g=>g[1].length);
+  return '<div class="wrap"><section class="block" style="padding-bottom:24px"><h1 class="display h-xl">'+esc(t("nl_page_title"))+'</h1><p class="lede muted" style="margin-top:14px">'+esc(t("nl_page_text"))+'</p></section>'+
+  '<div class="split" style="padding-bottom:48px"><section class="main-col" style="display:flex;flex-direction:column;gap:24px">'+
+  (S.nl.done?'<p class="empty ok-msg" role="status">'+esc(t("nl_done"))+'</p>':
+  '<form data-nl="1" style="display:flex;flex-direction:column;gap:20px"><fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px"><legend class="kicker" style="margin-bottom:10px">'+esc(t("nl_topics"))+'</legend><div class="checks">'+TH.map(x=>'<label class="check" for="nlt-'+x+'"><input type="checkbox" id="nlt-'+x+'" data-nlt="'+x+'"'+(sel.includes(x)?" checked":"")+'>'+esc(t("th_"+x))+'</label>').join("")+'</div></fieldset>'+
+  '<div style="display:flex;flex-wrap:wrap;gap:12px"><label class="field" for="nl-lang" style="flex:0 1 220px"><span class="sr">'+esc(t("nl_lang"))+'</span><select id="nl-lang">'+["pt","en","es","fr","it"].map(l=>'<option value="'+l+'"'+(l===S.lang?" selected":"")+'>'+({pt:"Português",en:"English",es:"Español",fr:"Français",it:"Italiano"})[l]+'</option>').join("")+'</select></label>'+
+  '<label class="field" for="nl-email2" style="flex:1 1 260px"><span class="sr">'+esc(t("email"))+'</span><input id="nl-email2" type="email" required placeholder="'+esc(t("email"))+'"></label><button class="btn primary" type="submit">'+esc(t("subscribe"))+'</button></div></form>')+
+  '</section><aside class="side-col"><div class="rule-top" style="display:flex;flex-direction:column;gap:14px"><span class="kicker muted">'+esc(t("nl_preview"))+'</span><div style="background:var(--surface);border:1.5px solid var(--ink);padding:20px;display:flex;flex-direction:column;gap:14px"><img class="logo logo-b" src="villa-black.png" alt="Villa" style="height:28px"><img class="logo logo-w" src="villa-white.png" alt="Villa" style="height:28px"><span class="kicker">'+esc(t("nl_edition"))+'</span>'+
+  pick.map(([x,is])=>'<div style="border-top:1px solid var(--rule);padding-top:10px;display:flex;flex-direction:column;gap:8px"><b class="kicker" style="color:var(--signal-text)">'+esc(t("th_"+x))+'</b>'+is.map(i=>'<div><b class="serif" style="font-size:17px;display:block;line-height:1.3">'+esc(i.title)+'</b><span class="muted" style="font-size:13px">'+esc(authorName(i))+' · '+esc(i.src)+'</span></div>').join("")+'</div>').join("")+
+  '</div></div></aside></div></div>';
+}
+function vAbout(){
+  return '<div class="wrap"><section class="block" style="padding-bottom:24px"><h1 class="display h-xl">'+esc(t("about_title"))+'</h1><p class="lede" style="margin-top:14px">'+esc(t("about_lede"))+'</p></section>'+
+  '<ol class="steps">'+[1,2,3,4].map(n=>'<li><b style="font-size:18px">'+esc(t("step"+n+"_t"))+'</b><span class="muted">'+esc(t("step"+n))+'</span></li>').join("")+'</ol>'+
+  '<section class="block"><div class="prose">'+["lens","rights","lang"].map(k=>'<h2 class="display h-m" style="margin-top:12px">'+esc(t("about_"+k+"_t"))+'</h2><p>'+esc(t("about_"+k))+'</p>').join("")+'<p class="proto" style="margin-top:12px">'+esc(t("proto"))+'</p></div></section></div>';
+}
+function vNotFound(){return '<div class="wrap"><section class="block"><h1 class="display h-l">404</h1><p><a href="#inicio">'+esc(t("back"))+'</a></p></section></div>'}
+
+/* ============ SHELL ============ */
+function shell(route){
+  document.documentElement.lang=S.lang==="pt"?"pt-BR":S.lang;
+  try{document.getElementById("today").textContent=new Intl.DateTimeFormat(t("locale"),{weekday:"long",day:"numeric",month:"long",year:"numeric"}).format(new Date())}catch(e){}
+  document.getElementById("langs").innerHTML=["en","pt","es","fr","it"].map(l=>'<button type="button" data-lang="'+l+'" aria-pressed="'+(l===S.lang)+'">'+l.toUpperCase()+'</button>').join("");
+  const sec=route.split("-")[0];
+  const cur={inicio:"inicio","":"inicio",analises:"analises",analistas:"analistas",a:"analistas",tema:"tema",assistir:"assistir",organizacoes:"organizacoes",newsletter:"newsletter",sobre:"sobre"}[route.startsWith("a-")?"a":(route.startsWith("tema-")?"tema":(route.startsWith("p-")?"organizacoes":route))]||"";
+  const links=[["analises",t("nav_analyses")],["analistas",t("nav_analysts")],["tema-dem",t("nav_topics"),"tema"],["assistir",t("nav_watch")],["organizacoes",t("nav_orgs")],["newsletter",t("nav_newsletter")],["sobre",t("nav_about")]];
+  document.getElementById("nav").innerHTML=links.map(([h,l,k])=>'<a href="#'+h+'"'+((k||h)===cur?' aria-current="page"':"")+'>'+esc(l)+'</a>').join("");
+  document.getElementById("searchBtn").setAttribute("aria-label",t("search"));
+  document.getElementById("footer").innerHTML='<div class="wrap"><div class="cols">'+
+   '<div style="display:flex;flex-direction:column;gap:12px"><img class="logo logo-b" src="villa-black.png" alt="Villa" style="height:36px;align-self:flex-start"><img class="logo logo-w" src="villa-white.png" alt="Villa" style="height:36px;align-self:flex-start"><p class="muted" style="margin:0;font-size:14px">'+esc(t("tagline"))+'</p></div>'+
+   '<div><h2>'+esc(t("footer_nav"))+'</h2><ul>'+links.filter(l=>!l[2]).map(([h,l])=>'<li><a href="#'+h+'">'+esc(l)+'</a></li>').join("")+'</ul></div>'+
+   '<div><h2>'+esc(t("footer_topics"))+'</h2><ul>'+TH.map(x=>'<li><a href="#tema-'+x+'">'+esc(t("th_"+x))+'</a></li>').join("")+'</ul></div>'+
+   '<div><h2>'+esc(t("footer_lang"))+'</h2><ul>'+["en","pt","es","fr","it"].map(l=>'<li><a href="#" data-lang="'+l+'">'+({pt:"Português",en:"English",es:"Español",fr:"Français",it:"Italiano"})[l]+'</a></li>').join("")+'</ul></div>'+
+   '</div><p class="proto" style="margin:0 0 32px">'+esc(t("proto"))+'</p></div>';
+}
+function current(){const h=(location.hash||"").replace(/^#/,"");return h||"inicio"}
+function render(scroll){
+  const r=current();shell(r);
+  let html;
+  if(r==="inicio")html=vHome();
+  else if(r==="analises")html=vAnalyses();
+  else if(r==="analistas")html=vAnalysts();
+  else if(r.startsWith("a-"))html=vProfile(r.slice(2));
+  else if(r.startsWith("tema-"))html=vTopic(r.slice(5));
+  else if(r.startsWith("p-"))html=vPub(r.slice(2));
+  else if(r==="assistir")html=vWatch();
+  else if(r==="organizacoes")html=vOrgs();
+  else if(r==="newsletter")html=vNewsletter();
+  else if(r==="sobre")html=vAbout();
+  else html=vNotFound();
+  const app=document.getElementById("app");app.innerHTML=html;
+  const an=document.getElementById("an-res");if(an)an.innerHTML=anResults();
+  const pe=document.getElementById("pe-res");if(pe)pe.innerHTML=peResults();
+  const nav=document.getElementById("nav");nav.classList.remove("open");document.getElementById("menuBtn").setAttribute("aria-expanded","false");
+  if(scroll)window.scrollTo(0,0);
+}
+let lastRoute=null;
+window.addEventListener("hashchange",()=>{const r=current();const routeOnly=r!==lastRoute;lastRoute=r;render(routeOnly)});
+
+document.addEventListener("click",e=>{
+  const lg=e.target.closest("[data-lang]");
+  if(lg){e.preventDefault();S.lang=lg.getAttribute("data-lang");store.set("uilang",S.lang);render(false);return}
+  const st=e.target.closest("[data-set]");
+  if(st){const [g,k]=st.getAttribute("data-set").split(".");S[g][k]=st.getAttribute("data-val");if(g==="feed")S.feed.n=8;keep(()=>render(false));return}
+  const fo=e.target.closest("[data-follow]");
+  if(fo){const id=fo.getAttribute("data-follow");S.follow[id]=!S.follow[id];if(!S.follow[id])delete S.follow[id];store.set("follow",JSON.stringify(S.follow));keep(()=>render(false));return}
+  const sv=e.target.closest("[data-save]");
+  if(sv){const id=sv.getAttribute("data-save");if(S.saved[id])delete S.saved[id];else S.saved[id]=1;store.set("saved",JSON.stringify(S.saved));keep(()=>render(false));return}
+  const cp=e.target.closest("[data-copy]");
+  if(cp){const u=cp.getAttribute("data-copy");try{navigator.clipboard.writeText(u).then(()=>toast(t("copied")),()=>toast(t("copy_fail")))}catch(err){toast(t("copy_fail"))}return}
+  const mo=e.target.closest("[data-more]");
+  if(mo){S.feed.n+=8;const fl=document.getElementById("feed-list");if(fl)fl.innerHTML=feedHTML();return}
+  const sc=e.target.closest("[data-scroll]");
+  if(sc){const el=document.getElementById(sc.getAttribute("data-scroll"));if(el)el.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});return}
+  if(e.target.closest("#menuBtn")){const nav=document.getElementById("nav");const o=nav.classList.toggle("open");document.getElementById("menuBtn").setAttribute("aria-expanded",String(o));return}
+  if(e.target.closest("#searchBtn")){openSearch();return}
+  if(e.target.closest("[data-close]")||e.target.id==="overlay"){closeSearch();return}
+  const sr=e.target.closest("#overlay a");if(sr){closeSearch()}
+});
+document.addEventListener("input",e=>{
+  const q=e.target.getAttribute&&e.target.getAttribute("data-q");
+  if(q==="an"){S.an.q=e.target.value;document.getElementById("an-res").innerHTML=anResults()}
+  if(q==="pe"){S.pe.q=e.target.value;document.getElementById("pe-res").innerHTML=peResults()}
+  if(e.target.id==="gq")searchResults(e.target.value);
+});
+document.addEventListener("change",e=>{
+  const x=e.target.getAttribute&&e.target.getAttribute("data-nlt");
+  if(x){const s=new Set(S.nl.themes);e.target.checked?s.add(x):s.delete(x);S.nl.themes=TH.filter(v=>s.has(v));const y=window.scrollY;render(false);window.scrollTo(0,y);const el=document.getElementById("nlt-"+x);if(el)el.focus()}
+});
+document.addEventListener("submit",e=>{if(e.target.matches("[data-nl]")){e.preventDefault();S.nl.done=true;const y=window.scrollY;render(false);window.scrollTo(0,y)}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!document.getElementById("overlay").hidden)closeSearch()});
+
+function keep(fn){const y=window.scrollY;fn();window.scrollTo(0,y)}
+let toastT=null;function toast(msg){let el=document.getElementById("toast");if(!el){el=document.createElement("div");el.id="toast";el.className="toast";el.setAttribute("role","status");document.body.appendChild(el)}el.textContent=msg;el.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{el.hidden=true},2200)}
+function openSearch(){
+  const o=document.getElementById("overlay");
+  o.innerHTML='<div class="panel" role="dialog" aria-modal="true" aria-label="'+esc(t("search"))+'"><div class="field"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><label for="gq" class="sr">'+esc(t("search"))+'</label><input id="gq" type="search" placeholder="'+esc(t("search_ph"))+'" autocomplete="off"><button type="button" class="icon-btn" data-close="1" aria-label="'+esc(t("close"))+'" style="border:0"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div><div class="res" id="gres"></div></div>';
+  o.hidden=false;searchResults("");setTimeout(()=>{const i=document.getElementById("gq");if(i)i.focus()},0);
+}
+function closeSearch(){const o=document.getElementById("overlay");o.hidden=true;o.innerHTML="";const b=document.getElementById("searchBtn");if(b)b.focus()}
+function searchResults(v){
+  const q=norm(v.trim());const box=document.getElementById("gres");if(!box)return;
+  const ps=(q?PEOPLE.filter(p=>norm(p.name+" "+pArea(p)+" "+p.area+" "+cname(p.cc)).includes(q)):PEOPLE.filter(p=>countBy(p.id))).slice(0,6);
+  const is=(q?itemsSorted().filter(i=>norm(i.title+" "+(i.sum||"")+" "+(i.sum_en||"")+" "+authorName(i)+" "+i.src).includes(q)):itemsSorted()).slice(0,6);
+  const as=q?AV.filter(a=>norm(a.title+" "+a.orig+" "+a.theme).includes(q)).slice(0,6):[];
+  if(!ps.length&&!is.length&&!as.length){box.innerHTML='<p class="muted" style="padding:16px 0">'+esc(t("no_results"))+'</p>';return}
+  box.innerHTML=(ps.length?'<h4>'+esc(t("results_people"))+'</h4>'+ps.map(p=>'<a href="#a-'+p.id+'"><b>'+esc(p.name)+'</b> <span class="muted">· '+esc(pArea(p))+'</span></a>').join(""):"")+
+   (is.length?'<h4>'+esc(t("results_items"))+'</h4>'+is.map(i=>'<a href="'+authorHref(i)+'"><b class="serif">'+esc(i.title)+'</b> <span class="muted">· '+esc(authorName(i))+'</span></a>').join(""):"")+
+   (as.length?'<h4>'+esc(t("results_av"))+'</h4>'+as.map(a=>'<a href="#assistir"><b>'+esc(avTitle(a))+'</b> <span class="muted">· '+esc(avKindL(a))+'</span></a>').join(""):"");
+}
+
+lastRoute=current();render(false);
+})();
+</script>
+
+</body>
+</html>
