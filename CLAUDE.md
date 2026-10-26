@@ -7,6 +7,8 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 - Os dados ficam em constantes no início do script: `PEOPLE` (analistas), `ITEMS` (análises), `ORGS` (organizações e publicações), `AV` (filmes e séries), `AREAS` e `AVTH` (traduções de rótulos) e `L` (textos da interface em en, pt, es, fr, it).
 - As rotas usam hash: `#inicio`, `#analises`, `#analistas`, `#a-<id>`, `#tema-<dem|geo|eco|tec>`, `#p-<id>`, `#assistir`, `#organizacoes`, `#newsletter`, `#sobre`.
 - O inglês é o idioma principal. Todo texto novo de interface entra nos cinco idiomas.
+- Um item de `ITEMS` sem `who` pode ter `pub` (só `revista-id` e `dagobah` têm página) ou apenas `src` e, se houver, `by`. Nesse último caso o cartão aponta direto para o original e não mostra o botão de seguir.
+- Para testar uma mudança, confira o conteúdo renderizado dentro de `<main>` (Chrome headless com `--dump-dom`), nunca o HTML bruto, porque os dados ficam no próprio script e aparecem mesmo com a página quebrada.
 - `localStorage` só guarda conveniências do leitor (idioma, seguidos, salvos), sempre com try/catch.
 - Logotipo em `gv-logo-dark.png` (fundos claros) e `gv-logo-light.png` (fundos escuros). O guia da marca, com cores e fontes, está em `brand/global-village/README.md`.
 - Ícones em `favicon.png` e `apple-touch-icon.png`. A prévia de link usa `og-image.png`, cuja fonte fica em `brand/site/src/`. As tags `og:` usam o endereço absoluto do GitHub Pages e precisam ser trocadas se o domínio mudar.

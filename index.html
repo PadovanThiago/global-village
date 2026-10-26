@@ -786,8 +786,9 @@ const norm=s=>String(s).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
 function fdate(d){try{const p=d.split("-").map(Number);if(p.length===2)return new Intl.DateTimeFormat(t("locale"),{month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(p[0],p[1]-1,15)));return new Intl.DateTimeFormat(t("locale"),{day:"numeric",month:"short",year:"numeric",timeZone:"UTC"}).format(new Date(Date.UTC(p[0],p[1]-1,p[2])))}catch(e){return d}}
 const itemsSorted=()=>ITEMS.slice().sort((a,b)=>a.date<b.date?1:-1);
 const countBy=id=>ITEMS.filter(i=>i.who.includes(id)).length;
-const authorName=i=>i.who.length?i.who.map(id=>byId[id].name).join(", "):(i.by||"");
-const authorHref=i=>i.who.length?"#a-"+i.who[0]:"#p-"+i.pub;
+const authorName=i=>i.who.length?i.who.map(id=>byId[id].name).join(", "):(i.by||i.src||"");
+// Itens de organizações sem página própria apontam direto para o original.
+const authorHref=i=>i.who.length?"#a-"+i.who[0]:PUBS[i.pub]?"#p-"+i.pub:i.url;
 const itemRegion=i=>i.who.length?byId[i.who[0]].region:(PUBS[i.pub]?PUBS[i.pub].region:"int");
 const DN={};
 function cname(cc){if(!cc||cc==="INT")return t("region_int");if(cc==="EUR")return t("region_eu");const ex=cc==="RU-EX";const c=ex?"RU":cc;let n=c;try{const l=t("locale");DN[l]=DN[l]||new Intl.DisplayNames([l],{type:"region"});n=DN[l].of(c)||c}catch(e){}return ex?n+" ("+t("in_exile")+")":n}
@@ -810,7 +811,7 @@ const themeOpts=(lbl)=>[["all",lbl||t("all")]].concat(TH.map(x=>[x,t("th_"+x)]))
 function note(){const n=t("content_note");return n?'<p class="notice">'+esc(n)+'</p>':""}
 
 function card(i){
-  const who=i.who.length?i.who.map(id=>'<a href="#a-'+id+'">'+esc(byId[id].name)+'</a>').join(", "):'<a href="#p-'+i.pub+'">'+esc(i.by)+'</a>';
+  const who=i.who.length?i.who.map(id=>'<a href="#a-'+id+'">'+esc(byId[id].name)+'</a>').join(", "):'<a href="'+esc(authorHref(i))+'">'+esc(authorName(i))+'</a>';
   return '<article class="card"><div class="top"><span class="kicker">'+esc(t("th_"+i.theme))+'</span><span class="tags"><span class="tag solid">'+esc(t("fmt_"+i.fmt))+'</span><span class="tag">'+esc(i.lang)+'</span></span></div>'+
   '<h3>'+esc(i.title)+'</h3><p class="meta">'+who+' · '+esc(i.src)+' · '+esc(fdate(i.date))+'</p>'+
   (i.paywall?'<p class="paywall">'+LOCK+'<span>'+esc(t("paywall"))+'</span></p>':'<p class="sum">'+esc(sumOf(i))+'</p>')+
@@ -849,11 +850,11 @@ function ago(i){
   try{return new Intl.RelativeTimeFormat(t("locale"),{numeric:"auto"}).format(-n,"day")}catch(e){return fdate(i.date)}
 }
 function post(i){
-  const pub=PUBS[i.pub];const p=i.who.length?byId[i.who[0]]:{id:i.pub,name:pub.name,cat:"",isPub:true};const fol=!!S.follow[p.id];const saved=!!S.saved[i.id];const fresh=relDay(i.date)<=3&&i.date.length>7;
+  const pub=PUBS[i.pub];const p=i.who.length?byId[i.who[0]]:pub?{id:i.pub,name:pub.name,cat:"",isPub:true}:{id:"",name:i.src,cat:"",isPub:true,isSrc:true};const fol=!!S.follow[p.id];const saved=!!S.saved[i.id];const fresh=relDay(i.date)<=3&&i.date.length>7;
   const media=i.fmt==="video"||i.fmt==="podcast";
   return '<article class="post" id="post-'+i.id+'">'+
-  '<div class="post-head"><a href="'+(p.isPub?"#p-":"#a-")+p.id+'" class="avatar'+(p.isPub?' pub':'')+'" aria-hidden="true" tabindex="-1" style="text-decoration:none">'+esc(p.isPub?pubIni(pub):ini(p.name))+'</a>'+
-   '<div style="min-width:0;flex:1"><a href="'+authorHref(i)+'" class="pname">'+esc(authorName(i))+'</a><span class="pmeta">'+esc(p.isPub?t("columnist"):t("cat1_"+p.cat))+' · '+(i.pub?'<a href="#p-'+i.pub+'">'+esc(i.src)+'</a>':esc(i.src))+'</span></div>'+
+  '<div class="post-head"><a href="'+(p.isSrc?esc(i.url):(p.isPub?"#p-":"#a-")+p.id)+'" class="avatar'+(p.isPub?' pub':'')+'" aria-hidden="true" tabindex="-1" style="text-decoration:none">'+esc(p.isPub?pubIni(pub||{id:"",name:i.src}):ini(p.name))+'</a>'+
+   '<div style="min-width:0;flex:1"><a href="'+authorHref(i)+'" class="pname">'+esc(authorName(i))+'</a><span class="pmeta">'+(p.isSrc&&!i.by?'':esc(p.isPub?t("columnist"):t("cat1_"+p.cat))+' · '+(pub?'<a href="#p-'+i.pub+'">'+esc(i.src)+'</a>':esc(i.src)))+'</span></div>'+
    '<div class="ptime">'+(fresh?'<span class="tag signal">'+esc(t("new"))+'</span>':'')+'<span>'+esc(ago(i))+'</span></div></div>'+
   '<div class="post-body"><span class="kicker">'+esc(t("th_"+i.theme))+' · '+esc(t("fmt_"+i.fmt))+' · '+esc(i.lang)+'</span>'+
    '<h3><a href="'+esc(i.url)+'" target="_blank" rel="noopener">'+esc(i.title)+'</a></h3>'+
@@ -862,7 +863,7 @@ function post(i){
   '<div class="post-actions"><a class="act strong" href="'+esc(i.url)+'" target="_blank" rel="noopener">'+esc(cta(i.fmt))+ARROW+'</a>'+
    '<button type="button" class="act" data-save="'+i.id+'" aria-pressed="'+saved+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="'+(saved?"currentColor":"none")+'" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>'+esc(saved?t("saved"):t("save"))+'</button>'+
    '<button type="button" class="act" data-copy="'+esc(i.url)+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>'+esc(t("copy_link"))+'</span></button>'+
-   '<button type="button" class="act" data-follow="'+p.id+'" aria-pressed="'+fol+'">'+esc(fol?t("following"):t("follow_short")+" "+(p.isPub?p.name:p.name.split(" ")[0]))+'</button></div></article>';
+   (p.isSrc?'':'<button type="button" class="act" data-follow="'+p.id+'" aria-pressed="'+fol+'">'+esc(fol?t("following"):t("follow_short")+" "+(p.isPub?p.name:p.name.split(" ")[0]))+'</button>')+'</div></article>';
 }
 function feedList(){
   const F=S.feed;const all=itemsSorted();
