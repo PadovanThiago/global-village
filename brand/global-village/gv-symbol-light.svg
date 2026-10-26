@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Global Village">
+  <circle cx="60" cy="60" r="52" fill="none" stroke="#F5F2EA" stroke-width="7"/>
+  <ellipse cx="60" cy="60" rx="23" ry="52" fill="none" stroke="#F5F2EA" stroke-width="7"/>
+  <line x1="8" y1="60" x2="112" y2="60" stroke="#F5F2EA" stroke-width="7"/>
+  <circle cx="60" cy="60" r="13" fill="#C4411F" stroke="#14213D" stroke-width="5"/>
+</svg>

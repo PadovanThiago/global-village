@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&display=block">
+<style>
+  /* Logotipo horizontal: símbolo + nome. #light inverte as cores para fundos escuros. */
+  html, body { margin: 0; width: 640px; height: 160px; background: transparent; overflow: hidden; }
+  .lockup { height: 160px; display: flex; align-items: center; gap: 26px; padding-left: 8px; }
+  .lockup svg { width: 120px; height: 120px; flex: none; }
+  .name { font: 600 88px/1 "Fraunces", Georgia, serif; font-variation-settings: "opsz" 144; letter-spacing: -0.015em; color: #14213D; white-space: nowrap; }
+  .light .name { color: #F5F2EA; }
+</style>
+</head>
+<body>
+<div class="lockup" id="l">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="52" fill="none" stroke="#14213D" stroke-width="7"/>
+    <ellipse cx="60" cy="60" rx="23" ry="52" fill="none" stroke="#14213D" stroke-width="7"/>
+    <line x1="8" y1="60" x2="112" y2="60" stroke="#14213D" stroke-width="7"/>
+    <circle cx="60" cy="60" r="13" fill="#C4411F" stroke="#F5F2EA" stroke-width="5"/>
+  </svg>
+  <span class="name">Global Village</span>
+</div>
+<script>
+  if (location.hash === "#light") {
+    document.getElementById("l").classList.add("light");
+    document.querySelectorAll("circle[fill=none], ellipse, line").forEach(e => e.setAttribute("stroke", "#F5F2EA"));
+    document.querySelector("circle[fill='#C4411F']").setAttribute("stroke", "#14213D");
+  }
+</script>
+</body>
+</html>
