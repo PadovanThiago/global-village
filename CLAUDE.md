@@ -9,6 +9,7 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 - O inglês é o idioma principal. Todo texto novo de interface entra nos cinco idiomas.
 - Um item de `ITEMS` sem `who` pode ter `pub` (só `revista-id` e `dagobah` têm página) ou apenas `src` e, se houver, `by`. Nesse último caso o cartão aponta direto para o original e não mostra o botão de seguir.
 - Para testar uma mudança, confira o conteúdo renderizado dentro de `<main>` (Chrome headless com `--dump-dom`), nunca o HTML bruto, porque os dados ficam no próprio script e aparecem mesmo com a página quebrada.
+- Os feeds de cada fonte ficam no campo `rss` dos canais em `PEOPLE` e no décimo campo de `ORGS`, copiados da coluna Feed RSS da planilha. Quem não tem feed aparece na planilha como "sem feed" com o motivo. Para buscar novidades, rode `python3 -I tools/ler-feeds.py <data>`.
 - `localStorage` só guarda conveniências do leitor (idioma, seguidos, salvos), sempre com try/catch.
 - Logotipo em `gv-logo-dark.png` (fundos claros) e `gv-logo-light.png` (fundos escuros). O guia da marca, com cores e fontes, está em `brand/global-village/README.md`.
 - Ícones em `favicon.png` e `apple-touch-icon.png`. A prévia de link usa `og-image.png`, cuja fonte fica em `brand/site/src/`. As tags `og:` usam o endereço absoluto do GitHub Pages e precisam ser trocadas se o domínio mudar.
