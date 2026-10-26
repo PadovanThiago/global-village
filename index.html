@@ -1107,6 +1107,8 @@ function subscribe(f){
   const sel=f.querySelector("#nl-lang"),fd=new FormData();
   fd.append("email",f.querySelector('input[type="email"]').value.trim());
   fd.append("tag",sel?sel.value:nlTag());
+  // Na página da newsletter, cada tema marcado vira mais uma etiqueta (dem, geo, eco, tec).
+  if(sel)S.nl.themes.forEach(x=>fd.append("tag",x));
   f.querySelector('button[type="submit"]').disabled=true;
   fetch("https://buttondown.com/api/emails/embed-subscribe/"+encodeURIComponent(BUTTONDOWN_USER),{method:"POST",body:fd,mode:"no-cors"})
     .then(()=>{S.nl.done=true;S.nl.err=false;store.set("nl","1")},()=>{S.nl.err=true})

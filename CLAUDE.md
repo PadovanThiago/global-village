@@ -19,4 +19,5 @@ Villa é um agregador internacional de análises do mundo contemporâneo pela le
 ## Pendências conhecidas
 - Os formulários de newsletter já enviam ao Buttondown (POST para `https://buttondown.com/api/emails/embed-subscribe/<usuário>` com `email` e `tag` igual a `pt` ou `en`). O usuário fica na constante `BUTTONDOWN_USER` do `index.html` (hoje `padovan`). Se ela ficar vazia, o formulário só simula a inscrição.
 - A newsletter sai em português e inglês. A página `#newsletter` oferece só esses dois idiomas, e os formulários da home usam `pt` quando a interface está em português e `en` nos demais casos.
+- Na página `#newsletter`, os temas marcados seguem como etiquetas extras (`dem`, `geo`, `eco`, `tec`). Os formulários da home não mandam temas.
 - Separar os dados em arquivos JSON quando o volume crescer.
