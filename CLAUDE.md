@@ -9,6 +9,7 @@ Villa é um agregador internacional de análises do mundo contemporâneo pela le
 - O inglês é o idioma principal. Todo texto novo de interface entra nos cinco idiomas.
 - `localStorage` só guarda conveniências do leitor (idioma, seguidos, salvos), sempre com try/catch.
 - Logos em `villa-black.png` e `villa-white.png`.
+- Ícones em `favicon.png` e `apple-touch-icon.png`. A prévia de link usa `og-image.png`, cuja fonte fica em `brand/site/src/`. As tags `og:` usam o endereço absoluto do GitHub Pages e precisam ser trocadas se o domínio mudar.
 
 ## Regras do projeto
 - A curadoria é de Thiago. Nenhum nome, organização ou filme entra ou sai sem a aprovação dele. A fonte de verdade é a planilha de trabalho e o portal de curadoria.
