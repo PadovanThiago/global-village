@@ -1,8 +1,8 @@
 # Buttondown · descrição
 
-Toda sexta-feira o Global Village reúne as análises mais relevantes da semana sobre democracia, geopolítica, economia e tecnologia, escolhidas entre analistas, think tanks e publicações comprometidos com a democracia liberal. Cada texto vem com um resumo curto e o link para o original, em português ou em inglês.
+De segunda a sexta, logo cedo, o Global Village reúne os fatos mais importantes do dia anterior sobre democracia, geopolítica, economia e tecnologia, a partir do que publicaram analistas, think tanks e organizações comprometidos com a democracia liberal. Cada fato vem com um resumo curto e o link para o original, em português ou em inglês.
 
-Every Friday, Global Village brings together the week's most relevant analysis on democracy, geopolitics, the economy and technology, chosen from analysts, think tanks and publications committed to liberal democracy. Each piece comes with a short summary and a link to the original, in English or Portuguese.
+Every weekday morning, Global Village brings together the most important stories of the previous day on democracy, geopolitics, the economy and technology, drawn from analysts, think tanks and organisations committed to liberal democracy. Each story comes with a short summary and a link to the original, in English or Portuguese.
 
 ## Texto alternativo do ícone
 
