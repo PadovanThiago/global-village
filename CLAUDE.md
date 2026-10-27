@@ -20,6 +20,8 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 ## Regras do projeto
 - A curadoria é de Thiago. Nenhum nome, organização ou filme entra ou sai sem a aprovação dele. A fonte de verdade é a planilha de trabalho e o portal de curadoria.
 - A home não menciona o Brasil. O projeto é internacional.
+- Na voz do Global Village (notas do editor, introduções, títulos de seção), a vitória de Lula não é tratada como vitória da democracia liberal. Lula e o PT são um populismo de esquerda e o bolsonarismo um populismo de direita, os dois do campo da democracia eleitoral, como argumenta a [Carta a Francis Fukuyama](https://www.revistaid.com.br/p/carta-a-francis-fukuyama) da Revista ID.
+- Os resumos de análises curadas descrevem o que o autor diz e atribuem a avaliação a ele ("Para Fukuyama, …"), sem corrigir o autor. Quando discordamos do enquadramento, a correção vai na nota do editor do item (campos `nota`, `nota_en` e, se houver, `nota_url` em `ITEMS`) e, na newsletter, na parte "Onde divergem". Uma voz que trate o PT como democrático de forma sistemática é caso para o Conselho de Curadoria, nunca para exclusão pela edição.
 - Textos publicáveis em português evitam travessões, dois-pontos como recurso de estilo, frases fragmentadas, tríades anafóricas, paralelismos negativos e transições polidas. Todo texto passa por uma revisão de naturalidade antes de ir ao ar.
 - Thiago revisa e aprova. Mudanças visíveis vão por pull request com um resumo curto em português.
 
