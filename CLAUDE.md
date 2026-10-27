@@ -19,7 +19,7 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 
 ## Newsletter
 - A newsletter é diária, de segunda a sexta, com de 3 a 5 fatos do dia anterior e pelo menos um fora do eixo Estados Unidos e Europa. O roteiro completo está em `.claude/skills/edicao-diaria/SKILL.md`.
-- Uma tarefa agendada no app do Claude ("Global Village · edição diária") roda esse roteiro às 6h dos dias úteis. Ela abre um PR com o feed do site e escreve a edição num documento do Claude Docs. Thiago revisa, aprova o PR e envia a newsletter.
+- Uma tarefa agendada no app do Claude ("Global Village · edição diária") roda esse roteiro às 6h dos dias úteis. Ela abre um PR com o feed do site, gera a imagem do dia com `tools/imagem-edicao.py` (molde em `brand/newsletter/src/edicao.html`) e escreve a edição num documento do Claude Docs. Thiago revisa, aprova o PR e envia a newsletter.
 
 ## Regras do projeto
 - A curadoria é de Thiago. Nenhum nome, organização ou filme entra ou sai sem a aprovação dele. A fonte de verdade é a planilha de trabalho e o portal de curadoria.

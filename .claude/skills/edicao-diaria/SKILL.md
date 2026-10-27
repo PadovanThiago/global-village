@@ -43,10 +43,20 @@ Crie um documento no Claude Docs chamado `Global Village Diário · <dia> de <m�
    - Rodapé com o convite para assinar, `{{ subscribe_form }}` e a linha sobre a base inicial de leitores.
 3. **English edition**, espelhando a portuguesa.
 
+### Imagem do dia
+
+Cada edição abre com uma imagem de 1200 × 600, no visual da marca, uma em português e outra em inglês.
+
+- Escreva um título curto para o dia, de até umas 40 letras, que diga o fio comum dos fatos (exemplo: "Onde os holofotes chegam menos"). Faça a versão em inglês também. Sem travessão e sem dois-pontos.
+- Gere as duas imagens com `python3 -I tools/imagem-edicao.py brand/newsletter/<AAAA-MM-DD>-pt.png "<dia> de <mês> de <ano>" "<título>" "<fato 1>" "<fato 2>" ...` e o mesmo comando para `-en.png`, com a data em inglês ("October 28, 2026"). Cada fato entra com o seu título curto, de até umas 50 letras.
+- Abra as duas imagens e confira que nenhum texto ficou cortado ou sobreposto. Se ficou, encurte e gere de novo.
+- Suba as duas para o documento do dia (Artifact `publish` com `asset: true` e a URL do documento), crie um blob para cada uma e insira cada imagem logo abaixo do título da sua edição. O texto alternativo repete a data, o título e os fatos.
+- Inclua os dois arquivos no commit do PR do feed.
+
 A edição diária não tem nota do editor. Se um fato pedir a posição do Global Village, ela entra numa frase no próprio parágrafo, com a mesma regra da nota do editor dos itens.
 
 Textos em português seguem as regras do `CLAUDE.md`: sem travessões, sem dois-pontos como recurso de estilo, sem frases fragmentadas, tríades anafóricas, paralelismos negativos e transições polidas.
 
 ## 5. Relato
 
-Termine com um resumo curto para Thiago: os fatos escolhidos, o link do PR e o link do documento.
+Termine com um resumo curto para Thiago: os fatos escolhidos, o título da imagem do dia, o link do PR e o link do documento.
