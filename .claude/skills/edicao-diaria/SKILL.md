@@ -50,7 +50,7 @@ Crie um documento no Claude Docs chamado `Global Village Diário · <dia> de <m�
    - Título `Global Village Diário · <dia da semana>, <dia> de <mês>` e a linha *Os fatos de ontem pela lente da democracia liberal, com o que as vozes que acompanhamos disseram.*
    - De 3 a 5 fatos. Cada fato tem um título curto, um parágrafo de no máximo 90 palavras com o que aconteceu e o que as vozes disseram (quem concorda, quem diverge, quando houver), e a lista de links no formato `[Título](url) · Autor, Fonte · dia mês · idioma`.
    - **A leitura do dia**: um texto para ler com calma, com duas ou três frases.
-   - Rodapé com o convite para assinar, `{{ subscribe_form }}` e a linha sobre a base inicial de leitores.
+   - Rodapé com uma frase de convite para assinar a seção do Global Village no Substack do Projeto Villa e a linha sobre a base inicial de leitores. O botão de assinatura Thiago insere no editor do Substack.
 3. **English edition**, espelhando a portuguesa.
 
 ### Imagem do dia

@@ -18,8 +18,9 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 - O projeto se chamou Villa até 26/10/2026 e passou a se chamar Global Village. As chaves `villa:` do localStorage ficaram com o nome antigo de propósito, para não apagar as preferências dos leitores.
 
 ## Newsletter
+- A newsletter sai pelo Substack do Projeto Villa (https://projetovilla.substack.com), que já tem cerca de 250 inscritos e os ensaios de Thiago. O Global Village tem duas seções lá, `global-village` em português e `global-village-english` em inglês, para que quem só quer os ensaios possa sair da edição diária sem cancelar tudo. O site não coleta e-mails. Os botões de assinatura levam à seção do idioma (constantes `SUBSTACK` e `NL_SECTION` do `index.html`).
 - A newsletter é diária, de segunda a sexta, com de 3 a 5 fatos do dia anterior e pelo menos um fora do eixo Estados Unidos e Europa. O roteiro completo está em `.claude/skills/edicao-diaria/SKILL.md`.
-- Uma tarefa agendada no app do Claude ("Global Village · edição diária") roda esse roteiro às 6h dos dias úteis. Ela abre um PR com o feed do site, gera a imagem do dia com `tools/imagem-edicao.py` (molde em `brand/newsletter/src/edicao.html`) e escreve a edição num documento do Claude Docs. Thiago revisa, aprova o PR e envia a newsletter.
+- Uma tarefa agendada no app do Claude ("Global Village · edição diária") roda esse roteiro às 6h dos dias úteis. Ela abre um PR com o feed do site, gera a imagem do dia com `tools/imagem-edicao.py` (molde em `brand/newsletter/src/edicao.html`) e escreve a edição num documento do Claude Docs. Thiago revisa, aprova o PR e publica cada edição como post na seção do idioma no Substack.
 
 ## Regras do projeto
 - A curadoria é de Thiago. Nenhum nome, organização ou filme entra ou sai sem a aprovação dele. A fonte de verdade é a planilha de trabalho e o portal de curadoria.
@@ -31,9 +32,7 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 - Thiago revisa e aprova. Mudanças visíveis vão por pull request com um resumo curto em português.
 
 ## Pendências conhecidas
-- Os formulários de newsletter já enviam ao Buttondown (POST para `https://buttondown.com/api/emails/embed-subscribe/<usuário>` com `email` e `tag` igual a `pt` ou `en`). O usuário fica na constante `BUTTONDOWN_USER` do `index.html` (hoje `padovan`). Se ela ficar vazia, o formulário só simula a inscrição.
-- A newsletter sai em português e inglês. A página `#newsletter` oferece só esses dois idiomas, e os formulários da home usam `pt` quando a interface está em português e `en` nos demais casos.
 - O `index.html` tem `<meta name="robots" content="noindex, nofollow">` durante a fase de teste. Retirar no lançamento para o site aparecer nas buscas.
 - Separar os dados em arquivos JSON quando o volume crescer.
 - Portal de curadoria (artifact "Global Village Curadoria" no claude.ai, https://claude.ai/artifact/MA4yjRaLbECoNTeEHv46Xg): a Mesa do editor só aparece para o dono, e os curadores entram como Contribuidor. Nos dados a separação ainda é só visual, porque votos, decisões e notas do editor ficam no mesmo registro de cada item, que qualquer Contribuidor lê e altera. Antes de ampliar o conselho além dos primeiros cinco curadores de confiança, mover os votos para um espaço por curador e as decisões do editor para um caminho só do editor, migrando os dados existentes. A aba Contexto regional já nasceu nesse modelo, com a validação de cada curador em `validacoes/<id do curador>` e a aprovação do editor em `editor/contexto`, que só o dono grava.
-- Enviar os temas escolhidos na página `#newsletter` como etiquetas do Buttondown (`dem`, `geo`, `eco`, `tec`). O código está pronto na branch `feat/newsletter-temas` (PR #2, fechado). Depende do plano pago do Buttondown, que é o que permite criar etiquetas. Retomar quando houver assinatura.
+- O Buttondown foi usado nos testes de outubro de 2026 e deixou de ser o meio de envio. Os materiais em `brand/buttondown/` ficaram como histórico.
