@@ -29,7 +29,15 @@ Antes de começar, leia o `CLAUDE.md`. As regras de curadoria e de texto valem a
 ## 2. Escolha dos fatos
 
 - De 3 a 5 fatos. Um fato é um acontecimento ou debate que pelo menos duas fontes aprovadas trataram no período, ou uma denúncia relevante de uma organização aprovada (OCCRP, CPJ, Article 19, Freedom House e afins).
+- Comece pelo que mais pesou no dia anterior. Antes de escolher, agrupe as novidades por assunto e conte quantas fontes aprovadas trataram cada um. Os assuntos que dominaram o período entram primeiro, e um acontecimento grande não fica de fora por não caber num tema.
+- A edição busca cobrir os quatro temas do site, como aparecem nas páginas de tema: Democracia e instituições (`dem`), Geopolítica (`geo`), Economia (`eco`) e Tecnologia e liberdades (`tec`). Quando um tema tem análise relevante de fontes aprovadas no período, ele ganha pelo menos um fato. Um tema sem material bom fica de fora, e a seção de revisão diz por quê.
 - Pelo menos um fato fora do eixo Estados Unidos e Europa Ocidental, com prioridade para África, Ásia, Oriente Médio e América Latina fora do Brasil.
+
+### Pautas em destaque
+
+Assuntos que Thiago pediu para acompanhar de perto num período. Enquanto valerem, entram na edição sempre que houver análise nova de fonte aprovada, mesmo que outro assunto tenha mais volume. Retire a pauta da lista quando o prazo passar.
+
+- **Eleições de meio de mandato nos Estados Unidos** (votação em 3/11/2026), até o fim da apuração e das contestações, por volta de 13/11/2026. Prioridade para as regras do jogo (pressão sobre a contagem, observadores, ações na Justiça, ameaças de não reconhecer o resultado), para os resultados e para o que as vozes da base dizem sobre eles.
 - Só entram textos de pessoas e organizações aprovadas na base. Autor fora da base (mesmo publicado por uma organização aprovada) fica de fora e vai citado na seção de revisão.
 - Abra cada texto escolhido (`curl` com user agent de navegador) antes de resumir. Se não der para ler, diga isso na seção de revisão e resuma só pelo título e pela descrição do feed.
 
@@ -45,7 +53,7 @@ Antes de começar, leia o `CLAUDE.md`. As regras de curadoria e de texto valem a
 
 Crie um documento no Claude Docs chamado `Global Village Diário · <dia> de <mês>` com esta estrutura:
 
-1. **Para revisar** (só para Thiago): período, fontes lidas, leituras parciais, textos deixados de fora e por quê, qualquer dúvida de enquadramento, os casos de contexto regional encontrados (aplicados ou só sinalizados) e os autores que voltaram a cair no mesmo registro.
+1. **Para revisar** (só para Thiago): período, fontes lidas, os assuntos que mais pesaram no período, os temas cobertos e os que ficaram de fora (com o motivo), como cada pauta em destaque foi tratada, leituras parciais, textos deixados de fora e por quê, qualquer dúvida de enquadramento, os casos de contexto regional encontrados (aplicados ou só sinalizados) e os autores que voltaram a cair no mesmo registro.
 2. **Edição em português**
    - Título `Global Village Diário · <dia da semana>, <dia> de <mês>` e a linha *Os fatos de ontem pela lente da democracia liberal, com o que as vozes que acompanhamos disseram.*
    - De 3 a 5 fatos. Cada fato tem um título curto, um parágrafo de no máximo 90 palavras com o que aconteceu e o que as vozes disseram (quem concorda, quem diverge, quando houver), e a lista de links no formato `[Título](url) · Autor, Fonte · dia mês · idioma`.

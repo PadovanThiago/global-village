@@ -19,7 +19,7 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 
 ## Newsletter
 - A newsletter sai pelo Substack do Projeto Villa (https://projetovilla.substack.com), que já tem cerca de 250 inscritos e os ensaios de Thiago. O Global Village tem duas seções lá, `global-village` em português e `global-village-english` em inglês, para que quem só quer os ensaios possa sair da edição diária sem cancelar tudo. O site não coleta e-mails. Os botões de assinatura levam à seção do idioma (constantes `SUBSTACK` e `NL_SECTION` do `index.html`).
-- A newsletter é diária, de segunda a sexta, com de 3 a 5 fatos do dia anterior e pelo menos um fora do eixo Estados Unidos e Europa. O roteiro completo está em `.claude/skills/edicao-diaria/SKILL.md`.
+- A newsletter é diária, de segunda a sexta, com de 3 a 5 fatos do dia anterior, os temas do site cobertos sempre que houver material e pelo menos um fato fora do eixo Estados Unidos e Europa. O roteiro completo está em `.claude/skills/edicao-diaria/SKILL.md`.
 - Uma tarefa agendada no app do Claude ("Global Village · edição diária") roda esse roteiro às 6h dos dias úteis. Ela abre um PR com o feed do site, gera a imagem do dia com `tools/imagem-edicao.py` (molde em `brand/newsletter/src/edicao.html`) e escreve a edição num documento do Claude Docs. Thiago revisa, aprova o PR e publica cada edição como post na seção do idioma no Substack.
 
 ## Regras do projeto
