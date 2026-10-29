@@ -55,7 +55,7 @@ Crie um documento no Claude Docs chamado `Global Village Pauta · <dia> de <mês
 3. **Pautas em destaque**, quando houver, com os candidatos da pauta.
 4. **Uma seção por tema**, na ordem do site. Cada candidato é uma tarefa (`- [ ]`) com:
    - título curto do fato;
-   - uma ou duas frases sobre o que aconteceu e o que as vozes disseram, atribuindo cada leitura ao autor;
+   - duas a quatro frases que expliquem o contexto (quem são as pessoas e as organizações, por que o assunto importa), o que aconteceu e o que as vozes disseram, atribuindo cada leitura ao autor;
    - as fontes, no formato `[Título](url) · Autor, Fonte · idioma`;
    - região, e a marca **fora do eixo** quando for o caso;
    - **Recomendo** quando for a sua sugestão, com meia frase do motivo. As tarefas ficam desmarcadas. Quem marca é Thiago.
@@ -78,6 +78,8 @@ Começa quando Thiago avisar que escolheu. Se a conversa não for a da rotina, e
 - Leia a pauta com as ferramentas do Claude Docs: as tarefas marcadas são os fatos da edição, e os comentários dizem onde mudar o enfoque. O que Thiago disser na conversa vale por cima do documento.
 - Se ele marcou menos de 3 ou mais de 5, ou nenhum fato fora do eixo, siga a escolha dele e registre isso em "Para revisar".
 - Se a escolha pedir um texto que ainda não foi aberto, abra antes de escrever.
+- Thiago pode pôr assuntos **em destaque**. Eles abrem a edição, antes dos outros fatos, com a marca "Em destaque" no título.
+- Quando ele pedir vozes locais para um país (por exemplo, analistas israelenses sobre Israel), pesquise fontes daquele país com a lente da democracia liberal (institutos de democracia, jornais de referência, colunistas). Se estiverem fora da base, elas entram só na newsletter, nunca no feed do site, e vão listadas em "Para revisar" para Thiago decidir se entram na base.
 
 ## 6. Feed do site
 
@@ -95,7 +97,9 @@ Crie um documento no Claude Docs chamado `Global Village Diário · <dia> de <m�
 1. **Para revisar** (só para Thiago): o link da pauta, os fatos escolhidos e o tema de cada um, o que mudou em relação à pauta, leituras parciais, qualquer dúvida de enquadramento, os casos de contexto regional (aplicados ou só sinalizados) e os autores que voltaram a cair no mesmo registro.
 2. **Edição em português**
    - Título `Global Village Diário · <dia da semana>, <dia> de <mês>` e a linha *Os fatos de ontem pela lente da democracia liberal, com o que as vozes que acompanhamos disseram.*
-   - Os fatos escolhidos. Cada fato tem um título curto, um parágrafo de no máximo 90 palavras com o que aconteceu e o que as vozes disseram (quem concorda, quem diverge, quando houver), e a lista de links no formato `[Título](url) · Autor, Fonte · dia mês · idioma`.
+   - **Nota do editor**, logo depois da imagem e da linha de abertura, assinada por Thiago Padovan. Dois ou três parágrafos curtos, em primeira pessoa e num tom de conversa, como Thiago fala com quem o lê, sem formalidade de editorial. Ela diz por que esses assuntos importam hoje e o que os liga. Use a skill `thiago-framework` para a voz, sem citar os conceitos dele pelo nome. A nota é a voz do Global Village e segue a regra sobre Lula e o PT do `CLAUDE.md`.
+   - Os assuntos em destaque, depois os demais fatos escolhidos. Cada fato tem um título curto, um parágrafo de no máximo 150 palavras e a lista de links no formato `[Título](url) · Autor, Fonte · dia mês · idioma`.
+   - O parágrafo explica antes de resumir. O leitor pode não saber quem são as pessoas, o que são as organizações e os veículos, onde fica um lugar ou como funciona uma regra (por exemplo, quem é Lina Attalah, o que é o Mada Masr e por que ele importa, o que faz um grande júri, quantos assentos são precisos para governar em Israel). Dê esse contexto em poucas palavras, dentro das próprias frases, e depois diga o que aconteceu e o que as vozes disseram (quem concorda, quem diverge, quando houver). Contexto tirado de fora dos textos da base precisa de fonte, e o que não for confirmado vai em "Para revisar".
    - **A leitura do dia**: um texto para ler com calma, com duas ou três frases.
    - Rodapé com uma frase de convite para assinar a seção do Global Village no Substack do Projeto Villa e a linha sobre a base inicial de leitores. O botão de assinatura Thiago insere no editor do Substack.
 3. **English edition**, espelhando a portuguesa.
@@ -110,7 +114,9 @@ Cada edição abre com uma imagem de 1200 × 600, no visual da marca, uma em por
 - Suba as duas para o documento do dia (Artifact `publish` com `asset: true` e a URL do documento), crie um blob para cada uma e insira cada imagem logo abaixo do título da sua edição. O texto alternativo repete a data, o título e os fatos.
 - Inclua os dois arquivos no commit do PR do feed.
 
-A edição diária não tem nota do editor. Se um fato pedir a posição do Global Village, ela entra numa frase no próprio parágrafo, com a mesma regra da nota do editor dos itens.
+A posição do Global Village fica na nota do editor do topo. Se um fato pedir essa posição de forma específica, ela entra numa frase no próprio parágrafo, com a mesma regra da nota do editor dos itens.
+
+Quando houver mais de cinco fatos, a imagem do dia leva os destaques e os fatos que melhor representam o resto, porque o molde comporta cinco. Diga em "Para revisar" quais ficaram de fora da imagem.
 
 Textos em português seguem as regras do `CLAUDE.md`: sem travessões, sem dois-pontos como recurso de estilo, sem frases fragmentadas, tríades anafóricas, paralelismos negativos e transições polidas.
 
