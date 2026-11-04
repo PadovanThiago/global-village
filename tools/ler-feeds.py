@@ -42,7 +42,14 @@ def fontes():
 
 def baixar(url):
     r = subprocess.run(["curl", "-sL", "--max-time", "15", "-A", UA, url], capture_output=True)
-    return r.stdout.decode("utf-8", "replace")
+    # Alguns feeds (Folha) vêm em ISO-8859-1: decodifica pela declaração do XML e tira a declaração,
+    # porque o texto segue adiante já em UTF-8.
+    m = re.match(rb'\s*<\?xml[^>]*encoding=["\']([\w.-]+)', r.stdout[:200])
+    try:
+        texto = r.stdout.decode(m.group(1).decode() if m else "utf-8", "replace")
+    except LookupError:
+        texto = r.stdout.decode("utf-8", "replace")
+    return re.sub(r"^\s*<\?xml[^>]*\?>", "", texto)
 
 
 def data(texto):

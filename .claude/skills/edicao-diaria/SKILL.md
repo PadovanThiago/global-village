@@ -31,6 +31,13 @@ Antes de começar qualquer etapa, leia o `CLAUDE.md`. As regras de curadoria e d
 - Suba os dois arquivos para o painel (Artifact `publish` com `asset: true` e a URL do painel) e atualize os documentos `datasets/fontes` e `datasets/fora` com `ArtifactData` `update`: `source.url` com o endereço novo, `source.name`, `updated` (`at` e `by`) e `edit`. Depois apague os dois arquivos antigos do painel.
 - Se uma fonte ativa ficou parada ou o feed saiu do ar, cite isso em "Fora da pauta". Quem entra ou sai da base continua sendo decisão de Thiago.
 
+### Agente "Pergunte ao Global Village"
+
+- O protótipo [Pergunte ao Global Village](https://claude.ai/artifact/VvCZeXeFfD2pqAjifguVve) responde perguntas com base nas análises do site e no arquivo dos feeds das fontes aprovadas. Atualize a base dele a cada etapa 1, depois do painel de fontes.
+- Rode `python3 -I tools/base-agente.py /tmp/base-agente.json`. O script junta as publicações novas dos feeds ao arquivo local `dados/arquivo-feeds.json` (fora do Git, com os últimos 60 dias) e escreve a base.
+- Leia o artifact (Artifact `read` com a URL) e publique de novo com a mesma URL, `file_path` em `agente/index.html` e `files` com `base.json` apontando para `/tmp/base-agente.json`. Não mude `capabilities`.
+- A base usa o `index.html` da `main`. As análises de um PR ainda aberto entram no dia seguinte ao merge.
+
 ### Contexto regional
 
 - Leia a aba Contexto regional do portal de curadoria (`ArtifactData` com a URL do portal). As coleções são `contexto` (os registros), `contexto/<id>/casos` (os casos de cada registro), `validacoes` (um documento por curador, com a validação de cada registro) e `editor`, documento `contexto` (as aprovações do editor). O estado de cada registro segue a regra do portal: em vigor quando há aprovação do editor e validação de um curador de tradição diferente da de quem propôs (dois, com dez curadores ou mais), em debate quando há contestação, arquivado quando `arch` é verdadeiro.
