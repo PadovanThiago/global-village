@@ -346,6 +346,7 @@ const AREAS = {
  "Relações internacionais":{en:"International relations",es:"Relaciones internacionales",fr:"Relations internationales",it:"Relazioni internazionali"},
  "Geopolítica":{en:"Geopolitics",es:"Geopolítica",fr:"Géopolitique",it:"Geopolitica"},
  "Ciência política":{en:"Political science",es:"Ciencia política",fr:"Science politique",it:"Scienza politica"},
+ "História e tecnologia":{en:"History and technology",es:"Historia y tecnología",fr:"Histoire et technologie",it:"Storia e tecnologia"},
  "Economia":{en:"Economics",es:"Economía",fr:"Économie",it:"Economia"},
  "Economia e sociedade":{en:"Economics and society",es:"Economía y sociedad",fr:"Économie et société",it:"Economia e società"},
  "Política":{en:"Politics",es:"Política",fr:"Politique",it:"Politica"},
@@ -468,7 +469,10 @@ const PEOPLE = [
  ["peter-kreko","Péter Krekó","think","Populismo e desinformação","HU","Political Capital","en",["dem", "tec"],{site:"https://www.politicalcapital.hu",rss:"https://www.youtube.com/feeds/videos.xml?channel_id=UCSkXTentxDKm4DV9McvIXaQ"}],
  ["erica-frantz","Erica Frantz","think","Autoritarismo","US","Michigan State University","en",["dem"],{site:"https://polisci.msu.edu/people/directory/frantz-erica.html"}],
  ["peter-pomerantsev","Peter Pomerantsev","journo","Propaganda e desinformação","GB","SNF Agora · Johns Hopkins","en",["tec", "geo"],{site:"https://snfagora.jhu.edu/person/peter-pomerantsev/",rss:"https://feeds.megaphone.fm/autocracyinamerica"}],
- ["enrique-krauze","Enrique Krauze","think","História e democracia","MX","Letras Libres","es",["dem"],{site:"https://letraslibres.com",rss:"https://letraslibres.com/feed/"}]
+ ["enrique-krauze","Enrique Krauze","think","História e democracia","MX","Letras Libres","es",["dem"],{site:"https://letraslibres.com",rss:"https://letraslibres.com/feed/"}],
+ ["sarah-longwell","Sarah Longwell","journo","Política americana","US","The Bulwark","en",["dem"],{newsletter:"https://www.thebulwark.com"}],
+ ["sebastian-mazzuca","Sebastián Mazzuca","think","Ciência política","AR","Johns Hopkins University","es",["dem", "geo"],{site:"https://politicalscience.jhu.edu/directory/sebastian-mazzuca"}],
+ ["yuval-noah-harari","Yuval Noah Harari","think","História e tecnologia","IL","","en",["tec", "dem"],{site:"https://www.ynharari.com",rss:"https://www.ynharari.com/feed/"}]
 ].map(r=>({id:r[0],name:r[1],cat:r[2],area:r[3],cc:r[4],region:regOf(r[4]),org:r[5],lang:r[6],themes:r[7],ch:r[8]}));
 
 const ITEMS = [
@@ -642,7 +646,16 @@ const ORGS = [
  ["Le Grand Continent","pub","FR","https://legrandcontinent.eu","European review of geopolitics and ideas.","Revista europeia de geopolítica e ideias.",["geo"],"","","https://legrandcontinent.eu/fr/feed/"],
  ["Democracy in Africa","pub","INT","https://democracyinafrica.org","Research and commentary platform on African democracy.","Plataforma de pesquisa e análise sobre a democracia africana.",["dem"],"","","https://democracyinafrica.org/feed/"],
  ["Revista ID","pub","BR","https://www.revistaid.com.br/","Inteligência Democrática, a Substack magazine where several columnists write on democracy, politics and society.","Revista Inteligência Democrática, publicada no Substack, com artigos de vários colunistas sobre democracia, política e sociedade.",["dem", "tec"],"revista-id","Revista Inteligência Democrática","https://www.revistaid.com.br/feed"],
- ["Dagobah","pub","BR","https://dagobah.com.br/","Review of democratic political analysis. Recent pieces are by Augusto de Franco, including translations of foreign essays.","Revista de análises políticas democráticas. Os textos recentes são assinados por Augusto de Franco, incluindo traduções de ensaios estrangeiros.",["dem", "tec"],"dagobah","Dagobah, Revista de Análises Políticas","https://dagobah.com.br/feed/"]
+ ["Dagobah","pub","BR","https://dagobah.com.br/","Review of democratic political analysis. Recent pieces are by Augusto de Franco, including translations of foreign essays.","Revista de análises políticas democráticas. Os textos recentes são assinados por Augusto de Franco, incluindo traduções de ensaios estrangeiros.",["dem", "tec"],"dagobah","Dagobah, Revista de Análises Políticas","https://dagobah.com.br/feed/"],
+ ["Democracy Docket", "media", "US", "https://www.democracydocket.com", "News and analysis on voting rights and election litigation in the United States, founded by lawyer Marc Elias.", "Notícias e análises sobre direito de voto e disputas eleitorais na Justiça dos Estados Unidos, fundado pelo advogado Marc Elias.", ["dem"], "", "", "https://www.democracydocket.com/analysis/feed/"],
+ ["DemocracyNext", "tank", "INT", "https://www.demnext.org", "Think tank working on citizens’ assemblies and new democratic institutions.", "Think tank que trabalha com assembleias de cidadãos e novas instituições democráticas.", ["dem"], "", "", "https://news.google.com/rss/search?q=site%3Ademnext.org&hl=en-US&gl=US&ceid=US:en"],
+ ["Konrad-Adenauer-Stiftung", "fund", "DE", "https://www.kas.de", "German political foundation linked to the CDU that supports democracy and the rule of law around the world.", "Fundação política alemã ligada à CDU que apoia a democracia e o Estado de direito pelo mundo.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Akas.de&hl=en-US&gl=US&ceid=US:en"],
+ ["National Endowment for Democracy (NED)", "fund", "US", "https://www.ned.org", "US foundation that funds civil society and independent media in closed and transitioning countries.", "Fundação americana que financia sociedade civil e imprensa independente em países fechados e em transição.", ["dem"], "", "National Endowment for Democracy", "https://www.ned.org/feed/"],
+ ["Notes from the Circus", "pub", "US", "https://www.notesfromthecircus.com", "Mike Brock’s publication on democracy, technology and power in the United States.", "Publicação de Mike Brock sobre democracia, tecnologia e poder nos Estados Unidos.", ["dem", "tec"], "", "", ""],
+ ["Renew Democracy Initiative", "net", "US", "https://rdi.org", "Organisation chaired by Garry Kasparov that defends liberal democracy and supports Ukraine. It publishes The Next Move.", "Organização presidida por Garry Kasparov que defende a democracia liberal e apoia a Ucrânia. Publica The Next Move.", ["dem", "geo"], "", "", ""],
+ ["The Contrarian", "pub", "US", "https://www.contrariannews.org", "Pro-democracy publication on American politics, founded by Jennifer Rubin and Norm Eisen.", "Publicação pró-democracia sobre política americana, fundada por Jennifer Rubin e Norm Eisen.", ["dem"], "", "", "https://www.contrariannews.org/feed"],
+ ["The Social Contract with Joe Walsh", "pub", "US", "https://socialcontractwithjoewalsh.substack.com", "Joe Walsh’s newsletter and podcast on American politics and democracy.", "Newsletter e podcast de Joe Walsh sobre política americana e democracia.", ["dem"], "", "", ""],
+ ["World Liberty Congress", "net", "INT", "https://worldlibertycongress.org", "Global network of dissidents from authoritarian countries, from Venezuela and Cuba to Russia and Iran.", "Rede global de dissidentes de países autoritários, da Venezuela e de Cuba à Rússia e ao Irã.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Aworldlibertycongress.org&hl=en-US&gl=US&ceid=US:en"]
 ].map(r=>({name:r[0],type:r[1],cc:r[2],region:regOf(r[2]),url:r[3],desc:r[4],desc_pt:r[5],themes:r[6],id:r[7]||"",full:r[8]||r[0],rss:r[9]||""}));
 const PUBS=Object.fromEntries(ORGS.filter(o=>o.id).map(o=>[o.id,o]));
 
@@ -1134,7 +1147,7 @@ function vPub(id){
   '</div></div><div class="rule-top"><h2>'+esc(t("pub_authors"))+'</h2><ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px">'+authors.map(a=>{const pp=PEOPLE.find(x=>x.name===a);return '<li>'+(pp?'<a href="#a-'+pp.id+'" style="font-weight:700">'+esc(a)+'</a>':esc(a))+'</li>'}).join("")+'</ul></div></aside></div></div>';
 }
 function vOrgs(){
-  const types=["index","tank","net","media","pub"].filter(ty=>ORGS.some(o=>o.type===ty));
+  const types=["index","tank","fund","net","media","pub"].filter(ty=>ORGS.some(o=>o.type===ty));
   return '<div class="wrap"><section class="block" style="padding-bottom:16px"><h1 class="display h-xl">'+esc(t("orgs_title"))+'</h1><p class="lede muted" style="margin-top:14px">'+esc(t("orgs_text"))+'</p></section>'+
   types.map(ty=>{const os=ORGS.filter(o=>o.type===ty);return '<section style="padding-block:20px"><h2 class="kicker rule-top" style="font-size:13px;margin:0 0 14px">'+esc(t("ot_"+ty))+' · '+os.length+'</h2><div class="orgs">'+os.map(o=>'<a class="org" href="'+(o.id?"#p-"+o.id:esc(o.url))+'"'+(o.id?"":' target="_blank" rel="noopener"')+'><b>'+esc(o.name)+'</b><span>'+esc(oDesc(o))+'</span><span class="kicker" style="margin-top:4px">'+esc(cname(o.cc))+'</span></a>').join("")+'</div></section>'}).join("")+'<div style="height:40px"></div></div>';
 }
