@@ -336,7 +336,7 @@ footer.site a{text-decoration:none}
 "use strict";
 
 /* ============ DATA ============ */
-const CC_REG = {"BR": "latam", "VE": "latam", "AR": "latam", "NI": "latam", "MX": "latam", "SV": "latam", "CU": "latam", "CL": "latam", "US": "na", "CA": "na", "IT": "eu", "NO": "eu", "GB": "eu", "SE": "eu", "GR": "eu", "BE": "eu", "RU": "eu", "FI": "eu", "DE": "eu", "FR": "eu", "HU": "eu", "NL": "eu", "UA": "eu", "EUR": "eu", "RU-EX": "eu", "IL": "mena", "IR": "mena", "LB": "mena", "IN": "asia", "AU": "asia", "TW": "asia", "NG": "afr", "ZA": "afr", "GH": "afr", "SN": "afr"};
+const CC_REG = {"BR": "latam", "VE": "latam", "AR": "latam", "NI": "latam", "MX": "latam", "SV": "latam", "CU": "latam", "CL": "latam", "US": "na", "CA": "na", "IT": "eu", "NO": "eu", "GB": "eu", "ES": "eu", "SE": "eu", "GR": "eu", "BE": "eu", "RU": "eu", "FI": "eu", "DE": "eu", "FR": "eu", "HU": "eu", "NL": "eu", "UA": "eu", "EUR": "eu", "RU-EX": "eu", "IL": "mena", "IR": "mena", "LB": "mena", "IN": "asia", "AU": "asia", "TW": "asia", "NG": "afr", "ZA": "afr", "GH": "afr", "SN": "afr"};
 const regOf=cc=>CC_REG[cc]||"int";
 const REGIONS=["latam","na","eu","afr","mena","asia","int"];
 const AREAS = {
@@ -472,7 +472,12 @@ const PEOPLE = [
  ["enrique-krauze","Enrique Krauze","think","História e democracia","MX","Letras Libres","es",["dem"],{site:"https://letraslibres.com",rss:"https://letraslibres.com/feed/"}],
  ["sarah-longwell","Sarah Longwell","journo","Política americana","US","The Bulwark","en",["dem"],{newsletter:"https://www.thebulwark.com"}],
  ["sebastian-mazzuca","Sebastián Mazzuca","think","Ciência política","AR","Johns Hopkins University","es",["dem", "geo"],{site:"https://politicalscience.jhu.edu/directory/sebastian-mazzuca"}],
- ["yuval-noah-harari","Yuval Noah Harari","think","História e tecnologia","IL","","en",["tec", "dem"],{site:"https://www.ynharari.com",rss:"https://www.ynharari.com/feed/"}]
+ ["yuval-noah-harari","Yuval Noah Harari","think","História e tecnologia","IL","","en",["tec", "dem"],{site:"https://www.ynharari.com",rss:"https://www.ynharari.com/feed/"}],
+ ["carlos-malamud","Carlos Malamud","think","América Latina","ES","Real Instituto Elcano","es",["geo", "dem"],{site:"https://www.realinstitutoelcano.org/biografias/carlos-malamud/",rss:"https://news.google.com/rss/search?q=%22Carlos%20Malamud%22&hl=es-419&gl=ES&ceid=ES:es"}],
+ ["hari-seshasayee","Hari Seshasayee","think","Relações internacionais","IN","Observer Research Foundation","en",["geo", "eco"],{site:"https://www.orfonline.org/people-expert/hari-seshasayee",rss:"https://news.google.com/rss/search?q=%22Hari%20Seshasayee%22&hl=en-US&gl=US&ceid=US:en"}],
+ ["luis-rubio","Luis Rubio","think","Instituições e desenvolvimento","MX","México Evalúa-CIDAC","es",["dem", "eco"],{site:"https://www.luisrubio.mx",rss:"https://www.luisrubio.mx/feed/"}],
+ ["ricardo-zuniga","Ricardo Zúñiga","journo","Relações internacionais","US","Dinámica Americas","en",["geo", "dem"],{site:"https://dinamicaamericas.com"}],
+ ["daniel-buarque","Daniel Buarque","journo","Relações internacionais","BR","Interesse Nacional","pt",["geo"],{site:"https://interessenacional.com.br"}]
 ].map(r=>({id:r[0],name:r[1],cat:r[2],area:r[3],cc:r[4],region:regOf(r[4]),org:r[5],lang:r[6],themes:r[7],ch:r[8]}));
 
 const ITEMS = [
@@ -655,7 +660,9 @@ const ORGS = [
  ["Renew Democracy Initiative", "net", "US", "https://rdi.org", "Organisation chaired by Garry Kasparov that defends liberal democracy and supports Ukraine. It publishes The Next Move.", "Organização presidida por Garry Kasparov que defende a democracia liberal e apoia a Ucrânia. Publica The Next Move.", ["dem", "geo"], "", "", ""],
  ["The Contrarian", "pub", "US", "https://www.contrariannews.org", "Pro-democracy publication on American politics, founded by Jennifer Rubin and Norm Eisen.", "Publicação pró-democracia sobre política americana, fundada por Jennifer Rubin e Norm Eisen.", ["dem"], "", "", "https://www.contrariannews.org/feed"],
  ["The Social Contract with Joe Walsh", "pub", "US", "https://socialcontractwithjoewalsh.substack.com", "Joe Walsh’s newsletter and podcast on American politics and democracy.", "Newsletter e podcast de Joe Walsh sobre política americana e democracia.", ["dem"], "", "", ""],
- ["World Liberty Congress", "net", "INT", "https://worldlibertycongress.org", "Global network of dissidents from authoritarian countries, from Venezuela and Cuba to Russia and Iran.", "Rede global de dissidentes de países autoritários, da Venezuela e de Cuba à Rússia e ao Irã.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Aworldlibertycongress.org&hl=en-US&gl=US&ceid=US:en"]
+ ["World Liberty Congress", "net", "INT", "https://worldlibertycongress.org", "Global network of dissidents from authoritarian countries, from Venezuela and Cuba to Russia and Iran.", "Rede global de dissidentes de países autoritários, da Venezuela e de Cuba à Rússia e ao Irã.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Aworldlibertycongress.org&hl=en-US&gl=US&ceid=US:en"],
+ ["Plataforma Democrática", "tank", "BR", "https://www.plataformademocratica.org", "Initiative of the Fernando Henrique Cardoso Foundation and the Edelstein Center that supports democratic institutions and culture in Latin America through research and publications.", "Iniciativa da Fundação Fernando Henrique Cardoso e do Centro Edelstein que apoia as instituições e a cultura democrática na América Latina com pesquisas e publicações.", ["dem", "geo"], "", "", "https://fundacaofhc.org.br/feed/"],
+ ["Journal of Democracy em português", "pub", "BR", "https://fundacaofhc.org.br/colecao/journal-of-democracy-em-portugues/", "Biannual Portuguese edition of the Journal of Democracy, with translations and original articles on Brazil and Latin America.", "Edição semestral em português do Journal of Democracy, com traduções e artigos originais sobre o Brasil e a América Latina.", ["dem"], "", "", ""]
 ].map(r=>({name:r[0],type:r[1],cc:r[2],region:regOf(r[2]),url:r[3],desc:r[4],desc_pt:r[5],themes:r[6],id:r[7]||"",full:r[8]||r[0],rss:r[9]||""}));
 const PUBS=Object.fromEntries(ORGS.filter(o=>o.id).map(o=>[o.id,o]));
 
