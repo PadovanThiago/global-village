@@ -54,6 +54,26 @@ Antes de começar qualquer etapa, leia o `CLAUDE.md`. As regras de curadoria e d
 - Marque os candidatos fora do eixo Estados Unidos e Europa Ocidental. A edição precisa de pelo menos um, com prioridade para África, Ásia, Oriente Médio e América Latina fora do Brasil, e a pauta deve oferecer opções suficientes para isso.
 - Abra os textos de cada candidato (`curl` com user agent de navegador) antes de descrevê-lo. Se não der para ler, diga isso no próprio candidato.
 
+### Vozes do Brasil no radar
+
+Pedido de Thiago em 10/11/2026: sempre que houver assunto brasileiro no período, consulte estas vozes, mesmo que o assunto não tenha virado candidato por outras fontes.
+
+| Voz | Na base? | Onde ler |
+| --- | --- | --- |
+| William Waack e o painel do WW (CNN Brasil) | Waack sim; o programa não | Feed de Waack na base e [WW na CNN Brasil](https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%2Fpolitica%2Fww&hl=pt-BR&gl=BR&ceid=BR:pt-419) |
+| Lourival Sant'Anna | Não | [Estadão](https://news.google.com/rss/search?q=site%3Aestadao.com.br%20lourival-santanna&hl=pt-BR&gl=BR&ceid=BR:pt-419) e [CNN Brasil](https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%20lourival-sant-anna&hl=pt-BR&gl=BR&ceid=BR:pt-419) |
+| Caio Junqueira | Não | [Blog na CNN Brasil](https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%2Fblogs%2Fcaio-junqueira&hl=pt-BR&gl=BR&ceid=BR:pt-419) |
+| Demétrio Magnoli | Sim | Feed da base (Folha) |
+| Merval Pereira | Sim | Feed da base (podcast) |
+| Fernando Schüler | Sim | O feed da base é um podcast parado desde abril de 2026; as colunas estão no Estadão (conferir o feed sugerido em "Fora da pauta") |
+| Oliver Stuenkel | Sim | O blog da base está parado desde 2025; as colunas estão no Estadão |
+| Carlos Andreazza | No PR #30 | Feed do PR #30 (Estadão) |
+
+- Leia os feeds com `curl` (user agent de navegador) e filtre o período. Os de busca do Google Notícias misturam textos de outros autores do mesmo site: confira a assinatura antes de usar.
+- Quem está fora da base entra só na newsletter e no carrossel, nunca no feed do site, e vai listado em "Para revisar" até Thiago aprovar a entrada na planilha ou no portal.
+- O WW é um programa com vários comentaristas. Atribua cada leitura a quem falou, não ao programa.
+- A regra sobre Lula e o PT e o registro `br-lula-democracia-liberal` valem para todas essas vozes.
+
 ### Pautas em destaque
 
 Assuntos que Thiago pediu para acompanhar de perto num período. Enquanto valerem, têm seção própria no topo da pauta sempre que houver análise nova de fonte aprovada, mesmo que outro assunto tenha mais volume. Retire a pauta da lista quando o prazo passar.
