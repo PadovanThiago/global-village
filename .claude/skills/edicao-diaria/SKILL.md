@@ -60,6 +60,12 @@ Assuntos que Thiago pediu para acompanhar de perto num período. Enquanto valere
 
 - **Eleições de meio de mandato nos Estados Unidos** (votação em 3/11/2026), até o fim da apuração e das contestações, por volta de 13/11/2026. Prioridade para as regras do jogo (pressão sobre a contagem, observadores, ações na Justiça, ameaças de não reconhecer o resultado), para os resultados e para o que as vozes da base dizem sobre eles.
 
+### Temas de acompanhamento
+
+Assuntos que Thiago pediu para tratar sempre que houver notícia relevante, sem prazo para acabar. Não ganham seção própria na pauta. Procure por eles a cada leitura dos feeds e, quando houver material, traga o candidato no tema dele, mesmo com uma fonte aprovada só, com a marca **Acompanhamento** e uma linha dizendo qual tema é.
+
+- **China e Rússia na África** (pedido de 12/11/2026). Ações de Pequim e de Moscou no continente, como empréstimos e infraestrutura, mineração e acordos de recursos, presença militar e mercenária (o antigo Grupo Wagner, hoje Africa Corps), apoio a juntas e governos autoritários, campanhas de desinformação e votos na ONU. Fontes da base que costumam tratar disso: ISS Africa, Daily Maverick, WATHI, The Insider, OCCRP, Carnegie e Afrobarometer. Quando o fato for escolhido, explique quem governa o país africano e o que o acordo ou a presença estrangeira muda para as instituições e as liberdades de lá.
+
 ## 3. Documento da pauta
 
 Crie um documento no Claude Docs chamado `Global Village Pauta · <dia> de <mês>`, curto e fácil de decidir:
