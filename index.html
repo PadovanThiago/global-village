@@ -336,7 +336,7 @@ footer.site a{text-decoration:none}
 "use strict";
 
 /* ============ DATA ============ */
-const CC_REG = {"BR": "latam", "VE": "latam", "AR": "latam", "NI": "latam", "MX": "latam", "SV": "latam", "CU": "latam", "CL": "latam", "US": "na", "CA": "na", "IT": "eu", "NO": "eu", "GB": "eu", "SE": "eu", "GR": "eu", "BE": "eu", "RU": "eu", "FI": "eu", "DE": "eu", "FR": "eu", "HU": "eu", "NL": "eu", "UA": "eu", "EUR": "eu", "RU-EX": "eu", "IL": "mena", "IR": "mena", "LB": "mena", "IN": "asia", "AU": "asia", "TW": "asia", "NG": "afr", "ZA": "afr", "GH": "afr", "SN": "afr"};
+const CC_REG = {"BR": "latam", "VE": "latam", "AR": "latam", "NI": "latam", "MX": "latam", "SV": "latam", "CU": "latam", "CL": "latam", "US": "na", "CA": "na", "IT": "eu", "NO": "eu", "GB": "eu", "SE": "eu", "GR": "eu", "BE": "eu", "RU": "eu", "FI": "eu", "DE": "eu", "FR": "eu", "ES": "eu", "HU": "eu", "NL": "eu", "UA": "eu", "EUR": "eu", "RU-EX": "eu", "IL": "mena", "IR": "mena", "LB": "mena", "IN": "asia", "AU": "asia", "TW": "asia", "NG": "afr", "ZA": "afr", "GH": "afr", "SN": "afr"};
 const regOf=cc=>CC_REG[cc]||"int";
 const REGIONS=["latam","na","eu","afr","mena","asia","int"];
 const AREAS = {
@@ -470,6 +470,9 @@ const PEOPLE = [
  ["erica-frantz","Erica Frantz","think","Autoritarismo","US","Michigan State University","en",["dem"],{site:"https://polisci.msu.edu/people/directory/frantz-erica.html"}],
  ["peter-pomerantsev","Peter Pomerantsev","journo","Propaganda e desinformação","GB","SNF Agora · Johns Hopkins","en",["tec", "geo"],{site:"https://snfagora.jhu.edu/person/peter-pomerantsev/",rss:"https://feeds.megaphone.fm/autocracyinamerica"}],
  ["enrique-krauze","Enrique Krauze","think","História e democracia","MX","Letras Libres","es",["dem"],{site:"https://letraslibres.com",rss:"https://letraslibres.com/feed/"}],
+ ["daniel-gascon","Daniel Gascón","journo","Política","ES","Letras Libres · El País","es",["dem"],{site:"https://letraslibres.com/author/daniel-gascn/",rss:"https://letraslibres.com/author/daniel-gascn/feed/"}],
+ ["manuel-arias-maldonado","Manuel Arias Maldonado","think","Ciência política","ES","Universidad de Málaga · Letras Libres","es",["dem"],{site:"https://letraslibres.com/author/manuel-arias-maldonado/",rss:"https://letraslibres.com/author/manuel-arias-maldonado/feed/"}],
+ ["ricardo-dudda","Ricardo Dudda","journo","Política","ES","Letras Libres · El País","es",["dem"],{site:"https://letraslibres.com/author/ricardo-dudda/",rss:"https://letraslibres.com/author/ricardo-dudda/feed/"}],
  ["sarah-longwell","Sarah Longwell","journo","Política americana","US","The Bulwark","en",["dem"],{newsletter:"https://www.thebulwark.com"}],
  ["sebastian-mazzuca","Sebastián Mazzuca","think","Ciência política","AR","Johns Hopkins University","es",["dem", "geo"],{site:"https://politicalscience.jhu.edu/directory/sebastian-mazzuca"}],
  ["yuval-noah-harari","Yuval Noah Harari","think","História e tecnologia","IL","","en",["tec", "dem"],{site:"https://www.ynharari.com",rss:"https://www.ynharari.com/feed/"}]
@@ -642,6 +645,8 @@ const ORGS = [
  ["Journal of Democracy","pub","US","https://www.journalofdemocracy.org","Academic quarterly on democracy, published with the National Endowment for Democracy.","Revista acadêmica trimestral sobre democracia, publicada com o National Endowment for Democracy.",["dem"],"","","https://www.journalofdemocracy.org/feed"],
  ["Americas Quarterly","pub","US","https://www.americasquarterly.org","Magazine on politics, business and culture in the Americas.","Revista sobre política, economia e cultura nas Américas.",["geo","eco"],"","","https://news.google.com/rss/search?q=site%3Aamericasquarterly.org&hl=en-US&gl=US&ceid=US:en"],
  ["Letras Libres","pub","MX","https://letraslibres.com","Cultural and political magazine published in Mexico and Spain, founded by Enrique Krauze.","Revista de cultura e política publicada no México e na Espanha, fundada por Enrique Krauze.",["dem"],"","","https://letraslibres.com/feed/"],
+ ["Fundación Hay Derecho","tank","ES","https://www.hayderecho.com","Spanish foundation on the rule of law and the quality of institutions, whichever party governs.","Fundação espanhola dedicada ao Estado de direito e à qualidade das instituições, seja qual for o partido no governo.",["dem"],"","","https://www.hayderecho.com/feed/"],
+ ["Real Instituto Elcano","tank","ES","https://www.realinstitutoelcano.org","Spain’s leading think tank on foreign policy and international relations, publisher of the Elcano Global Presence Index.","Principal think tank espanhol de política externa e relações internacionais, que publica o Índice Elcano de Presença Global.",["geo"],"","","https://www.realinstitutoelcano.org/feed/"],
  ["Nexos","pub","MX","https://www.nexos.com.mx","Mexican magazine on politics, society and culture.","Revista mexicana de política, sociedade e cultura.",["dem"],"","","https://www.nexos.com.mx/feed/"],
  ["Meio","pub","BR","https://www.canalmeio.com.br","Newsletter and video outlet on politics and technology.","Newsletter e canal de vídeo sobre política e tecnologia.",["dem","tec"],"","","https://www.canalmeio.com.br/feed/"],
  ["Le Grand Continent","pub","FR","https://legrandcontinent.eu","European review of geopolitics and ideas.","Revista europeia de geopolítica e ideias.",["geo"],"","","https://legrandcontinent.eu/fr/feed/"],
