@@ -54,6 +54,26 @@ Antes de começar qualquer etapa, leia o `CLAUDE.md`. As regras de curadoria e d
 - Marque os candidatos fora do eixo Estados Unidos e Europa Ocidental. A edição precisa de pelo menos um, com prioridade para África, Ásia, Oriente Médio e América Latina fora do Brasil, e a pauta deve oferecer opções suficientes para isso.
 - Abra os textos de cada candidato (`curl` com user agent de navegador) antes de descrevê-lo. Se não der para ler, diga isso no próprio candidato.
 
+### Vozes do Brasil no radar
+
+Pedido de Thiago em 10/11/2026: sempre que houver assunto brasileiro no período, consulte estas vozes, mesmo que o assunto não tenha virado candidato por outras fontes.
+
+| Voz | Na base? | Onde ler |
+| --- | --- | --- |
+| William Waack e o painel do WW (CNN Brasil) | Waack sim; o programa não | Feed de Waack na base e [WW na CNN Brasil](https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%2Fpolitica%2Fww&hl=pt-BR&gl=BR&ceid=BR:pt-419) |
+| Lourival Sant'Anna | Não | [Estadão](https://news.google.com/rss/search?q=site%3Aestadao.com.br%20lourival-santanna&hl=pt-BR&gl=BR&ceid=BR:pt-419) e [CNN Brasil](https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%20lourival-sant-anna&hl=pt-BR&gl=BR&ceid=BR:pt-419) |
+| Caio Junqueira | Não | [Blog na CNN Brasil](https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%2Fblogs%2Fcaio-junqueira&hl=pt-BR&gl=BR&ceid=BR:pt-419) |
+| Demétrio Magnoli | Sim | Feed da base (Folha) |
+| Merval Pereira | Sim | Feed da base (podcast) |
+| Fernando Schüler | Sim | O feed da base é um podcast parado desde abril de 2026; as colunas estão no Estadão (conferir o feed sugerido em "Fora da pauta") |
+| Oliver Stuenkel | Sim | O blog da base está parado desde 2025; as colunas estão no Estadão |
+| Carlos Andreazza | No PR #30 | Feed do PR #30 (Estadão) |
+
+- Leia os feeds com `curl` (user agent de navegador) e filtre o período. Os de busca do Google Notícias misturam textos de outros autores do mesmo site: confira a assinatura antes de usar.
+- Quem está fora da base entra só na newsletter e no carrossel, nunca no feed do site, e vai listado em "Para revisar" até Thiago aprovar a entrada na planilha ou no portal.
+- O WW é um programa com vários comentaristas. Atribua cada leitura a quem falou, não ao programa.
+- A regra sobre Lula e o PT e o registro `br-lula-democracia-liberal` valem para todas essas vozes.
+
 ### Pautas em destaque
 
 Assuntos que Thiago pediu para acompanhar de perto num período. Enquanto valerem, têm seção própria no topo da pauta sempre que houver análise nova de fonte aprovada, mesmo que outro assunto tenha mais volume. Retire a pauta da lista quando o prazo passar.
@@ -80,8 +100,9 @@ Crie um documento no Claude Docs chamado `Global Village Pauta · <dia> de <mês
    - região, e a marca **fora do eixo** quando for o caso;
    - **Recomendo** quando for a sua sugestão, com meia frase do motivo. As tarefas ficam desmarcadas. Quem marca é Thiago.
    - o registro de contexto regional que o candidato toca, se houver, e o estado dele.
-5. **Também no período**: análises boas que não viraram candidato (fonte única, tema lateral), que podem entrar no feed do site.
-6. **Fora da pauta**: autores fora da base, leituras parciais, textos descartados e por quê.
+5. **No traço**, quando houver: um candidato de humor ligado aos assuntos do período (capa de revista satírica, charge, tweet ou post viral), como tarefa desmarcada, com o autor, o veículo, o link do post oficial e meia frase sobre o que a piada diz. Só entra o que conversa com os fatos e não humilha vítimas. Sites que bloqueiam leitura automática (o do Charlie Hebdo, por exemplo) ficam como pedido a Thiago, que pode mandar a imagem ou o link.
+6. **Também no período**: análises boas que não viraram candidato (fonte única, tema lateral), que podem entrar no feed do site.
+7. **Fora da pauta**: autores fora da base, leituras parciais, textos descartados e por quê.
 
 Recomende de 3 a 5 candidatos no total, com pelo menos um fora do eixo e, quando houver material, um por tema.
 
@@ -120,6 +141,7 @@ Crie um documento no Claude Docs chamado `Global Village Diário · <dia> de <m�
    - **Nota do editor**, logo depois da imagem e da linha de abertura, assinada por Thiago Padovan. Dois ou três parágrafos curtos, em primeira pessoa e num tom de conversa, como Thiago fala com quem o lê, sem formalidade de editorial. Ela diz por que esses assuntos importam hoje e o que os liga. Use a skill `thiago-framework` para a voz, sem citar os conceitos dele pelo nome. A nota é a voz do Global Village e segue a regra sobre Lula e o PT do `CLAUDE.md`.
    - Os assuntos em destaque, depois os demais fatos escolhidos. Cada fato tem um título curto, um parágrafo de no máximo 150 palavras e a lista de links no formato `[Título](url) · Autor, Fonte · dia mês · idioma`.
    - O parágrafo explica antes de resumir. O leitor pode não saber quem são as pessoas, o que são as organizações e os veículos, onde fica um lugar ou como funciona uma regra (por exemplo, quem é Lina Attalah, o que é o Mada Masr e por que ele importa, o que faz um grande júri, quantos assentos são precisos para governar em Israel). Dê esse contexto em poucas palavras, dentro das próprias frases, e depois diga o que aconteceu e o que as vozes disseram (quem concorda, quem diverge, quando houver). Contexto tirado de fora dos textos da base precisa de fonte, e o que não for confirmado vai em "Para revisar".
+   - **No traço**, quando Thiago marcar o candidato de humor: um título curto, um parágrafo que diga quem é o alvo, o que o desenho mostra e quem o fez, e o link do post oficial. A piada é atribuída ao veículo e não vira a posição do Global Village. No Substack, a charge entra incorporando o post oficial (X ou Instagram), não como cópia da imagem, porque tem direitos do autor. No documento do dia, uma imagem que Thiago mandou pode aparecer só para revisão, com aviso em "Para revisar". Nada do humor entra no feed do site.
    - **A leitura do dia**: um texto para ler com calma, com duas ou três frases.
    - Rodapé com uma frase de convite para assinar a seção do Global Village no Substack do Projeto Villa e a linha sobre a base inicial de leitores. O botão de assinatura Thiago insere no editor do Substack.
 3. **English edition**, espelhando a portuguesa.
@@ -138,8 +160,21 @@ A posição do Global Village fica na nota do editor do topo. Se um fato pedir e
 
 Quando houver mais de cinco fatos, a imagem do dia leva os destaques e os fatos que melhor representam o resto, porque o molde comporta cinco. Diga em "Para revisar" quais ficaram de fora da imagem.
 
+### Carrossel do Instagram
+
+Cada edição tem também um carrossel para o Instagram, em português, que se lê sozinho e não leva ao Substack para entender os fatos. O formato foi aprovado por Thiago em 10/11/2026 (o primeiro está em `brand/instagram/2026-11-10-pt/`).
+
+- Slides de 1080 × 1350 (retrato 4:5), até 11 no total. Slide 1 é a capa (azul-noite, título do dia, data por extenso, uma linha sobre o dia e "Arraste para o lado"). Depois vem um slide por fato, numerado, com a região ou "Em destaque · <país>", um título curto, um texto de 50 a 60 palavras e, no rodapé, os veículos citados. Se houver humor escolhido, ele ganha um slide "No traço". O último slide convida a assinar a seção no Substack do Projeto Villa, com "link na bio" e o endereço escrito.
+- Com mais de oito fatos, junte os assuntos do mesmo país num slide só e deixe de fora os que só têm notas de agência. Diga em "Para revisar" o que foi juntado ou cortado.
+- O texto de cada slide segue as mesmas regras da newsletter: contexto antes do resumo, avaliação atribuída ao autor e a regra sobre Lula e o PT. Quem está fora da base pode aparecer, como na newsletter.
+- Charge ou capa de terceiros não entra como imagem no slide. O slide descreve o desenho com palavras e manda ao perfil do veículo.
+- Escreva os textos em `brand/instagram/<AAAA-MM-DD>-pt.json`, no formato do primeiro, e gere os slides com `python3 -I tools/carrossel.py brand/instagram/<AAAA-MM-DD>-pt.json brand/instagram/<AAAA-MM-DD>-pt/`. O molde é `brand/instagram/src/carrossel.html`.
+- Abra os slides e confira que nenhum texto ficou cortado ou passou do rodapé. Se passou, encurte.
+- Escreva a legenda em `brand/instagram/<AAAA-MM-DD>-pt-legenda.txt`: um parágrafo com os fatos, a lista de fontes, o convite com "link na bio" e até seis hashtags. O Instagram não aceita link na legenda.
+- Inclua o JSON, os slides e a legenda no commit do PR do feed e envie os slides a Thiago. Ele publica no Instagram.
+
 Textos em português seguem as regras do `CLAUDE.md`: sem travessões, sem dois-pontos como recurso de estilo, sem frases fragmentadas, tríades anafóricas, paralelismos negativos e transições polidas.
 
 ## 8. Relato da etapa 2
 
-Termine com um resumo curto para Thiago: os fatos da edição, o título da imagem do dia, os casos de contexto regional, o link do PR e o link do documento.
+Termine com um resumo curto para Thiago: os fatos da edição, o título da imagem do dia, o humor do dia (se houver), os casos de contexto regional, o link do PR, o link do documento e os slides do carrossel.
