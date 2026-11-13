@@ -1,0 +1,107 @@
+{
+ "data": "13 nov 2026",
+ "slides": [
+  {
+   "tipo": "capa",
+   "data": "13 de novembro de 2026",
+   "titulo": "Quando a guarda baixa",
+   "texto": "Onze fatos de ontem pela lente da democracia liberal, com a China em destaque e o que as vozes que acompanhamos disseram.",
+   "fontes": "Arraste para o lado"
+  },
+  {
+   "tipo": "fato",
+   "n": "01",
+   "kicker": "Em destaque · China e Taiwan",
+   "titulo": "Xi promete a “reunificação”",
+   "texto": "A China trata Taiwan, governada democraticamente, como parte do seu território. Xi Jinping disse que a reunificação “certamente será realizada” e repetiu o “um país, dois sistemas”, que Taiwan rejeita. No mesmo dia, 29 aviões militares chineses rondaram a ilha. Em maio, Trump suspendeu uma venda de armas a Taiwan e a chamou de moeda de troca.",
+   "fontes": "AFP e Reuters, via Al Jazeera"
+  },
+  {
+   "tipo": "fato",
+   "n": "02",
+   "kicker": "Em destaque · China",
+   "titulo": "A polícia chinesa fora da China",
+   "texto": "Um relatório da Safeguard Defenders aponta cerca de 1.250 associações chinesas em 91 países que serviriam de fachada para postos de polícia e vigiariam a diáspora. O Kyiv Independent conta a história de Luo Haizhou, que recruta chineses para lutar pela Ucrânia enquanto a segurança do Estado pressiona a família dele em Shenzhen.",
+   "fontes": "CP24 · Kyiv Independent"
+  },
+  {
+   "tipo": "fato",
+   "n": "03",
+   "kicker": "Em destaque · China e EUA",
+   "titulo": "Huang deixa a Nvidia",
+   "texto": "O presidente da Nvidia, dona dos chips que movem a IA, renunciou depois de um caso com uma executiva que a inteligência americana liga ao serviço secreto chinês. Para Brian O'Neill, o escândalo maior é que Trump foi avisado meses antes e não alertou Huang. Jonathan V. Last diz que Trump deu à agente o que ela queria.",
+   "fontes": "The Contrarian · The Bulwark · The Dispatch"
+  },
+  {
+   "tipo": "fato",
+   "n": "04",
+   "kicker": "Ucrânia e Rússia",
+   "titulo": "De Putin a Zelensky",
+   "texto": "Os enviados de Trump encontraram Putin no Kremlin e, horas depois, Zelensky perto de Dublin. Zelensky disse que a Europa estará na próxima rodada e que vem aí a maior troca de prisioneiros da guerra. Para Oleksiy Sorokin, os europeus querem lugar na mesa, mas ainda não decidiram quem fala por eles.",
+   "fontes": "Kyiv Independent · Le Grand Continent"
+  },
+  {
+   "tipo": "fato",
+   "n": "05",
+   "kicker": "ONU e Irã",
+   "titulo": "Uma cadeira para o Irã",
+   "texto": "A Assembleia Geral da ONU elegeu o Irã, com 144 votos, para o comitê que ajuda a definir as prioridades da organização em direitos humanos e direitos das mulheres. O voto é secreto, e só o Canadá disse ter votado contra. É o regime que matou milhares de manifestantes no inverno passado.",
+   "fontes": "ONU · UN Watch · Freedom House · CPJ"
+  },
+  {
+   "tipo": "fato",
+   "n": "06",
+   "kicker": "Estados Unidos",
+   "titulo": "A democracia americana sob medida",
+   "texto": "A Freedom House, que avalia mais de 200 países desde 1973, passou a medir os EUA a cada trimestre com o mesmo método. A primeira edição vê preocupação séria na responsabilização do governo e na liberdade de imprensa. Para Jamie Fly, o comparecimento recorde não basta, porque a democracia se mede pelas liberdades na prática.",
+   "fontes": "Freedom House"
+  },
+  {
+   "tipo": "fato",
+   "n": "07",
+   "kicker": "Estados Unidos",
+   "titulo": "Mississippi faz história",
+   "texto": "O democrata Scott Colom é o primeiro senador negro do Mississippi desde 1875, no estado onde Emmett Till e Medgar Evers foram assassinados. Jennifer Rubin destaca que a republicana derrotada reconheceu o resultado, um gesto decente num partido marcado pela negação de eleições.",
+   "fontes": "GZERO · The Contrarian"
+  },
+  {
+   "tipo": "fato",
+   "n": "08",
+   "kicker": "Clima",
+   "titulo": "COP31 com prioridades em choque",
+   "texto": "Na conferência do clima em Antália, na Turquia, as pequenas ilhas pediram cortes urgentes, os europeus defenderam a eletrificação, os países em desenvolvimento cobraram dinheiro e os produtores de petróleo defenderam seguir explorando. O financiamento triplicado para adaptação ficou fora da agenda principal, um revés para a África.",
+   "fontes": "Daily Maverick · Le Grand Continent"
+  },
+  {
+   "tipo": "fato",
+   "n": "09",
+   "kicker": "Espanha",
+   "titulo": "Contrapesos para qualquer governo",
+   "texto": "A Espanha vota em 29 de novembro, depois de uma greve geral pela moradia. Germán Teruel, da Fundación Hay Derecho, propõe que, seja quem for o vencedor, o Tribunal Constitucional, o Banco de España e a TV pública deixem de ser loteados entre partidos, com concurso e avaliação técnica antes de cada indicação.",
+   "fontes": "Fundación Hay Derecho"
+  },
+  {
+   "tipo": "fato",
+   "n": "10",
+   "kicker": "Brasil",
+   "titulo": "Lula com o presidente do Irã",
+   "texto": "Na COP31, Lula se reuniu com Masoud Pezeshkian e falou em ampliar o comércio com o Irã e importar mais fertilizantes iranianos. Foi um dia depois de o Irã ganhar a cadeira na ONU. Nenhuma das vozes brasileiras que acompanhamos comentou o encontro.",
+   "fontes": "Gazeta do Povo · Band · Diplomatizzando"
+  },
+  {
+   "tipo": "fato",
+   "n": "11",
+   "kicker": "Brasil",
+   "titulo": "A crise na Polícia Federal",
+   "texto": "A PF afastou os dois delegados que conduziam o inquérito do Banco Master numa “reforma administrativa” vista como forma de tirá-los do caso, e o diretor-geral Andrei Rodrigues balança no cargo. O que está em jogo é a autonomia da polícia judiciária diante do governo numa investigação de corrupção.",
+   "fontes": "Meio · Revista ID · O Globo"
+  },
+  {
+   "tipo": "final",
+   "titulo": "Os fatos do dia, de segunda a sexta",
+   "texto": "Assine a seção Global Village no Substack do Projeto Villa. O link está na bio.",
+   "url": "projetovilla.substack.com",
+   "fontes": "Global Village"
+  }
+ ]
+}
