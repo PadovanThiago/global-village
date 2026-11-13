@@ -397,7 +397,7 @@ const PEOPLE = [
  ["antonio-riserio","Antônio Risério","think","Cultura e sociedade","BR","","pt",["dem"],{rss:"https://antonioriserio.substack.com/feed"}],
  ["luiz-felipe-ponde","Luiz Felipe Pondé","think","Filosofia","BR","","pt",["dem"],{rss:"https://feeds.folha.uol.com.br/colunas/luizfelipeponde/rss091.xml"}],
  ["paulo-roberto-de-almeida","Paulo Roberto de Almeida","think","Relações internacionais","BR","","pt",["geo"],{rss:"https://diplomatizzando.blogspot.com/feeds/posts/default"}],
- ["oliver-stuenkel","Oliver Stuenkel","think","Geopolítica","BR","FGV","pt",["geo", "dem"],{site:"https://oliverstuenkel.com/",rss:"https://oliverstuenkel.com/feed/"}],
+ ["oliver-stuenkel","Oliver Stuenkel","think","Geopolítica","BR","FGV","pt",["geo", "dem"],{site:"https://oliverstuenkel.com/",newsletter:"https://oliverstuenkel.substack.com",rss:"https://oliverstuenkel.substack.com/feed"}],
  ["guilherme-casaroes","Guilherme Casarões","think","Relações internacionais","BR","FGV","pt",["geo"],{}],
  ["fernando-schuler","Fernando Schüler","think","Ciência política","BR","Insper","pt",["dem"],{rss:"https://www.spreaker.com/show/4847781/episodes/feed"}],
  ["elena-landau","Elena Landau","econ","Economia","BR","","pt",["eco"],{rss:"https://news.google.com/rss/search?q=site%3Aestadao.com.br/economia/elena-landau&hl=pt-BR&gl=BR&ceid=BR:pt-419"}],
@@ -475,7 +475,9 @@ const PEOPLE = [
  ["ricardo-dudda","Ricardo Dudda","journo","Política","ES","Letras Libres · El País","es",["dem"],{site:"https://letraslibres.com/author/ricardo-dudda/",rss:"https://letraslibres.com/author/ricardo-dudda/feed/"}],
  ["sarah-longwell","Sarah Longwell","journo","Política americana","US","The Bulwark","en",["dem"],{newsletter:"https://www.thebulwark.com"}],
  ["sebastian-mazzuca","Sebastián Mazzuca","think","Ciência política","AR","Johns Hopkins University","es",["dem", "geo"],{site:"https://politicalscience.jhu.edu/directory/sebastian-mazzuca"}],
- ["yuval-noah-harari","Yuval Noah Harari","think","História e tecnologia","IL","","en",["tec", "dem"],{site:"https://www.ynharari.com",rss:"https://www.ynharari.com/feed/"}]
+ ["yuval-noah-harari","Yuval Noah Harari","think","História e tecnologia","IL","","en",["tec", "dem"],{site:"https://www.ynharari.com",rss:"https://www.ynharari.com/feed/"}],
+ ["lourival-santanna","Lourival Sant'Anna","journo","Relações internacionais","BR","CNN Brasil e Estadão","pt",["geo", "dem"],{site:"https://www.estadao.com.br/autores/lourival-santanna/",rss:"https://news.google.com/rss/search?q=site%3Aestadao.com.br%20lourival-santanna&hl=pt-BR&gl=BR&ceid=BR:pt-419"}],
+ ["caio-junqueira","Caio Junqueira","journo","Política","BR","CNN Brasil","pt",["dem"],{site:"https://www.cnnbrasil.com.br/blogs/caio-junqueira/",rss:"https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%2Fblogs%2Fcaio-junqueira&hl=pt-BR&gl=BR&ceid=BR:pt-419"}]
 ].map(r=>({id:r[0],name:r[1],cat:r[2],area:r[3],cc:r[4],region:regOf(r[4]),org:r[5],lang:r[6],themes:r[7],ch:r[8]}));
 
 const ITEMS = [
@@ -662,7 +664,8 @@ const ORGS = [
  ["Renew Democracy Initiative", "net", "US", "https://rdi.org", "Organisation chaired by Garry Kasparov that defends liberal democracy and supports Ukraine. It publishes The Next Move.", "Organização presidida por Garry Kasparov que defende a democracia liberal e apoia a Ucrânia. Publica The Next Move.", ["dem", "geo"], "", "", ""],
  ["The Contrarian", "pub", "US", "https://www.contrariannews.org", "Pro-democracy publication on American politics, founded by Jennifer Rubin and Norm Eisen.", "Publicação pró-democracia sobre política americana, fundada por Jennifer Rubin e Norm Eisen.", ["dem"], "", "", "https://www.contrariannews.org/feed"],
  ["The Social Contract with Joe Walsh", "pub", "US", "https://socialcontractwithjoewalsh.substack.com", "Joe Walsh’s newsletter and podcast on American politics and democracy.", "Newsletter e podcast de Joe Walsh sobre política americana e democracia.", ["dem"], "", "", ""],
- ["World Liberty Congress", "net", "INT", "https://worldlibertycongress.org", "Global network of dissidents from authoritarian countries, from Venezuela and Cuba to Russia and Iran.", "Rede global de dissidentes de países autoritários, da Venezuela e de Cuba à Rússia e ao Irã.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Aworldlibertycongress.org&hl=en-US&gl=US&ceid=US:en"]
+ ["World Liberty Congress", "net", "INT", "https://worldlibertycongress.org", "Global network of dissidents from authoritarian countries, from Venezuela and Cuba to Russia and Iran.", "Rede global de dissidentes de países autoritários, da Venezuela e de Cuba à Rússia e ao Irã.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Aworldlibertycongress.org&hl=en-US&gl=US&ceid=US:en"],
+ ["WW (CNN Brasil)", "media", "BR", "https://www.cnnbrasil.com.br/programas/ww/", "CNN Brasil’s nightly analysis show hosted by William Waack, with a panel of commentators on politics, the economy and world affairs.", "Programa de análise da CNN Brasil apresentado por William Waack, com um painel de comentaristas sobre política, economia e mundo.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Acnnbrasil.com.br%2Fpolitica%2Fww&hl=pt-BR&gl=BR&ceid=BR:pt-419"]
 ].map(r=>({name:r[0],type:r[1],cc:r[2],region:regOf(r[2]),url:r[3],desc:r[4],desc_pt:r[5],themes:r[6],id:r[7]||"",full:r[8]||r[0],rss:r[9]||""}));
 const PUBS=Object.fromEntries(ORGS.filter(o=>o.id).map(o=>[o.id,o]));
 
