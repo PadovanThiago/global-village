@@ -35,11 +35,12 @@
    "fontes": "Le Grand Continent · GZERO"
   },
   {
-   "tipo": "fato",
+   "tipo": "fato-mapa",
    "kicker": "Quem é",
    "titulo": "O mapa de Dugin",
-   "texto": "Alexandr Dugin, ideólogo de uma Eurásia sob Moscou, postou na véspera um mapa do mundo repartido entre EUA, Rússia e China, com legenda em português. Para Florian Louis, é a ilusão de um império que não conquistou a Ucrânia em quatro anos.",
-   "fontes": "Le Grand Continent · post de @AGDugin no X"
+   "texto": "Alexandr Dugin, ideólogo de uma Eurásia sob Moscou, postou na véspera o mundo repartido entre os três, com legenda em português. Para Florian Louis, é a ilusão de um império que não conquistou a Ucrânia em quatro anos.",
+   "fontes": "Post de @AGDugin no X · Le Grand Continent",
+   "nota": "Slide montado à parte, com o mapa postado por Alexandr Dugin no X em 16/11/2026, a pedido de Thiago."
   },
   {
    "tipo": "fato",
