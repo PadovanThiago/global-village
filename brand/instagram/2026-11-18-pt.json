@@ -2,13 +2,12 @@
  "data": "18 nov 2026",
  "slides": [
   {
-   "tipo": "capa",
-   "data": "18 de novembro de 2026",
+   "tipo": "capa-charge",
+   "nota": "Slide montado à parte, com a imagem da charge Trilateral Cooperation, de Nick Anderson (The Contrarian, 17/11/2026), a pedido de Thiago.",
    "kicker": "No traço · Nick Anderson",
-   "titulo": "Jump! Jump! Jump!",
-   "texto": "Na charge de Nick Anderson, Xi e Putin batem corda e Trump pula no meio. Amanhã, os três se encontram de verdade em Shenzhen.",
-   "fontes": "Charge no perfil de Nick Anderson · Arraste",
-   "balao": "Quem bate a corda em Shenzhen?"
+   "titulo": "Quem bate a corda em Shenzhen?",
+   "texto": "Charge de Nick Anderson, vencedor do Pulitzer, para a The Contrarian. Ele está no Substack em nickanderson.substack.com.",
+   "fontes": "Arraste para o lado"
   },
   {
    "tipo": "fato",
