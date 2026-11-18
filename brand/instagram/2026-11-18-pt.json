@@ -1,0 +1,85 @@
+{
+ "data": "18 nov 2026",
+ "slides": [
+  {
+   "tipo": "capa-charge",
+   "nota": "Slide montado à parte, com a imagem da charge Trilateral Cooperation, de Nick Anderson (The Contrarian, 17/11/2026), a pedido de Thiago.",
+   "kicker": "No traço · Nick Anderson",
+   "titulo": "Quem bate a corda em Shenzhen?",
+   "texto": "Charge de Nick Anderson, vencedor do Pulitzer, para a The Contrarian. Ele está no Substack em nickanderson.substack.com.",
+   "fontes": "Arraste para o lado"
+  },
+  {
+   "tipo": "fato",
+   "n": "01",
+   "kicker": "Em destaque · EUA, China e Rússia",
+   "titulo": "Fracos atrás do poder",
+   "texto": "Amanhã, em Shenzhen, Trump, Xi e Putin fazem o primeiro encontro a três da história, sem a Ucrânia na pauta. Putin chega dois dias depois de ver cair um pedaço da ponte da Crimeia, e Trump, derrotado nas eleições de meio de mandato. A foto vai parecer de gigantes.",
+   "fontes": "Le Grand Continent · The Bulwark"
+  },
+  {
+   "tipo": "fato",
+   "kicker": "O que dizem as vozes",
+   "titulo": "Vitória ou encenação?",
+   "texto": "Duas leituras do mesmo encontro.",
+   "pecas": [
+    [
+     "Le Grand Continent",
+     "“Imensa vitória” de Putin"
+    ],
+    [
+     "Ian Bremmer",
+     "“Muito menos do que parece”"
+    ]
+   ],
+   "fontes": "Le Grand Continent · GZERO"
+  },
+  {
+   "tipo": "fato-mapa",
+   "kicker": "Quem é",
+   "titulo": "O mapa de Dugin",
+   "texto": "Alexandr Dugin, ideólogo de uma Eurásia sob Moscou, postou na véspera o mundo repartido entre os três, com legenda em português. Para Florian Louis, é a ilusão de um império que não conquistou a Ucrânia em quatro anos.",
+   "fontes": "Post de @AGDugin no X · Le Grand Continent",
+   "nota": "Slide montado à parte, com o mapa postado por Alexandr Dugin no X em 16/11/2026, a pedido de Thiago."
+  },
+  {
+   "tipo": "fato",
+   "n": "02",
+   "kicker": "México",
+   "titulo": "Quem vai apitar a próxima eleição?",
+   "texto": "A presidente do INE, que organiza as eleições mexicanas, saiu em meio a denúncias de corrupção, e o Morena vai escolher quem a substitui. Para Enrique Krauze, o árbitro foi capturado, e só a protesta cívica pacífica pode reconstruí-lo.",
+   "fontes": "Letras Libres"
+  },
+  {
+   "tipo": "fato",
+   "n": "03",
+   "kicker": "Alemanha",
+   "titulo": "A AfD vai moderar ou radicalizar?",
+   "texto": "A extrema direita lidera as pesquisas, e o cordão que a isolava cedeu na Saxônia-Anhalt. Para Michael Bröning, a AfD amacia o discurso sobre a UE, mas segue contra a ajuda à Ucrânia. No poder, pode lembrar Orbán.",
+   "fontes": "Journal of Democracy"
+  },
+  {
+   "tipo": "fato",
+   "n": "04",
+   "kicker": "Europa",
+   "titulo": "Quem manda 8 mil ameaças de bomba?",
+   "texto": "Em um mês, escolas, aeroportos e redações europeias receberam mais de 8 mil falsos alertas. O ISW vê métodos russos, e o general Mark Hertling lê a onda como guerra híbrida. Na terça, sete drones russos entraram na Moldávia.",
+   "fontes": "The Bulwark · The Insider · Kyiv Independent"
+  },
+  {
+   "tipo": "fato",
+   "n": "05",
+   "kicker": "Estados Unidos",
+   "titulo": "Coincidência ou sintoma?",
+   "texto": "Em cinco dias, a FAA parou todos os voos, o Microsoft 365 caiu em 70 países, bancos saíram do ar e a falha chegou à NSA. Nada foi atribuído a ataque. Trump culpou “equipamento velho quebrado”.",
+   "fontes": "Le Grand Continent · The Bulwark · Reuters"
+  },
+  {
+   "tipo": "final",
+   "titulo": "Quem sai maior de Shenzhen?",
+   "texto": "Conte nos comentários. Os fatos do dia, de segunda a sexta, na seção Global Village do Substack do Projeto Villa. O link está na bio.",
+   "url": "projetovilla.substack.com",
+   "fontes": "Global Village"
+  }
+ ]
+}
