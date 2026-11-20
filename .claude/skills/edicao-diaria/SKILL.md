@@ -66,6 +66,10 @@ Assuntos que Thiago pediu para tratar sempre que houver notícia relevante, sem 
 
 - **China e Rússia na África** (pedido de 12/11/2026). Ações de Pequim e de Moscou no continente, como empréstimos e infraestrutura, mineração e acordos de recursos, presença militar e mercenária (o antigo Grupo Wagner, hoje Africa Corps), apoio a juntas e governos autoritários, campanhas de desinformação e votos na ONU. Fontes da base que costumam tratar disso: ISS Africa, Daily Maverick, WATHI, The Insider, OCCRP, Carnegie e Afrobarometer. Quando o fato for escolhido, explique quem governa o país africano e o que o acordo ou a presença estrangeira muda para as instituições e as liberdades de lá.
 
+### Descoberta de fontes
+
+Depois da leitura dos feeds e dos candidatos acima, rode a skill `descoberta-de-fontes`. Ela faz a busca aberta por tema e por região, procura o contraponto dos assuntos que dominaram e devolve a seção "Descobertas fora da base". Os achados não sustentam candidato sozinhos e não vão ao feed do site.
+
 ## 3. Documento da pauta
 
 Crie um documento no Claude Docs chamado `Global Village Pauta · <dia> de <mês>`, curto e fácil de decidir:
@@ -81,7 +85,8 @@ Crie um documento no Claude Docs chamado `Global Village Pauta · <dia> de <mês
    - **Recomendo** quando for a sua sugestão, com meia frase do motivo. As tarefas ficam desmarcadas. Quem marca é Thiago.
    - o registro de contexto regional que o candidato toca, se houver, e o estado dele.
 5. **Também no período**: análises boas que não viraram candidato (fonte única, tema lateral), que podem entrar no feed do site.
-6. **Fora da pauta**: autores fora da base, leituras parciais, textos descartados e por quê.
+6. **Descobertas fora da base**, no formato da skill `descoberta-de-fontes`: quadro de diversidade, até oito achados marcáveis, pontos cegos da base e limites da busca.
+7. **Fora da pauta**: autores fora da base, leituras parciais, textos descartados e por quê.
 
 Recomende de 3 a 5 candidatos no total, com pelo menos um fora do eixo e, quando houver material, um por tema.
 
