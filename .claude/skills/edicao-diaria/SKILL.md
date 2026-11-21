@@ -49,7 +49,8 @@ Antes de começar qualquer etapa, leia o `CLAUDE.md`. As regras de curadoria e d
 
 - Um candidato é um acontecimento ou debate que pelo menos duas fontes aprovadas trataram no período, ou uma denúncia relevante de uma organização aprovada (OCCRP, CPJ, Article 19, Freedom House e afins).
 - Só contam textos de pessoas e organizações aprovadas na base. Autor fora da base (mesmo publicado por uma organização aprovada ou no canal de uma pessoa aprovada) não sustenta candidato e vai citado no fim da pauta.
-- Agrupe as novidades por assunto e conte quantas fontes aprovadas trataram cada um. Os assuntos que dominaram o período abrem a pauta.
+- Agrupe as novidades por assunto e conte quantas fontes aprovadas trataram cada um. Os assuntos que dominaram o período abrem a pauta, a não ser que a skill `descoberta-de-fontes` os marque como repetição (já dados e sem fato novo). Nesse caso eles descem para "Também no período".
+- Para cada fato, prefira as vozes do país onde ele aconteceu. A análise estrangeira complementa, mas não abre o candidato quando houver voz local aprovada.
 - Distribua os candidatos pelos quatro temas do site, como aparecem nas páginas de tema: Democracia e instituições (`dem`), Geopolítica (`geo`), Economia (`eco`) e Tecnologia e liberdades (`tec`). Traga de dois a quatro candidatos por tema, os mais interessantes do período. Tema sem material bom aparece na pauta com uma linha dizendo por quê.
 - Marque os candidatos fora do eixo Estados Unidos e Europa Ocidental. A edição precisa de pelo menos um, com prioridade para África, Ásia, Oriente Médio e América Latina fora do Brasil, e a pauta deve oferecer opções suficientes para isso.
 - Abra os textos de cada candidato (`curl` com user agent de navegador) antes de descrevê-lo. Se não der para ler, diga isso no próprio candidato.
@@ -68,7 +69,7 @@ Assuntos que Thiago pediu para tratar sempre que houver notícia relevante, sem 
 
 ### Descoberta de fontes
 
-Depois da leitura dos feeds e dos candidatos acima, rode a skill `descoberta-de-fontes`. Ela faz a busca aberta por tema e por região, procura o contraponto dos assuntos que dominaram e devolve a seção "Descobertas fora da base". Os achados não sustentam candidato sozinhos e não vão ao feed do site.
+Depois da leitura dos feeds, rode a skill `descoberta-de-fontes`. Ela monta o radar do mundo no período, compara os assuntos com as pautas anteriores (novo, desdobramento ou repetição), busca primeiro as vozes locais de cada fato e devolve a seção "Descobertas fora da base". Os achados de fora da base não sustentam candidato sozinhos e não vão ao feed do site.
 
 ## 3. Documento da pauta
 
@@ -82,6 +83,8 @@ Crie um documento no Claude Docs chamado `Global Village Pauta · <dia> de <mês
    - duas a quatro frases que expliquem o contexto (quem são as pessoas e as organizações, por que o assunto importa), o que aconteceu e o que as vozes disseram, atribuindo cada leitura ao autor;
    - as fontes, no formato `[Título](url) · Autor, Fonte · idioma`;
    - região, e a marca **fora do eixo** quando for o caso;
+   - a marca **Novo** ou **Desdobramento**, e neste caso o que mudou desde a edição anterior, com o link dela;
+   - cada voz marcada como **local** ou **de fora** do país do fato;
    - **Recomendo** quando for a sua sugestão, com meia frase do motivo. As tarefas ficam desmarcadas. Quem marca é Thiago.
    - o registro de contexto regional que o candidato toca, se houver, e o estado dele.
 5. **Também no período**: análises boas que não viraram candidato (fonte única, tema lateral), que podem entrar no feed do site.
@@ -146,5 +149,7 @@ Quando houver mais de cinco fatos, a imagem do dia leva os destaques e os fatos 
 Textos em português seguem as regras do `CLAUDE.md`: sem travessões, sem dois-pontos como recurso de estilo, sem frases fragmentadas, tríades anafóricas, paralelismos negativos e transições polidas.
 
 ## 8. Relato da etapa 2
+
+Antes do relato, acrescente no topo de `conhecimento/pautas-recentes.md` a edição do dia, no formato do arquivo, e inclua o arquivo no commit do PR do feed.
 
 Termine com um resumo curto para Thiago: os fatos da edição, o título da imagem do dia, os casos de contexto regional, o link do PR e o link do documento.
