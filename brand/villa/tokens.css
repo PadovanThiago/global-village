@@ -1,0 +1,175 @@
+/* Villa — generated from tokens.json */
+:root, [data-theme="papel"] {
+  --papel: #f3ebdd; /* Fundo de página, de cartas e de peças impressas. Superfície padrão de todo o sistema. */
+  --papel-2: #e8dcc6; /* Superfície elevada: blocos de citação, cartões de destaque, rodapés. Texto `tinta` e `tinta-suave` leem nela. */
+  --tinta: #1e1a16; /* Texto principal, wordmark e naipes pretos (Fechaduras, Estrelas) sobre `papel` e `papel-2` (14,6:1 e 12,8:1). Também texto sobre `ocre-airbel` (6,2:1). */
+  --tinta-suave: #5e5547; /* Subtítulos, epítetos, legendas e metadados sobre `papel` e `papel-2` (mín. 5,4:1 em ambos os temas). */
+  --linha: #cdbfa6; /* Fios decorativos e molduras finas de carta. Nunca carrega significado sozinho; não use para texto. */
+  --ocre-airbel: #c19440; /* Cor-assinatura, só como preenchimento: discos de naipe, blocos de capa, fios do verso da carta. Texto sobre ela sempre em `tinta` claro-tema (#1e1a16). Nunca como cor de texto sobre `papel` (2,3:1). */
+  --ocre-texto: #7a5718; /* Quando o ocre precisa virar texto (rótulos, números de carta em linha): sobre `papel` e `papel-2` (mín. 4,8:1). */
+  --verde-veneziana: #415e3a; /* Cor secundária: links, botões, verso do baralho, avatar. Como texto sobre `papel` (6,1:1 claro, 7,1:1 escuro). Como fundo, o texto vai em `sobre-verde`. */
+  --sobre-verde: #f3ebdd; /* Texto e monograma sobre `verde-veneziana` (6,1:1 em ambos os temas). */
+  --vermelho-naipe: #a33a2a; /* Naipes vermelhos (Rodas, Chamas) e seus índices nas cartas; sobre `papel` 5,6:1 (claro) e 6,2:1 (escuro). Não use para erro ou alerta. */
+  --violeta-carimbo: #55478a; /* Tinta de carimbo: datas, numeração de edição, a cifra de carta dos posts e as microlegendas escondidas. Sobre `papel` 6,7:1 (claro), 7,4:1 (escuro). Uso raro, sempre em `carimbo`. */
+  --foco: var(--verde-veneziana); /* Anel de foco de teclado, contínuo, 2px, com 2px de afastamento; 6:1 ou mais sobre `papel` e `papel-2` nos dois temas. */
+}
+[data-theme="noite"] {
+  --papel: #1e1a16;
+  --papel-2: #2a251f;
+  --tinta: #f3ebdd;
+  --tinta-suave: #b9ae9c;
+  --linha: #4a4236;
+  --ocre-airbel: #c19440;
+  --ocre-texto: #d9b06a;
+  --verde-veneziana: #8db07f;
+  --sobre-verde: #1e1a16;
+  --vermelho-naipe: #e0806a;
+  --violeta-carimbo: #ada0e6;
+  --foco: var(--verde-veneziana);
+}
+:root {
+  --espaco-1: 4px; /* Afastamento de ícone e texto em rótulos. */
+  --espaco-2: 8px; /* Entre rótulo e título; gap interno de carimbo. */
+  --espaco-3: 12px; /* Padding de botão vertical. */
+  --espaco-4: 16px; /* Padding padrão de cartões. */
+  --espaco-5: 24px; /* Entre parágrafos e blocos; padding de botão horizontal. */
+  --espaco-6: 32px; /* Margem interna de peças sociais. */
+  --espaco-7: 48px; /* Entre seções de artigo. */
+  --espaco-8: 72px; /* Respiro de capa e topo de página. */
+  --raio-0: 0px; /* Padrão do sistema: botões, cartões, imagens, avatar. O Villa é de cantos retos. */
+  --raio-carta: 11px; /* Somente o corte das cartas do baralho físico. */
+  --raio-carimbo: 50%; /* Somente o carimbo redondo e o disco de naipe. */
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Courier Prime", "Courier New", monospace;
+  --text-titulo-1: 500 56px/60px var(--font-serif); /* Título de artigo e de capa. Um por página. */
+  --text-titulo-2: 500 36px/42px var(--font-serif); /* Intertítulos de artigo, título de slide. */
+  --text-titulo-3: 600 26px/32px var(--font-serif); /* Subseções, títulos de cartão. */
+  --text-corpo: 400 19px/30px var(--font-serif); /* Corpo de artigo e newsletter. */
+  --text-corpo-pequeno: 400 16px/24px var(--font-serif); /* Notas, legendas longas, rodapé. */
+  --text-citacao: italic 400 24px/34px var(--font-serif); /* Citações em destaque e epítetos de carta. */
+  --text-rotulo: 700 13px/16px var(--font-sans); /* Rótulos em caixa-alta: naipe do artigo, seções, papéis das cartas. Sempre em maiúsculas. */
+  --text-ui: 500 15px/22px var(--font-sans); /* Botões, navegação, formulários. */
+  --text-indice: 700 28px/28px var(--font-sans); /* Índices de carta e numerais de destaque. */
+  --text-carimbo: 700 12px/16px var(--font-mono); /* Datas, numeração de edição, cifra de carta, microlegendas. Cor `violeta-carimbo`. */
+  --text-datilografado: 400 14px/20px var(--font-mono); /* Notas de bastidor, fichas, crachás, listas. */
+}
+.titulo-1 {
+  font-family: var(--font-serif);
+  font-size: 56px;
+  line-height: 60px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  font-variation-settings: 'opsz' 72;
+}
+.titulo-2 {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 500;
+  letter-spacing: 0;
+  font-variation-settings: 'opsz' 48;
+}
+.titulo-3 {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: 0;
+  font-variation-settings: 'opsz' 24;
+}
+.corpo {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  line-height: 30px;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-variation-settings: 'opsz' 16;
+}
+.corpo-pequeno {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-variation-settings: 'opsz' 12;
+}
+.citacao {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 34px;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-style: italic;
+  font-variation-settings: 'opsz' 24;
+}
+.rotulo {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+}
+.ui {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.indice {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+.carimbo {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+.datilografado {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../../fonts/Newsreader-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../../fonts/Newsreader-Italic-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Archivo";
+  src: url("../../fonts/Archivo-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Courier Prime";
+  src: url("../../fonts/CourierPrime-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Courier Prime";
+  src: url("../../fonts/CourierPrime-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
