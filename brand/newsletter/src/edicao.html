@@ -3,38 +3,52 @@
 <head>
 <meta charset="utf-8">
 <style>
-  /* Imagem de abertura de uma edição, 1200 × 600, na identidade do Villa. O conteúdo vem da URL:
-     edicao.html?data=27%20de%20outubro%20de%202026&titulo=...&fato=...&fato=...  (de 3 a 5 "fato")
-     A data sai em Courier Prime e violeta-carimbo, a única marca de carimbo da peça. */
+  /* Imagem de abertura de uma edição, 1200 × 600. Segue o CabecalhoArtigo do Villa: rótulo à esquerda, carimbo à direita, título, fio e os fatos.
+     O conteúdo vem da URL: edicao.html?data=27%20de%20outubro%20de%202026&titulo=...&fato=...  (de 3 a 5 "fato").
+     A data vira carimbo (27.X.2026) quando está em português ou inglês por extenso, ou no formato AAAA-MM-DD. */
   @font-face { font-family: "Newsreader"; src: url("../../../fonts/Newsreader-Variable.woff2") format("woff2"); font-weight: 200 800; }
   @font-face { font-family: "Archivo"; src: url("../../../fonts/Archivo-Variable.woff2") format("woff2"); font-weight: 100 900; }
   @font-face { font-family: "Courier Prime"; src: url("../../../fonts/CourierPrime-Bold.woff2") format("woff2"); font-weight: 700; }
   html, body { margin: 0; width: 1200px; height: 600px; background: #F3EBDD; color: #1E1A16; overflow: hidden; font-family: Archivo, sans-serif; }
-  .globe { position: absolute; right: 64px; top: 112px; width: 248px; height: 248px; }
-  .page { position: absolute; inset: 0; padding: 56px 64px; box-sizing: border-box; display: flex; flex-direction: column; }
-  .top { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #1E1A16; padding-bottom: 20px; }
-  .top img { height: 52px; }
-  .date { font: 700 22px/1 "Courier Prime", monospace; letter-spacing: .06em; text-transform: uppercase; color: #55478A; }
-  h1 { font: 500 74px/1.02 Newsreader, Georgia, serif; font-variation-settings: "opsz" 72; letter-spacing: -.01em; margin: 44px 0 0; max-width: 860px; }
+  .page { position: absolute; inset: 0; padding: 48px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .rotulo { display: inline-flex; align-items: center; gap: 10px; font: 700 17px/20px Archivo, sans-serif; letter-spacing: 2px; text-transform: uppercase; color: #5E5547; }
+  .rotulo svg { height: 22px; width: auto; fill: #1E1A16; }
+  .carimbo { font: 700 18px/22px "Courier Prime", monospace; letter-spacing: 1.2px; text-transform: uppercase; color: #55478A; }
+  h1 { font: 500 76px/1.02 Newsreader, Georgia, serif; font-variation-settings: "opsz" 72; letter-spacing: -.5px; margin: 28px 0 0; max-width: 1000px; }
   h1.long { font-size: 62px; }
-  .topics { margin-top: auto; display: flex; gap: 20px; }
-  .t { flex: 1; min-width: 0; border-top: 6px solid #C19440; padding-top: 14px; }
-  .t b { display: block; font: 700 30px/1 Archivo, sans-serif; color: #7A5718; }
-  .t span { display: block; margin-top: 8px; font-weight: 600; font-size: 20px; line-height: 1.3; }
-  .many .t span { font-size: 17px; }
+  hr { border: 0; border-top: 1px solid #CDBFA6; margin: auto 0 0; width: 100%; }
+  .topics { display: flex; gap: 24px; padding-top: 8px; }
+  .t { flex: 1; min-width: 0; }
+  .t b { display: block; font: 700 28px/28px Archivo, sans-serif; color: #7A5718; }
+  .t span { display: block; margin-top: 10px; font: 400 21px/28px Newsreader, serif; font-variation-settings: "opsz" 16; }
+  .many .t span { font-size: 18px; line-height: 24px; }
 </style>
 </head>
 <body>
-  <svg class="globe" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="#CDBFA6" stroke-width="3"/><ellipse cx="60" cy="60" rx="23" ry="52" fill="none" stroke="#CDBFA6" stroke-width="3"/><line x1="8" y1="60" x2="112" y2="60" stroke="#CDBFA6" stroke-width="3"/></svg>
   <div class="page">
-    <div class="top"><img src="../../../gv-logo-dark.png" alt="Global Village"><span class="date" id="date"></span></div>
+    <div class="top">
+      <span class="rotulo"><svg viewBox="-6 -6 100 112" aria-hidden="true"><polygon points="35,0 53,0 88,100 70,100 44,24 18,100 0,100"/><circle cx="44" cy="61" r="8"/><polygon points="41.0,64.2 47.0,64.2 50.5,88 37.5,88"/></svg>Global Village</span>
+      <span class="carimbo" id="date"></span>
+    </div>
     <h1 id="title"></h1>
+    <hr>
     <div class="topics" id="topics"></div>
   </div>
 <script>
   const q = new URLSearchParams(location.search);
+  const ROM = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+  const MES = {janeiro:1,fevereiro:2,"março":3,marco:3,abril:4,maio:5,junho:6,julho:7,agosto:8,setembro:9,outubro:10,novembro:11,dezembro:12,
+    january:1,february:2,march:3,april:4,may:5,june:6,july:7,august:8,september:9,october:10,november:11,december:12};
+  function carimbo(s) {
+    const t = s.trim().toLowerCase(); let m;
+    if ((m = t.match(/^(\d{4})-(\d{2})-(\d{2})$/))) return +m[3] + "." + ROM[m[2] - 1] + "." + m[1];
+    if ((m = t.match(/^(\d{1,2})(?: de)? ([a-zç]+)(?: de)?,? (\d{4})$/)) && MES[m[2]]) return m[1] + "." + ROM[MES[m[2]] - 1] + "." + m[3];
+    if ((m = t.match(/^([a-z]+) (\d{1,2}),? (\d{4})$/)) && MES[m[1]]) return m[2] + "." + ROM[MES[m[1]] - 1] + "." + m[3];
+    return s;
+  }
   const fatos = q.getAll("fato").slice(0, 5);
-  document.getElementById("date").textContent = q.get("data") || "";
+  document.getElementById("date").textContent = carimbo(q.get("data") || "");
   const h = document.getElementById("title");
   h.textContent = q.get("titulo") || "";
   if (h.textContent.length > 40) h.classList.add("long");
