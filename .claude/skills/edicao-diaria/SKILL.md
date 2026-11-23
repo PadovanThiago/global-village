@@ -138,6 +138,16 @@ A posição do Global Village fica na nota do editor do topo. Se um fato pedir e
 
 Quando houver mais de cinco fatos, a imagem do dia leva os destaques e os fatos que melhor representam o resto, porque o molde comporta cinco. Diga em "Para revisar" quais ficaram de fora da imagem.
 
+### A capa muda todo dia
+
+Quem vê a capa de relance precisa perceber que é uma edição nova. Por isso a imagem do dia e o primeiro slide do carrossel nunca repetem o visual da edição anterior. Antes de gerar, abra a capa da última edição e mude pelo menos uma destas coisas.
+
+- **Uma imagem do dia**, sempre que houver uma boa. Pode ser uma charge, um meme que faça sentido, um post de um protagonista (como o "My Friend" de Trump em 23/11) ou uma foto que resuma o destaque. Use `--imagem` com `--credito` e, para posts e charges, `--post`, que mostra a peça inteira sem cortar. Imagem de terceiros entra sempre com o crédito visível e como reprodução do post ou da charge, e o risco de direitos vai em "Para revisar". Antes de usar um post, confirme em pelo menos um veículo que ele existe e quando saiu.
+- **A paleta**, com `--paleta noite`, `papel`, `terracota` ou `oliva`. Sem imagem, não repita a paleta do dia anterior.
+- **O título**, que pode ser uma citação do dia entre aspas ou uma pergunta, em vez de um resumo.
+
+Na pauta, a seção "Capa do dia" propõe a imagem e a paleta, e Thiago decide. No carrossel, o primeiro slide usa a mesma imagem e a mesma paleta da capa, montado em HTML no visual do molde enquanto `carrossel.py` não aceitar imagem.
+
 Textos em português seguem as regras do `CLAUDE.md`: sem travessões, sem dois-pontos como recurso de estilo, sem frases fragmentadas, tríades anafóricas, paralelismos negativos e transições polidas.
 
 ## 8. Relato da etapa 2
