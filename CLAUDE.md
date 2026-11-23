@@ -13,7 +13,7 @@ Global Village é um agregador internacional de análises do mundo contemporâne
 - O painel [Fontes do Global Village](https://claude.ai/artifact/UbTKDWb3ELx256Mrq5FmtT) mostra quais fontes estão ativas, paradas, sem feed ou com o feed fora do ar, e os autores fora da base. Os dados saem de `tools/painel-fontes.py`, e a rotina das 6h os atualiza.
 - O protótipo [Pergunte ao Global Village](https://claude.ai/artifact/VvCZeXeFfD2pqAjifguVve) é um agente conversacional no claude.ai, com o código em `agente/index.html`. Ele responde só com base nas análises do site e no arquivo dos feeds das fontes aprovadas, separando o que foi curado do que não foi, e usa o Claude da conta de quem pergunta. A base sai de `tools/base-agente.py`, e a rotina das 6h a atualiza. O arquivo dos feeds fica em `dados/`, fora do Git, porque o conteúdo é de terceiros.
 - `localStorage` só guarda conveniências do leitor (idioma, seguidos, salvos), sempre com try/catch.
-- Logotipo em `gv-logo-dark.png` (fundos claros) e `gv-logo-light.png` (fundos escuros). O guia da marca, com cores e fontes, está em `brand/global-village/README.md`.
+- Logotipo em `gv-logo-dark.png` (fundos claros) e `gv-logo-light.png` (fundos escuros). O guia da marca, com cores e fontes, está em `brand/global-village/README.md`. Desde 23/11/2026 o Global Village usa só o sistema visual do Villa (tokens, marcas e naipes em `brand/villa/`, fontes em `fonts/`). O logotipo é o monograma do Villa com o nome em Newsreader, e o globo da identidade anterior saiu de uso.
 - Ícones em `favicon.png` e `apple-touch-icon.png`. A prévia de link usa `og-image.png`, cuja fonte fica em `brand/site/src/`. As tags `og:` usam o endereço absoluto do GitHub Pages e precisam ser trocadas se o domínio mudar.
 
 ## Nome

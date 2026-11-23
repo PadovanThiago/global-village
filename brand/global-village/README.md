@@ -1,39 +1,58 @@
 # Global Village · identidade visual
 
-A ideia vem de McLuhan, o mundo como uma aldeia onde muitas vozes se encontram. O símbolo é um globo desenhado com três linhas (o contorno, um meridiano e o equador), e o ponto terracota no cruzamento é a praça onde essas vozes se encontram. O tom é de jornal internacional, sóbrio e caloroso.
+O Global Village é um projeto do Villa e usa só o que existe no sistema visual do Villa, guardado em `brand/villa/` (tokens, marcas e naipes) e em `fonts/`. Desde 23/11/2026 não há marca própria. O globo e o terracota da identidade anterior saíram de uso.
 
-## Arquivos
+## Marca
+
+- O logotipo é o monograma do Villa (`brand/villa/logos/villa-monograma.svg`, copiado sem alteração) seguido do nome Global Village em Newsreader 500, do mesmo jeito que o nome Villa aparece na capa do sistema.
+- O ícone é o favicon do Villa, o monograma em papel sobre verde-veneziana.
+- O nome se escreve sempre Global Village, com iniciais maiúsculas, e em português leva artigo masculino (o Global Village).
 
 | Arquivo | Uso |
 | --- | --- |
-| `gv-logo-dark.png` | Logotipo horizontal sobre fundos claros |
-| `gv-logo-light.png` | Logotipo horizontal sobre fundos escuros |
-| `gv-symbol-dark.svg`, `gv-symbol-light.svg` | Símbolo sozinho, em vetor |
-| `gv-icon-512.png`, `gv-icon-1024.png` | Ícone quadrado (favicon, Buttondown, redes) |
-| `src/` | Fontes HTML das imagens, renderizadas com o Chrome headless |
+| `gv-logo-dark.png` | Logotipo em tinta, sobre papel, papel-2 e ocre-airbel |
+| `gv-logo-light.png` | Logotipo em papel, sobre tinta e verde-veneziana |
+| `gv-icon-512.png`, `gv-icon-1024.png` | Ícone quadrado (favicon, Substack, redes) |
+| `src/` | Fontes das imagens, renderizadas com o Chrome headless |
 
-O nome se escreve sempre Global Village, com iniciais maiúsculas, e em português leva artigo masculino (o Global Village). O símbolo nunca aparece sem o nome em tamanhos acima do ícone.
+## Peças
+
+| Peça | Molde | Componente do Villa que segue |
+| --- | --- | --- |
+| Prévia de link do site | `brand/site/src/og-image.html` | Cover, com a fachada em blocos |
+| Imagem da edição diária | `brand/newsletter/src/edicao.html` | CabecalhoArtigo, com a data em Carimbo (`23.XI.2026`) |
+| Arte das seções no Substack | `brand/substack/src/secao.html` | Verso do baralho, verde-veneziana com o monograma |
+
+Cada peça tem uma só referência perceptível ao sistema (a fachada, o carimbo ou o verde com o monograma).
 
 ## Cores
 
-| Nome | Hex | Uso |
-| --- | --- | --- |
-| Azul-noite | `#14213D` | Texto, títulos, fundos escuros |
-| Papel | `#F5F2EA` | Fundo principal |
-| Papel claro | `#FFFDF8` | Cartões e campos |
-| Areia | `#ECE7DB` | Faixas e fundos secundários |
-| Terracota | `#C4411F` | Destaque único: botões, números, faixa da newsletter |
-| Terracota texto | `#A3361A` | Rótulos e links sobre papel |
-| Ardósia | `#4A5068` | Texto secundário |
+São os tokens do Villa (`brand/villa/tokens.css`).
 
-Texto claro sobre o terracota tem contraste de 5:1. O terracota é a única cor de destaque, e nenhuma outra deve aparecer ao lado dele.
+| Token | Hex | Uso no Global Village |
+| --- | --- | --- |
+| papel | `#F3EBDD` | Fundo de página e de cartões |
+| papel-2 | `#E8DCC6` | Faixas, notas do editor, caixas laterais |
+| tinta | `#1E1A16` | Texto, títulos, fios fortes |
+| tinta-suave | `#5E5547` | Metadados, rótulos e texto secundário |
+| linha | `#CDBFA6` | Fios finos. Nunca texto |
+| verde-veneziana | `#415E3A` | Botão principal, idioma ativo, avatares, foco de teclado e ícone |
+| ocre-airbel | `#C19440` | Só preenchimento, com tinta por cima. A faixa da newsletter e a fachada da prévia |
+| ocre-texto | `#7A5718` | Números de destaque (radar, estatísticas, fatos da edição) |
+| violeta-carimbo | `#55478A` | O carimbo da imagem da edição. Uma vez por peça |
+
+O Villa não usa cor para erro nem para alerta.
 
 ## Tipografia
 
 | Fonte | Uso |
 | --- | --- |
-| Fraunces 600 | Títulos e números de destaque, em caixa alta e baixa |
-| Source Serif 4 | Textos de leitura e resumos |
-| Inter | Interface, rótulos, botões e navegação |
+| Newsreader | Títulos (peso 500), resumos e textos de leitura |
+| Archivo | Interface, rótulos em caixa-alta, botões, navegação e números de destaque |
+| Courier Prime | Datas do feed e carimbos. Nunca frases longas |
 
-Todas estão no Google Fonts.
+## Regras do Villa aplicadas aqui
+
+- Cantos retos em tudo, inclusive avatares e botões. Sem sombras e sem degradês.
+- Foco de teclado em anel contínuo de 2px, com 2px de afastamento, em verde-veneziana.
+- Nenhum ícone novo. Os naipes do Villa marcam artigos do Villa e não são usados nos temas do Global Village.
