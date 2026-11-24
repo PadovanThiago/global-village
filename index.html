@@ -676,7 +676,7 @@ const ORGS = [
  ["World Liberty Congress", "net", "INT", "https://worldlibertycongress.org", "Global network of dissidents from authoritarian countries, from Venezuela and Cuba to Russia and Iran.", "Rede global de dissidentes de países autoritários, da Venezuela e de Cuba à Rússia e ao Irã.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Aworldlibertycongress.org&hl=en-US&gl=US&ceid=US:en"]
 ].map(r=>({name:r[0],type:r[1],cc:r[2],region:regOf(r[2]),url:r[3],desc:r[4],desc_pt:r[5],themes:r[6],id:r[7]||"",full:r[8]||r[0],rss:r[9]||""}));
 // Veículos abertos: todo autor que publica neles conta como fonte da base (aprovado por Thiago em 24/11/2026). O nome é o de ORGS e do campo src de ITEMS.
-const OPEN_PUBS = ["Persuasion","The Bulwark","Journal of Democracy","The Atlantic"];
+const OPEN_PUBS = ["Persuasion","The Bulwark","Journal of Democracy","The Atlantic","The UnPopulist","ISMA · The UnPopulist"];
 const PUBS=Object.fromEntries(ORGS.filter(o=>o.id).map(o=>[o.id,o]));
 
 const AV = [
