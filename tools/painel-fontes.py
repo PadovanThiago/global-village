@@ -61,6 +61,9 @@ def main():
     i = s.index("const ITEMS = [")
     itens = re.findall(r'\{id:"[^"]+",who:\[([^\]]*)\](?:,pub:"([^"]*)")?(?:,by:"([^"]*)")?,theme:"[a-z]+",fmt:"[a-z]+",src:"([^"]*)",date:"([^"]*)"', s[i:])
     nomes_pessoas = {p["nome"] for p in pessoas}
+    # Em veículos abertos (OPEN_PUBS no index.html) todo autor conta como fonte da base.
+    m = re.search(r"const OPEN_PUBS = (\[.*?\]);", s)
+    abertos = set(json.loads(m.group(1))) if m else set()
 
     hoje = datetime.date.today()
     semana = (hoje - datetime.timedelta(days=7)).isoformat()
@@ -106,7 +109,7 @@ def main():
 
     fora = {}
     for who, pub, by, src, d in itens:
-        if by and not who.strip() and by not in nomes_pessoas and "tradução" not in by and by != "Inteligência Democrática":
+        if by and not who.strip() and by not in nomes_pessoas and src not in abertos and "tradução" not in by and by != "Inteligência Democrática":
             r = fora.setdefault(by, {"autor": by, "publicado_em": set(), "analises_no_site": 0, "ultima_no_site": ""})
             r["publicado_em"].add(src)
             r["analises_no_site"] += 1

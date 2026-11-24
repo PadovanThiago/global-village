@@ -653,6 +653,7 @@ const ORGS = [
  ["The Bulwark","pub","US","https://www.thebulwark.com","Pro-democracy outlet founded by conservatives who broke with Trumpism.","Veículo pró-democracia fundado por conservadores que romperam com o trumpismo.",["dem"],"","","https://www.thebulwark.com/feed"],
  ["The Dispatch","pub","US","https://thedispatch.com","Digital outlet for centre-right reporting and commentary.","Veículo digital de reportagem e opinião de centro-direita.",["dem","geo"],"","","https://thedispatch.com/feed"],
  ["Journal of Democracy","pub","US","https://www.journalofdemocracy.org","Academic quarterly on democracy, published with the National Endowment for Democracy.","Revista acadêmica trimestral sobre democracia, publicada com o National Endowment for Democracy.",["dem"],"","","https://www.journalofdemocracy.org/feed"],
+ ["The Atlantic","pub","US","https://www.theatlantic.com","American magazine of politics, ideas and culture, published since 1857.","Revista americana de política, ideias e cultura, publicada desde 1857.",["dem","geo"],"","","https://www.theatlantic.com/feed/all/"],
  ["Americas Quarterly","pub","US","https://www.americasquarterly.org","Magazine on politics, business and culture in the Americas.","Revista sobre política, economia e cultura nas Américas.",["geo","eco"],"","","https://news.google.com/rss/search?q=site%3Aamericasquarterly.org&hl=en-US&gl=US&ceid=US:en"],
  ["Letras Libres","pub","MX","https://letraslibres.com","Cultural and political magazine published in Mexico and Spain, founded by Enrique Krauze.","Revista de cultura e política publicada no México e na Espanha, fundada por Enrique Krauze.",["dem"],"","","https://letraslibres.com/feed/"],
  ["Fundación Hay Derecho","tank","ES","https://www.hayderecho.com","Spanish foundation on the rule of law and the quality of institutions, whichever party governs.","Fundação espanhola dedicada ao Estado de direito e à qualidade das instituições, seja qual for o partido no governo.",["dem"],"","","https://www.hayderecho.com/feed/"],
@@ -674,6 +675,10 @@ const ORGS = [
  ["The Social Contract with Joe Walsh", "pub", "US", "https://socialcontractwithjoewalsh.substack.com", "Joe Walsh’s newsletter and podcast on American politics and democracy.", "Newsletter e podcast de Joe Walsh sobre política americana e democracia.", ["dem"], "", "", ""],
  ["World Liberty Congress", "net", "INT", "https://worldlibertycongress.org", "Global network of dissidents from authoritarian countries, from Venezuela and Cuba to Russia and Iran.", "Rede global de dissidentes de países autoritários, da Venezuela e de Cuba à Rússia e ao Irã.", ["dem", "geo"], "", "", "https://news.google.com/rss/search?q=site%3Aworldlibertycongress.org&hl=en-US&gl=US&ceid=US:en"]
 ].map(r=>({name:r[0],type:r[1],cc:r[2],region:regOf(r[2]),url:r[3],desc:r[4],desc_pt:r[5],themes:r[6],id:r[7]||"",full:r[8]||r[0],rss:r[9]||""}));
+// Veículos abertos: todo autor que publica neles conta como fonte da base (aprovado por Thiago em 24/11/2026). O nome é o de ORGS e do campo src de ITEMS.
+const OPEN_PUBS = ["Persuasion","The Bulwark","Journal of Democracy","The Atlantic","The UnPopulist","ISMA · The UnPopulist"];
+// Analistas acompanhados = PEOPLE mais os autores dos veículos abertos que já assinam análises no site.
+function nSources(){const names=new Set(PEOPLE.map(p=>p.name));const extra=new Set(ITEMS.filter(i=>!(i.who&&i.who.length)&&i.by&&OPEN_PUBS.includes(i.src)&&!names.has(i.by)).map(i=>i.by));return PEOPLE.length+extra.size;}
 const PUBS=Object.fromEntries(ORGS.filter(o=>o.id).map(o=>[o.id,o]));
 
 const AV = [
@@ -1050,7 +1055,7 @@ function vHome(){
     '<div class="pills"><button type="button" class="btn primary" data-scroll="feed">'+esc(t("vp_cta_feed"))+'</button><a class="btn" href="#newsletter">'+esc(t("vp_cta_nl"))+'</a><a class="btn" href="#sobre" style="border-color:transparent;text-decoration:underline">'+esc(t("nav_about"))+'</a></div></div>'+
    '<ul class="vp-pillars">'+[1,2,3,4].map(n=>'<li><b>'+esc(t("vp_p"+n+"_t"))+'</b><span>'+esc(t("vp_p"+n))+'</span></li>').join("")+'</ul>'+
   '</div>'+
-  '<div class="wrap"><div class="vp-stats">'+[[PEOPLE.length,t("st_people")],[ORGS.length,t("st_orgs")],[5,t("st_langs")],[AV.length,t("st_av")]].map(([n,l])=>'<div class="stat"><b>'+n+'</b><span>'+esc(l)+'</span></div>').join("")+'</div></div></section>'+
+  '<div class="wrap"><div class="vp-stats">'+[[nSources(),t("st_people")],[ORGS.length,t("st_orgs")],[5,t("st_langs")],[AV.length,t("st_av")]].map(([n,l])=>'<div class="stat"><b>'+n+'</b><span>'+esc(l)+'</span></div>').join("")+'</div></div></section>'+
 
   '<section class="block" id="feed" style="padding-top:40px"><div class="wrap feed-grid">'+
    '<div class="feed-col">'+
