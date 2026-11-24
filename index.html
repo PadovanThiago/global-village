@@ -677,6 +677,8 @@ const ORGS = [
 ].map(r=>({name:r[0],type:r[1],cc:r[2],region:regOf(r[2]),url:r[3],desc:r[4],desc_pt:r[5],themes:r[6],id:r[7]||"",full:r[8]||r[0],rss:r[9]||""}));
 // Veículos abertos: todo autor que publica neles conta como fonte da base (aprovado por Thiago em 24/11/2026). O nome é o de ORGS e do campo src de ITEMS.
 const OPEN_PUBS = ["Persuasion","The Bulwark","Journal of Democracy","The Atlantic","The UnPopulist","ISMA · The UnPopulist"];
+// Analistas acompanhados = PEOPLE mais os autores dos veículos abertos que já assinam análises no site.
+function nSources(){const names=new Set(PEOPLE.map(p=>p.name));const extra=new Set(ITEMS.filter(i=>!(i.who&&i.who.length)&&i.by&&OPEN_PUBS.includes(i.src)&&!names.has(i.by)).map(i=>i.by));return PEOPLE.length+extra.size;}
 const PUBS=Object.fromEntries(ORGS.filter(o=>o.id).map(o=>[o.id,o]));
 
 const AV = [
@@ -1053,7 +1055,7 @@ function vHome(){
     '<div class="pills"><button type="button" class="btn primary" data-scroll="feed">'+esc(t("vp_cta_feed"))+'</button><a class="btn" href="#newsletter">'+esc(t("vp_cta_nl"))+'</a><a class="btn" href="#sobre" style="border-color:transparent;text-decoration:underline">'+esc(t("nav_about"))+'</a></div></div>'+
    '<ul class="vp-pillars">'+[1,2,3,4].map(n=>'<li><b>'+esc(t("vp_p"+n+"_t"))+'</b><span>'+esc(t("vp_p"+n))+'</span></li>').join("")+'</ul>'+
   '</div>'+
-  '<div class="wrap"><div class="vp-stats">'+[[PEOPLE.length,t("st_people")],[ORGS.length,t("st_orgs")],[5,t("st_langs")],[AV.length,t("st_av")]].map(([n,l])=>'<div class="stat"><b>'+n+'</b><span>'+esc(l)+'</span></div>').join("")+'</div></div></section>'+
+  '<div class="wrap"><div class="vp-stats">'+[[nSources(),t("st_people")],[ORGS.length,t("st_orgs")],[5,t("st_langs")],[AV.length,t("st_av")]].map(([n,l])=>'<div class="stat"><b>'+n+'</b><span>'+esc(l)+'</span></div>').join("")+'</div></div></section>'+
 
   '<section class="block" id="feed" style="padding-top:40px"><div class="wrap feed-grid">'+
    '<div class="feed-col">'+
