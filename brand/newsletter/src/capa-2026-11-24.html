@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  /* Capa da edição de 24/11/2026, 1200 × 600. Variação do CabecalhoArtigo do Villa com uma janela de aviso de sistema,
+     a piada visual do dia sobre a agência de cibersegurança dos EUA que "não responde". Cantos retos, sem sombra, sem degradê.
+     O ocre-airbel só como preenchimento (a barra da janela) e o violeta-carimbo uma vez (a data). */
+  @font-face { font-family: "Newsreader"; src: url("../../../fonts/Newsreader-Variable.woff2") format("woff2"); font-weight: 200 800; }
+  @font-face { font-family: "Archivo"; src: url("../../../fonts/Archivo-Variable.woff2") format("woff2"); font-weight: 100 900; }
+  @font-face { font-family: "Courier Prime"; src: url("../../../fonts/CourierPrime-Bold.woff2") format("woff2"); font-weight: 700; }
+  @font-face { font-family: "Courier Prime"; src: url("../../../fonts/CourierPrime-Regular.woff2") format("woff2"); font-weight: 400; }
+  html, body { margin: 0; width: 1200px; height: 600px; background: #F3EBDD; color: #1E1A16; overflow: hidden; font-family: Archivo, sans-serif; }
+  .page { position: absolute; inset: 0; padding: 44px 56px; box-sizing: border-box; display: grid; grid-template-columns: 560px 1fr; grid-template-rows: auto 1fr; align-items: center; column-gap: 48px; }
+  .top { grid-column: 1 / 3; align-self: start; display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+  .rotulo { display: inline-flex; align-items: center; gap: 10px; font: 700 17px/20px Archivo, sans-serif; letter-spacing: 2px; text-transform: uppercase; color: #5E5547; }
+  .rotulo svg { height: 22px; width: auto; fill: #1E1A16; }
+  .carimbo { font: 700 18px/22px "Courier Prime", monospace; letter-spacing: 1.2px; text-transform: uppercase; color: #55478A; }
+
+  .janela { border: 2px solid #1E1A16; background: #F3EBDD; }
+  .barra { background: #C19440; border-bottom: 2px solid #1E1A16; display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; font: 700 17px/20px "Courier Prime", monospace; color: #1E1A16; }
+  .barra .x { font: 700 20px/20px Archivo, sans-serif; }
+  .corpo { padding: 26px 28px 28px; }
+  .corpo .msg { font: 500 40px/1.08 Newsreader, Georgia, serif; font-variation-settings: "opsz" 48; margin: 0 0 14px; }
+  .corpo .det { font: 400 17px/25px "Courier Prime", monospace; color: #5E5547; margin: 0 0 24px; }
+  .botoes { display: flex; gap: 14px; justify-content: flex-end; }
+  .b { font: 700 16px/20px Archivo, sans-serif; letter-spacing: 1px; text-transform: uppercase; padding: 12px 20px; border: 2px solid #1E1A16; }
+  .b.p { background: #415E3A; color: #F3EBDD; border-color: #415E3A; }
+
+  .dir { display: flex; flex-direction: column; }
+  h1 { font: 500 58px/1.02 Newsreader, Georgia, serif; font-variation-settings: "opsz" 72; letter-spacing: -.5px; margin: 0 0 18px; }
+  hr { border: 0; border-top: 1px solid #CDBFA6; margin: 0 0 12px; width: 100%; }
+  ol { list-style: none; margin: 0; padding: 0; }
+  li { display: grid; grid-template-columns: 40px 1fr; align-items: baseline; padding: 7px 0; border-bottom: 1px solid #CDBFA6; }
+  li:last-child { border-bottom: 0; }
+  li b { font: 700 20px/24px Archivo, sans-serif; color: #7A5718; }
+  li span { font: 400 20px/25px Newsreader, serif; font-variation-settings: "opsz" 16; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="top">
+      <span class="rotulo"><svg viewBox="-6 -6 100 112" aria-hidden="true"><polygon points="35,0 53,0 88,100 70,100 44,24 18,100 0,100"/><circle cx="44" cy="61" r="8"/><polygon points="41.0,64.2 47.0,64.2 50.5,88 37.5,88"/></svg>Global Village</span>
+      <span class="carimbo">24.XI.2026</span>
+    </div>
+    <div class="janela">
+      <div class="barra"><span>aviso do sistema · EUA</span><span class="x">×</span></div>
+      <div class="corpo">
+        <p class="msg">A agência de cibersegurança não está respondendo.</p>
+        <p class="det">Um terço da equipe saiu.<br>O chefe da cibersegurança foi demitido.<br>O indicado ainda não foi confirmado.</p>
+        <div class="botoes"><span class="b">Aguardar</span><span class="b p">Reiniciar a democracia</span></div>
+      </div>
+    </div>
+    <div class="dir">
+      <h1>Os guardas saíram do posto</h1>
+      <hr>
+      <ol>
+        <li><b>01</b><span>O desmonte da segurança digital dos EUA</span></li>
+        <li><b>02</b><span>Trump devolve a Nvidia a Jensen Huang</span></li>
+        <li><b>03</b><span>Irã açoita uma cantora por cantar sem véu</span></li>
+        <li><b>04</b><span>No Quênia, medo de ir às ruas</span></li>
+        <li><b>05</b><span>Venezuela vai escolher um novo Supremo</span></li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>
