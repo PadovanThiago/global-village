@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=block">
+<style>
+  /* Um slide do carrossel do Instagram, 1080 × 1350 (retrato 4:5).
+     O conteúdo vem da URL em JSON: carrossel.html?s=<json codificado>
+     Tipos: capa, fato, humor, final. */
+  html, body { margin: 0; width: 1080px; height: 1350px; overflow: hidden; font-family: Inter, sans-serif; }
+  body { background: #F5F2EA; color: #14213D; }
+  body.dark { background: #14213D; color: #F5F2EA; }
+  .page { position: absolute; inset: 0; padding: 84px 88px 80px; box-sizing: border-box; display: flex; flex-direction: column; }
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .top img { height: 60px; }
+  .meta { font-weight: 700; font-size: 22px; letter-spacing: .12em; text-transform: uppercase; color: #A3361A; }
+  .dark .meta { color: #E8A08A; }
+  .globe { position: absolute; right: -90px; bottom: 150px; width: 620px; height: 620px; opacity: .14; }
+  .kicker { margin-top: 72px; font-weight: 700; font-size: 24px; letter-spacing: .12em; text-transform: uppercase; color: #A3361A; display: flex; align-items: center; gap: 18px; }
+  .dark .kicker { color: #E8A08A; }
+  .kicker b { font: 600 64px/1 Fraunces, Georgia, serif; letter-spacing: 0; color: #C4411F; }
+  .dark .kicker b { color: #E8A08A; }
+  h1 { font: 600 76px/1.04 Fraunces, Georgia, serif; font-variation-settings: "opsz" 144; letter-spacing: -.02em; margin: 26px 0 0; }
+  .capa h1 { font-size: 112px; line-height: 1; margin-top: 150px; max-width: 820px; }
+  .final h1 { font-size: 92px; margin-top: 170px; }
+  .body { font: 400 41px/1.42 "Source Serif 4", Georgia, serif; margin-top: 38px; }
+  .capa .body, .final .body { font-size: 40px; color: #D9D5CB; }
+  .src { margin-top: auto; border-top: 3px solid #C4411F; padding-top: 22px; display: flex; justify-content: space-between; align-items: baseline; gap: 24px; font-weight: 600; font-size: 23px; color: #4A5068; }
+  .dark .src { color: #D9D5CB; }
+  .src span:last-child { white-space: nowrap; color: #A3361A; }
+  .dark .src span:last-child { color: #E8A08A; }
+  .parts { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; }
+  .parts div { border-top: 2px solid #C4411F; padding-top: 12px; }
+  .parts small { display: block; font-weight: 700; font-size: 21px; letter-spacing: .1em; text-transform: uppercase; color: #A3361A; }
+  .parts span { display: block; margin-top: 6px; font: 600 40px/1.1 Fraunces, Georgia, serif; }
+  .quote { display: inline-block; margin-top: 34px; background: #C4411F; color: #FFFDF8; font: 600 40px/1.2 Fraunces, Georgia, serif; padding: 14px 26px; border-radius: 6px; align-self: flex-start; }
+  .url { margin-top: 40px; font-weight: 700; font-size: 32px; color: #E8A08A; }
+</style>
+</head>
+<body>
+  <div class="page" id="page"></div>
+<script>
+  const s = JSON.parse(new URLSearchParams(location.search).get("s") || "{}");
+  const page = document.getElementById("page");
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const dark = s.tipo === "capa" || s.tipo === "final";
+  if (dark) document.body.classList.add("dark");
+  page.classList.add(s.tipo);
+  const topo = el("div", "top");
+  const logo = el("img"); logo.src = dark ? "../../../gv-logo-light.png" : "../../../gv-logo-dark.png"; logo.alt = "Global Village";
+  topo.append(logo, el("span", "meta", s.data || ""));
+  page.append(topo);
+  if (dark) document.body.insertAdjacentHTML("afterbegin", '<svg class="globe" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="52" fill="none" stroke="#F5F2EA" stroke-width="3"/><ellipse cx="60" cy="60" rx="23" ry="52" fill="none" stroke="#F5F2EA" stroke-width="3"/><line x1="8" y1="60" x2="112" y2="60" stroke="#F5F2EA" stroke-width="3"/></svg>');
+  if (s.kicker) { const k = el("div", "kicker"); if (s.n) k.append(el("b", null, s.n)); k.append(el("span", null, s.kicker)); page.append(k); }
+  page.append(el("h1", null, s.titulo || ""));
+  if (s.texto) page.append(el("div", "body", s.texto));
+  if (s.balao) page.append(el("div", "quote", s.balao));
+  if (s.pecas) { const g = el("div", "parts"); s.pecas.forEach(([a, b]) => { const d = el("div"); d.append(el("small", null, a), el("span", null, b)); g.append(d); }); page.append(g); }
+  if (s.url) page.append(el("div", "url", s.url));
+  const f = el("div", "src"); f.append(el("span", null, s.fontes || ""), el("span", null, s.pagina || "")); page.append(f);
+</script>
+</body>
+</html>
