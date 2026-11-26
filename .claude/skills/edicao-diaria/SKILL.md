@@ -50,14 +50,25 @@ Antes de começar qualquer etapa, leia o `CLAUDE.md`. As regras de curadoria e d
 - Um candidato é um acontecimento ou debate que pelo menos duas fontes aprovadas trataram no período, ou uma denúncia relevante de uma organização aprovada (OCCRP, CPJ, Article 19, Freedom House e afins).
 - Só contam textos de pessoas e organizações aprovadas na base. Autor fora da base (mesmo publicado por uma organização aprovada ou no canal de uma pessoa aprovada) não sustenta candidato e vai citado no fim da pauta.
 - A exceção são os veículos abertos, listados em `OPEN_PUBS` no `index.html` (Persuasion, The Bulwark, Journal of Democracy, The Atlantic e The UnPopulist). Todo autor que publica neles conta como fonte da base, sustenta candidato e pode entrar no feed do site com `src` e `by`. Isso vale só para textos publicados no próprio veículo.
-- Agrupe as novidades por assunto e conte quantas fontes aprovadas trataram cada um. Os assuntos que dominaram o período abrem a pauta.
+- Agrupe as novidades por assunto e conte quantas fontes aprovadas trataram cada um. Os assuntos que dominaram o período abrem a pauta, a não ser que a memória das pautas os marque como repetição. Nesse caso eles descem para "Também no período".
 - Distribua os candidatos pelos quatro temas do site, como aparecem nas páginas de tema: Democracia e instituições (`dem`), Geopolítica (`geo`), Economia (`eco`) e Tecnologia e liberdades (`tec`). Traga de dois a quatro candidatos por tema, os mais interessantes do período. Tema sem material bom aparece na pauta com uma linha dizendo por quê.
 - Marque os candidatos fora do eixo Estados Unidos e Europa Ocidental. A edição precisa de pelo menos um, com prioridade para África, Ásia, Oriente Médio e América Latina fora do Brasil, e a pauta deve oferecer opções suficientes para isso.
 - Abra os textos de cada candidato (`curl` com user agent de navegador) antes de descrevê-lo. Se não der para ler, diga isso no próprio candidato.
 
+### Memória das pautas
+
+Antes de escolher os candidatos, leia `conhecimento/pautas-recentes.md` e os dois últimos Diários (pela lista de artifacts, título `Global Village Diário · <dia> de <mês>`, e as edições especiais `Global Village Dossiê`). O leitor viu esses fatos há poucos dias, e a pauta precisa trazer o que ele ainda não sabe.
+
+- Compare cada assunto do período com o que já saiu e marque-o como **Novo**, **Desdobramento** ou **Repetição**.
+- **Desdobramento** é um assunto que já saiu e ganhou um fato novo (uma decisão, um voto, um número, uma reação que muda o quadro). O candidato diz em uma frase o que mudou e traz o link da edição anterior. Análise nova sobre o mesmo fato, sem fato novo, não basta.
+- **Repetição** é um assunto que já saiu e não ganhou fato novo. Não vira candidato, mesmo com muitas fontes, e desce para "Também no período" com a data da edição em que saiu.
+- Um assunto que abriu duas edições seguidas não abre a terceira, a não ser que seja desdobramento forte. Diga isso no candidato.
+- Prefira assuntos, países e regiões que não apareceram nas últimas cinco edições. Quando o volume dos feeds puxar sempre para os mesmos temas (Estados Unidos, Rússia e China), procure de propósito o que ficou de fora, sobretudo nos temas de acompanhamento e nas fontes fora do eixo.
+- No topo da pauta, logo depois de "Como decidir", escreva uma linha com os assuntos das últimas edições e quantos candidatos de hoje são novos.
+
 ### Pautas em destaque
 
-Assuntos que Thiago pediu para acompanhar de perto num período. Enquanto valerem, têm seção própria no topo da pauta sempre que houver análise nova de fonte aprovada, mesmo que outro assunto tenha mais volume. Retire a pauta da lista quando o prazo passar.
+Assuntos que Thiago pediu para acompanhar de perto num período. Enquanto valerem, têm seção própria no topo da pauta sempre que houver análise nova de fonte aprovada, mesmo que outro assunto tenha mais volume. Retire a pauta da lista quando o prazo passar. A seção própria também segue a memória das pautas. Sem fato novo desde a última edição, ela traz só uma linha dizendo isso, e o assunto não vira candidato.
 
 - **Eleições de meio de mandato nos Estados Unidos** (votação em 3/11/2026), até o fim da apuração e das contestações, por volta de 13/11/2026. Prioridade para as regras do jogo (pressão sobre a contagem, observadores, ações na Justiça, ameaças de não reconhecer o resultado), para os resultados e para o que as vozes da base dizem sobre eles.
 
@@ -79,6 +90,7 @@ Crie um documento no Claude Docs chamado `Global Village Pauta · <dia> de <mês
    - duas a quatro frases que expliquem o contexto (quem são as pessoas e as organizações, por que o assunto importa), o que aconteceu e o que as vozes disseram, atribuindo cada leitura ao autor;
    - as fontes, no formato `[Título](url) · Autor, Fonte · idioma`;
    - região, e a marca **fora do eixo** quando for o caso;
+   - a marca **Novo** ou **Desdobramento**, e neste caso o que mudou desde a edição anterior, com o link dela;
    - **Recomendo** quando for a sua sugestão, com meia frase do motivo. As tarefas ficam desmarcadas. Quem marca é Thiago.
    - o registro de contexto regional que o candidato toca, se houver, e o estado dele.
 5. **Também no período**: análises boas que não viraram candidato (fonte única, tema lateral), que podem entrar no feed do site.
@@ -142,5 +154,7 @@ Quando houver mais de cinco fatos, a imagem do dia leva os destaques e os fatos 
 Textos em português seguem as regras do `CLAUDE.md`: sem travessões, sem dois-pontos como recurso de estilo, sem frases fragmentadas, tríades anafóricas, paralelismos negativos e transições polidas.
 
 ## 8. Relato da etapa 2
+
+Antes do relato, acrescente no topo de `conhecimento/pautas-recentes.md` a edição do dia, no formato do arquivo, e inclua o arquivo no commit do PR do feed. Edições especiais (dossiês) também entram. Apague as entradas com mais de três semanas.
 
 Termine com um resumo curto para Thiago: os fatos da edição, o título da imagem do dia, os casos de contexto regional, o link do PR e o link do documento.
