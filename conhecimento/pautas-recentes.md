@@ -4,6 +4,17 @@ Fatos que entraram nas últimas edições da newsletter, do mais novo para o mai
 
 Formato de cada entrada: data, título da imagem do dia, link do Diário e, para cada fato, o título curto, o tema, a região e, se for desdobramento, o que mudou.
 
+## 26/11/2026 · Fechar a porta aos autocratas
+
+Diário: https://claude.ai/artifact/6n5NicrQnae4XqZo3J9Vne
+
+- Sérvia prende Dragan Vučićević, dono da TV Informer, e a Rússia perde a via de Vučić · dem · Europa do Leste
+- Ilhas Salomão trocam o acordo com a China por um tratado com a Austrália · geo · Oceania e Pacífico
+- Polônia quer zona de exclusão aérea na fronteira com a Ucrânia · geo · Europa · desdobramento de 23/11 (a reação polonesa às incursões russas depois do aviso de Kagan)
+- Geórgia acusa a Rússia de preparar a anexação da Abcásia e da Ossétia do Sul, e a nova Constituição da Armênia · dem · Cáucaso
+- Venezuela fala em eleição presidencial em 2027 e publica a dívida de 242% do PIB · dem · América Latina · desdobramento de 24/11 (a data de eleição e a dívida)
+- Inside Deutsche Bank, o aço iraniano via Omã e as transferências de Kerimov · eco · Oriente Médio, Rússia e Europa
+
 ## 25/11/2026 · Edição especial · Como fazer guerra às democracias sem disparar um tiro diretamente
 
 Dossiê: https://claude.ai/artifact/Fn6S5JDmvpR1WnjfSe6Y8Q
